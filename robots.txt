@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://achref-2.github.io/sitemap.xml
