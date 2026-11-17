@@ -1,1098 +1,1343 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Achraf Aroua — Full-Stack & AI Developer</title>
-<meta name="description" content="Achraf Aroua builds full-stack applications with practical AI features. M.Sc. Computer Science student at TH Köln, based in Aachen and open to Werkstudent roles and internships." />
-<link rel="canonical" href="https://achref-2.github.io/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://achref-2.github.io/" />
-<meta property="og:title" content="Achraf Aroua — Full-Stack & AI Developer" />
-<meta property="og:description" content="I build full-stack applications with practical AI features. M.Sc. student at TH Köln · Aachen, Germany." />
-<meta property="og:image" content="https://achref-2.github.io/og.jpg" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#0b0b12" />
-<script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achraf Aroua, software engineer</title>
+<meta name="description" content="Achraf Aroua is a software engineer in Aachen who builds full-stack web apps with AI features. M.Sc. Computer Science student at TH Köln, open to working student roles.">
+<link rel="canonical" href="https://achref-2.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://achref-2.github.io/">
+<meta property="og:title" content="Achraf Aroua, software engineer">
+<meta property="og:description" content="Full-stack web apps with AI features. M.Sc. student at TH Köln, based in Aachen.">
+<meta property="og:image" content="https://achref-2.github.io/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f2f3f5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23000'/%3E%3Cpath d='M16 16h11' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add("js")</script>
 <style>
-  :root {
-    --bg: #0b0b12;
-    --bg-2: #11111b;
-    --card: #151522;
-    --card-2: #1b1b2b;
-    --line: #26263a;
-    --text: #ececf4;
-    --muted: #9b9bb4;
-    --accent: #a78bfa;
-    --accent-2: #7c3aed;
-    --accent-soft: rgba(167, 139, 250, .12);
-    --ok: #4ade80;
-    --shadow: 0 20px 60px rgba(0,0,0,.45);
-  }
-  [data-theme="light"] {
-    --bg: #f7f6fb;
-    --bg-2: #efedf7;
-    --card: #ffffff;
-    --card-2: #f3f1fa;
-    --line: #e2dff0;
-    --text: #16151f;
-    --muted: #5f5d72;
-    --accent: #6d28d9;
-    --accent-2: #7c3aed;
-    --accent-soft: rgba(109, 40, 217, .08);
-    --ok: #16a34a;
-    --shadow: 0 20px 50px rgba(40,20,90,.08);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Space Grotesk", system-ui, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-    transition: background .3s, color .3s;
-  }
-  body::before {
-    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
-    opacity: .5;
-  }
-  a { color: inherit; text-decoration: none; }
-  .mono { font-family: "JetBrains Mono", monospace; }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+@property --sweep {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 360deg;
+}
 
-  /* NAV */
-  header {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(14px);
-    background: color-mix(in srgb, var(--bg) 78%, transparent);
-    border-bottom: 1px solid var(--line);
-  }
-  nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
-  .logo {
-    width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
-    background: linear-gradient(135deg, var(--accent-2), var(--accent));
-    color: #fff; font-weight: 700; font-size: 15px; letter-spacing: .5px;
-  }
-  .links { display: flex; gap: 26px; font-size: 13px; }
-  .links a { color: var(--muted); transition: color .2s; font-family: "JetBrains Mono", monospace; }
-  .links a:hover { color: var(--text); }
-  .nav-right { display: flex; align-items: center; gap: 10px; }
-  .status { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent); animation: pulse 2s infinite; }
-  @keyframes pulse { 50% { box-shadow: 0 0 0 7px transparent; } }
-  .pill-btn {
-    border: 1px solid var(--line); background: var(--card); color: var(--text);
-    padding: 7px 12px; border-radius: 10px; font: 500 12px "JetBrains Mono", monospace; cursor: pointer;
-    transition: border-color .2s;
-  }
-  .pill-btn:hover { border-color: var(--accent); }
-  .pill-btn b { color: var(--accent); }
-  .burger { display: none; }
+:root {
+  --free: #f2f3f5;
+  --paper: #ffffff;
+  --unknown: #d3d7dc;
+  --bar: #e7e9ec;
+  --line: #c9ced4;
+  --ink: #000;
+  --ink-2: #33383e;
+  --muted: #5b6168;
+  --scan: #2436f0;
+  --frontier: #12a150;
+  --wrap: 1240px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
 
-  /* HERO */
-  .hero { min-height: calc(100vh - 68px); display: grid; grid-template-columns: 1.25fr .9fr; gap: 56px; align-items: center; padding: 60px 0 40px; }
-  .eyebrow { font: 500 12px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; display: inline-flex; gap: 10px; align-items: center; }
-  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--accent); }
-  h1 { font-size: clamp(34px, 4.8vw, 58px); line-height: 1.05; letter-spacing: -.03em; margin: 22px 0; font-weight: 700; }
-  h1 .grad { background: linear-gradient(90deg, var(--accent), #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  h1 .dim { color: var(--muted); font-weight: 500; }
-  .lead { color: var(--muted); font-size: 18px; max-width: 560px; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 12px;
-    font: 600 14px "JetBrains Mono", monospace; border: 1px solid var(--line); background: var(--card);
-    transition: transform .2s, border-color .2s, background .2s; cursor: pointer; color: var(--text);
-  }
-  .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
-  .btn.primary { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; border-color: transparent; }
-  .chips { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 40px; color: var(--muted); font: 12px "JetBrains Mono", monospace; }
-  .chips span::before { content: "▹ "; color: var(--accent); }
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--free);
+  color: var(--ink);
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  font-stretch: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--scan); outline-offset: 3px; border-radius: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 
-  .id-card {
-    position: relative; border-radius: 24px; padding: 28px; background: linear-gradient(160deg, var(--card-2), var(--card));
-    border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden;
-  }
-  .id-card::after {
-    content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; right: -120px; top: -120px;
-    background: radial-gradient(circle, var(--accent-soft), transparent 70%); filter: blur(6px);
-  }
-  .avatar {
-    aspect-ratio: 1; border-radius: 18px; display: grid; place-items: center; position: relative;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(232,121,249,.35), transparent 50%),
-      radial-gradient(circle at 70% 80%, rgba(124,58,237,.45), transparent 55%), var(--bg-2);
-    border: 1px solid var(--line); overflow: hidden;
-  }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .avatar .initials { font-size: 96px; font-weight: 700; letter-spacing: -.04em; color: #fff; opacity: .92; }
-  .avatar .tag { position: absolute; top: 14px; right: 14px; font: 10px "JetBrains Mono", monospace; color: #e9e3ff; background: rgba(0,0,0,.35); padding: 4px 8px; border-radius: 6px; }
-  .code {
-    margin-top: 18px; font: 12.5px/1.8 "JetBrains Mono", monospace; color: var(--muted);
-    background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
-  }
-  .code .k { color: #f472b6; } .code .p { color: var(--accent); } .code .s { color: #4ade80; }
+.skip { position: absolute; left: 12px; top: -80px; z-index: 100; background: var(--ink); color: var(--free); padding: 10px 14px; border-radius: 6px; text-decoration: none; }
+.skip:focus { top: 12px; }
 
-  /* SECTIONS */
-  section { padding: 110px 0; border-top: 1px solid var(--line); }
-  .sec-head { display: grid; grid-template-columns: 90px 1fr; gap: 24px; margin-bottom: 56px; }
-  .sec-num { font: 700 14px "JetBrains Mono", monospace; color: var(--accent); padding-top: 6px; }
-  .sec-label { font: 500 12px "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -.02em; margin: 10px 0 12px; }
-  .sec-sub { color: var(--muted); max-width: 640px; }
+/* Header */
+.top {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(242, 243, 245, .92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.top.scrolled { border-bottom-color: var(--line); }
+.top-in { display: flex; align-items: center; gap: 28px; height: 64px; }
+.brand { font-stretch: 125%; font-weight: 750; font-size: 16px; text-decoration: none; letter-spacing: -.01em; margin-right: auto; }
+.nav { display: flex; gap: 26px; font-size: 15px; }
+.nav a { text-decoration: none; color: var(--ink-2); }
+.nav a:hover { color: var(--scan); }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.lang { background: none; border: 0; font-size: 15px; color: var(--ink-2); padding: 6px 4px; }
+.lang:hover { color: var(--scan); }
 
-  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; }
-  .about-text p { color: var(--muted); margin-bottom: 18px; font-size: 17px; }
-  .about-text p strong { color: var(--text); font-weight: 600; }
-  .pillars { display: grid; gap: 14px; }
-  .pillar { padding: 22px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
-  .pillar:hover { border-color: var(--accent); transform: translateX(4px); }
-  .pillar h4 { font-size: 16px; margin-bottom: 4px; display: flex; gap: 10px; align-items: center; }
-  .pillar h4 i { font-style: normal; color: var(--accent); font: 12px "JetBrains Mono", monospace; }
-  .pillar p { color: var(--muted); font-size: 14px; }
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 46px; padding: 0 18px; border-radius: 6px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+  font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.btn:hover { background: var(--ink); color: var(--free); }
+.btn-solid { background: var(--ink); color: var(--free); }
+.btn-solid:hover { background: var(--scan); border-color: var(--scan); }
+.btn-sm { min-height: 38px; padding: 0 14px; font-size: 14px; }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
-  .stat { padding: 22px; border-radius: 16px; border: 1px dashed var(--line); }
-  .stat b { display: block; font-size: 32px; letter-spacing: -.02em; }
-  .stat span { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
+/* Hero map */
+.map {
+  position: relative;
+  height: clamp(420px, 66svh, 740px);
+  background: var(--unknown);
+  overflow: hidden;
+  touch-action: manipulation;
+}
+.map canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; }
+.statusbar { background: var(--bar); border-block: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
+.statusbar-in { display: flex; align-items: center; gap: 20px; min-height: 46px; }
+.hint { margin-right: auto; }
+.cov { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cov b { font-weight: 650; color: var(--ink); display: inline-block; min-width: 3.2ch; text-align: right; }
+.again { background: none; border: 0; padding: 6px 0; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.again:hover { color: var(--scan); }
 
-  /* STACK */
-  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .stack-card { padding: 26px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); position: relative; transition: border-color .2s, transform .2s; }
-  .stack-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .stack-card .n { font: 12px "JetBrains Mono", monospace; color: var(--accent); }
-  .stack-card h3 { font-size: 19px; margin: 6px 0 16px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tag-t { font: 12px "JetBrains Mono", monospace; padding: 5px 10px; border-radius: 8px; background: var(--accent-soft); color: var(--text); border: 1px solid transparent; }
-  .flow { margin-top: 22px; text-align: center; font: 13px "JetBrains Mono", monospace; color: var(--muted); }
-  .flow b { color: var(--accent); font-weight: 500; }
+.intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px 64px; align-items: end; padding-block: clamp(40px, 6vw, 72px) clamp(64px, 9vw, 120px); }
+.lede { font-size: clamp(22px, 2.5vw, 31px); line-height: 1.32; font-weight: 450; letter-spacing: -.01em; max-width: 30ch; }
+.open { display: flex; gap: 10px; align-items: baseline; color: var(--ink-2); margin-bottom: 20px; max-width: 40ch; }
+.dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--frontier); transform: translateY(-1px); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
-  /* PROJECT */
-  .project { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
-  .project-body { padding: 40px; }
-  .p-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
-  .badge { font: 600 11px "JetBrains Mono", monospace; padding: 4px 9px; border-radius: 6px; border: 1px solid var(--accent); color: var(--accent); letter-spacing: .06em; }
-  .badge.fill { background: var(--accent); color: #fff; }
-  .project h3 { font-size: 36px; letter-spacing: -.02em; }
-  .project .kicker { font: 12px "JetBrains Mono", monospace; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
-  .project p.desc { color: var(--muted); margin: 14px 0 24px; }
-  .feat-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; margin-top: 10px; }
-  .feat-list li { font-size: 14px; color: var(--muted); padding-left: 18px; position: relative; }
-  .feat-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-size: 12px; }
-  .h-mini { font: 600 11px "JetBrains Mono", monospace; letter-spacing: .14em; color: var(--text); margin: 22px 0 10px; text-transform: uppercase; }
-  .project-visual { background: var(--bg-2); border-left: 1px solid var(--line); padding: 36px; display: flex; align-items: center; justify-content: center; }
-  .mock { width: 100%; max-width: 420px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
-  .mock-bar { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
-  .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-  .mock-in { padding: 20px; }
-  .score { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
-  .ring { width: 86px; height: 86px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--accent) 0 87%, var(--line) 87% 100%); }
-  .ring span { width: 68px; height: 68px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font-weight: 700; font-size: 20px; }
-  .bar-row { font: 11px "JetBrains Mono", monospace; color: var(--muted); margin-bottom: 10px; }
-  .bar { height: 6px; border-radius: 4px; background: var(--line); margin-top: 5px; overflow: hidden; }
-  .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
-  .mock-note { margin-top: 14px; padding: 12px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
-  .mock-note b { color: var(--text); }
+/* Sections */
+.sec { border-top: 1px solid var(--line); padding-block: clamp(72px, 10vw, 140px); scroll-margin-top: 64px; }
+.h2 { font-stretch: 125%; font-weight: 800; font-size: clamp(38px, 5.4vw, 72px); line-height: 1; letter-spacing: -.02em; margin-bottom: clamp(36px, 5vw, 64px); }
+.h3 { font-stretch: 125%; font-weight: 800; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -.015em; }
+.meta { color: var(--muted); font-size: 15px; margin-bottom: 10px; }
+.body { color: var(--ink-2); max-width: 62ch; }
+.body + .body { margin-top: 1em; }
 
-  .p-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-  .p-note { margin-top: 12px; font: 12px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
-  .mock-cap { margin-top: 12px; font: 11.5px/1.5 "JetBrains Mono", monospace; color: var(--muted); text-align: center; }
-  .case { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 16px; padding: 36px 40px; border-radius: 24px; border: 1px solid var(--line); background: var(--card); }
-  .case .h-mini { margin-top: 0; margin-bottom: 18px; }
-  .arch { display: grid; gap: 8px; text-align: center; }
-  .node { padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); font-weight: 600; font-size: 14.5px; }
-  .node.strong { border-color: var(--accent); }
-  .node small { display: block; font: 400 11.5px "JetBrains Mono", monospace; color: var(--muted); margin-top: 3px; }
-  .arrow { font: 11px "JetBrains Mono", monospace; color: var(--accent); }
-  .arch-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .arch-split > div { display: grid; gap: 8px; }
-  .decisions { display: grid; grid-template-columns: 130px 1fr; gap: 12px 18px; font-size: 14.5px; }
-  .decisions dt { font: 600 12px "JetBrains Mono", monospace; color: var(--accent); padding-top: 3px; }
-  .decisions dd { color: var(--muted); }
+/* Projects */
+.proj { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px clamp(32px, 5vw, 80px); align-items: start; }
+.proj + .proj { margin-top: clamp(56px, 8vw, 110px); padding-top: clamp(56px, 8vw, 110px); border-top: 1px solid var(--line); }
+.proj.flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.proj.flip .proj-media { order: -1; }
+.proj-text .h3 { margin-bottom: 18px; }
+.facts { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 10px 20px; margin-top: 28px; font-size: 16px; }
+.facts dt { font-weight: 650; }
+.facts dd { color: var(--ink-2); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.note { margin-top: 16px; font-size: 14.5px; color: var(--muted); max-width: 52ch; }
 
-  .shot-link { display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .2s, border-color .2s; background: #000; }
-  .shot-link:hover { transform: translateY(-3px); border-color: var(--accent); }
-  .shot { display: block; width: 100%; height: auto; }
-  .shot.tall { max-height: 560px; object-fit: cover; object-position: top; }
-  .gallery { margin-top: 16px; padding: 36px 40px; border-radius: 24px; border: 1px solid var(--line); background: var(--card); }
-  .gallery .h-mini { margin-top: 0; margin-bottom: 18px; }
-  .g-grid { display: grid; grid-template-columns: 1fr 1fr 0.55fr; gap: 16px; align-items: start; }
-  .g-grid .g-wide { grid-column: 1 / 3; }
-  .g-grid .g-uml { grid-column: 3; grid-row: 1 / 3; }
-  .g-grid figcaption { margin-top: 8px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
-  .g-hint { margin-top: 14px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
+.frame { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
+.zoom img { transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+.zoom:hover img { transform: scale(1.015); }
+.cap { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.tall img { width: 100%; max-height: 640px; object-fit: cover; object-position: top; }
 
-  /* CHAT */
-  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .chat-fab { position: fixed; right: 20px; bottom: 20px; z-index: 80; display: flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px; border-radius: 999px; border: 1px solid var(--accent); background: var(--card); color: var(--text); font: 600 14px "JetBrains Mono", monospace; cursor: pointer; box-shadow: var(--shadow); transition: transform .2s; }
-  .chat-fab:hover { transform: translateY(-2px); }
-  .chat-fab img { border-radius: 50%; object-fit: cover; }
-  .chat-fab::after { content: ""; position: absolute; left: 32px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--ok); border: 2px solid var(--card); }
-  .chat-panel { position: fixed; right: 20px; bottom: 84px; z-index: 81; width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 110px); display: flex; flex-direction: column; padding: 0; border-radius: 20px; border: 1px solid var(--line); background: var(--card); box-shadow: 0 24px 70px rgba(0,0,0,.5); overflow: hidden; }
-  .chat-panel[hidden] { display: none; }
-  .chat-panel .chat-head { position: static; backdrop-filter: none; }
-  .chat-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--card-2); }
-  .chat-head img { border-radius: 50%; object-fit: cover; }
-  .chat-head div { flex: 1; line-height: 1.3; }
-  .chat-head small { display: block; color: var(--muted); font: 11px "JetBrains Mono", monospace; }
-  .chat-x { background: none; border: 0; color: var(--muted); font-size: 16px; cursor: pointer; padding: 6px; }
-  .chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .msg { max-width: 88%; padding: 10px 13px; border-radius: 14px; font-size: 14px; line-height: 1.5; white-space: pre-line; }
-  .msg.bot { background: var(--bg-2); border: 1px solid var(--line); border-bottom-left-radius: 4px; align-self: flex-start; }
-  .msg.me { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
-  .msg a { color: var(--accent); text-decoration: underline; }
-  .msg.typing { color: var(--muted); font: 13px "JetBrains Mono", monospace; }
-  .chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 10px; flex-shrink: 0; }
-  .chat-chips:empty { display: none; }
-  .chat-chips button { flex-shrink: 0; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); border-radius: 999px; padding: 6px 11px; font: 12px "JetBrains Mono", monospace; cursor: pointer; }
-  .chat-chips button:hover { border-color: var(--accent); }
-  .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
-  .chat-form input { flex: 1; padding: 11px 13px; border-radius: 12px; font-size: 14px; }
-  .chat-form button { width: 44px; border: 0; border-radius: 12px; background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; font-size: 16px; cursor: pointer; }
-  @media (max-width: 600px) {
-    .chat-fab { right: 12px; bottom: 12px; }
-    .chat-panel { right: 8px; left: 8px; bottom: 72px; width: auto; max-width: none; height: calc(100vh - 96px); }
-  }
+.strip { grid-column: 1 / -1; display: grid; grid-template-columns: 2fr 1.4fr 1.4fr .8fr; gap: 16px; }
+.strip .frame img { width: 100%; height: 150px; object-fit: cover; object-position: top left; }
 
-  /* LEARNING */
-  .learn-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
-  .learn-now, .learn-goal { padding: 32px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); }
-  .learn-goal { background: linear-gradient(160deg, var(--accent-soft), var(--card)); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
-  .learn-now .h-mini, .learn-goal .h-mini { margin-top: 0; }
-  .learn-now p, .learn-goal p { color: var(--muted); margin-bottom: 14px; }
-  .learn-now strong, .learn-goal strong { color: var(--text); font-weight: 600; }
-  .learn-badge { display: flex; gap: 14px; align-items: center; margin-top: 8px; padding: 14px 16px; border-radius: 14px; border: 1px dashed var(--accent); transition: background .2s; }
-  .learn-badge:hover { background: var(--accent-soft); }
-  .lb-icon { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 700; }
-  .learn-badge b { display: block; font-size: 14.5px; }
-  .learn-badge small { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
-  .interests { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
-  .interest { padding: 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s, transform .2s; }
-  .interest:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .interest .n { font: 12px "JetBrains Mono", monospace; color: var(--accent); }
-  .interest h4 { font-size: 16px; margin: 6px 0 6px; }
-  .interest p { color: var(--muted); font-size: 13.5px; }
-  .learn-close { margin: 28px auto 0; text-align: center; color: var(--muted); font-style: italic; max-width: 680px; }
-  .cert-link { color: var(--accent); text-decoration: underline; }
+/* GhostMate transcript */
+.agent { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: clamp(18px, 2.5vw, 28px); display: grid; gap: 12px; font-size: 15.5px; }
+.say { padding: 10px 14px; border-radius: 12px; max-width: 85%; }
+.say.me { justify-self: end; background: var(--free); border: 1px solid var(--line); }
+.say.bot { justify-self: start; padding-inline: 2px; color: var(--ink-2); }
+.call {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; line-height: 1.55;
+  border-left: 2px solid var(--scan); background: rgba(36, 54, 240, .05);
+  padding: 8px 12px; border-radius: 0 6px 6px 0; overflow-wrap: anywhere; color: var(--ink-2);
+}
+.call b { color: var(--scan); font-weight: 600; }
+.call .res { display: block; color: var(--muted); }
+.call .res.ok { color: var(--frontier); }
+.confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14.5px; padding: 10px 12px; border: 1px dashed var(--ink); border-radius: 8px; }
+.confirm span:first-child { margin-right: auto; }
+.chip { border: 1.5px solid var(--ink); border-radius: 6px; padding: 3px 10px; font-weight: 600; font-size: 13.5px; }
+.chip.dark { background: var(--ink); color: var(--free); }
+.js .agent .step { opacity: 0; transform: translateY(8px); transition: opacity .4s ease, transform .4s ease; }
+.js .agent .step.on { opacity: 1; transform: none; }
 
-  /* TIMELINE */
-  .timeline { position: relative; display: grid; gap: 18px; }
-  .job { display: grid; grid-template-columns: 200px 1fr 50px; gap: 28px; padding: 30px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s; }
-  .job:hover { border-color: var(--accent); }
-  .job .when { font: 12px "JetBrains Mono", monospace; color: var(--muted); }
-  .job .when em { display: inline-block; margin-top: 8px; font-style: normal; font-size: 10px; letter-spacing: .1em; color: var(--accent); border: 1px solid var(--accent); padding: 2px 7px; border-radius: 5px; }
-  .job h3 { font-size: 22px; }
-  .job .role { color: var(--accent); font-size: 15px; margin-bottom: 10px; }
-  .job ul { list-style: none; color: var(--muted); font-size: 14.5px; display: grid; gap: 6px; }
-  .job li { padding-left: 18px; position: relative; }
-  .job li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
-  .job .idx { font: 700 14px "JetBrains Mono", monospace; color: var(--line); text-align: right; font-size: 28px; }
-  .job .loc { color: var(--muted); font: 12px "JetBrains Mono", monospace; margin-top: 4px; }
+/* Saved SLAM map */
+.mapbox { position: relative; background: var(--unknown); border-radius: 8px; overflow: hidden; aspect-ratio: 843 / 732; }
+.mapbox img { position: absolute; inset: 4%; width: 92%; height: 92%; object-fit: contain; image-rendering: pixelated; }
+.mapbox .reveal {
+  position: absolute; inset: 0;
+  -webkit-mask-image: conic-gradient(from 0deg at 50% 52%, #000 var(--sweep), transparent var(--sweep));
+          mask-image: conic-gradient(from 0deg at 50% 52%, #000 var(--sweep), transparent var(--sweep));
+}
+.mapbox .beam { position: absolute; left: 50%; top: 52%; width: 75%; height: 2px; background: linear-gradient(90deg, var(--scan), rgba(36, 54, 240, 0)); transform-origin: 0 50%; transform: rotate(calc(var(--sweep) - 90deg)); opacity: 0; }
+.mapbox .bot { position: absolute; left: 50%; top: 52%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px var(--free); opacity: 0; transition: opacity .3s; }
+.js .mapbox { --sweep: 0deg; }
+.js .mapbox.on { --sweep: 360deg; transition: --sweep 2.6s cubic-bezier(.45, .05, .35, 1); }
+.js .mapbox.on .beam { animation: beam 2.6s ease forwards; }
+.js .mapbox.on .bot { opacity: 1; }
+@keyframes beam { 0% { opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
 
-  /* EDUCATION */
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .edu { padding: 30px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); }
-  .edu .when { font: 12px "JetBrains Mono", monospace; color: var(--accent); }
-  .edu h3 { font-size: 21px; margin: 8px 0 4px; }
-  .edu .school { color: var(--muted); margin-bottom: 14px; }
-  .edu .kv { display: flex; gap: 22px; margin-top: 16px; flex-wrap: wrap; }
-  .edu .kv div { font: 11px "JetBrains Mono", monospace; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
-  .edu .kv b { display: block; color: var(--text); font-size: 15px; letter-spacing: 0; margin-top: 2px; }
-  .edu .course { font-size: 13.5px; color: var(--muted); }
+.more { margin-top: clamp(64px, 9vw, 120px); padding-top: clamp(40px, 5vw, 56px); border-top: 1px solid var(--line); }
+.more h3 { font-stretch: 112%; font-weight: 700; font-size: 22px; margin-bottom: 8px; }
+.rows { list-style: none; }
+.rows li { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) auto; gap: 8px 32px; padding-block: 20px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.rows .name { font-weight: 650; font-size: 18px; }
+.rows .name small { display: block; font-weight: 400; font-size: 14px; color: var(--muted); }
+.rows p { color: var(--ink-2); }
+.rows .go { display: flex; gap: 16px; font-size: 15px; white-space: nowrap; }
+.rows .go a { text-underline-offset: 3px; }
+.rows .go a:hover, .tline a:hover { color: var(--scan); }
+.tline { margin-top: 20px; color: var(--muted); }
+.tline a { text-underline-offset: 3px; }
 
-  .certs { display: grid; gap: 0; border-top: 1px solid var(--line); }
-  .cert { display: grid; grid-template-columns: 60px 1fr auto; gap: 18px; align-items: center; padding: 22px 6px; border-bottom: 1px solid var(--line); transition: background .2s, padding .2s; }
-  .cert:hover { background: var(--accent-soft); padding-left: 16px; }
-  .cert .n { font: 12px "JetBrains Mono", monospace; color: var(--accent); }
-  .cert h4 { font-size: 17px; font-weight: 600; }
-  .cert small { color: var(--muted); font-size: 13.5px; }
-  .cert .d { font: 12px "JetBrains Mono", monospace; color: var(--muted); text-align: right; }
+/* Experience + education rows */
+.jobs { list-style: none; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 13em minmax(0, 1fr); gap: 8px 40px; padding-block: 32px; border-bottom: 1px solid var(--line); }
+.when { color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.job h3 { font-stretch: 112%; font-weight: 750; font-size: 24px; line-height: 1.2; }
+.role { font-size: 17px; font-weight: 500; margin: 2px 0 10px; }
+.job .body { max-width: 66ch; }
+.where { margin-top: 10px; font-size: 14.5px; color: var(--muted); }
 
-  .langs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
-  .lang { padding: 20px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
-  .lang b { display: block; font-size: 17px; }
-  .lang span { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
-  .lvl { display: flex; gap: 4px; margin-top: 12px; }
-  .lvl i { flex: 1; height: 4px; border-radius: 3px; background: var(--line); }
-  .lvl i.on { background: var(--accent); }
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px clamp(32px, 6vw, 96px); align-items: start; }
+.portrait { border-radius: 8px; overflow: hidden; background: #e9eaeb; max-width: 420px; }
+.about .body { font-size: 18px; }
+.kit { margin-top: 48px; }
+.kit h3, .sub-h { font-stretch: 112%; font-weight: 700; font-size: 22px; margin-bottom: 14px; }
+.kit dl { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); border-top: 1px solid var(--line); }
+.kit dt, .kit dd { padding-block: 11px; border-bottom: 1px solid var(--line); }
+.kit dt { font-weight: 650; }
+.kit dd { color: var(--ink-2); }
 
-  /* CONTACT */
-  .contact { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; }
-  .contact-big { font-size: clamp(32px, 4.4vw, 54px); line-height: 1.05; letter-spacing: -.03em; margin: 12px 0 18px; }
-  .contact-links { display: grid; gap: 10px; margin-top: 28px; }
-  .c-link { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s; font-size: 15px; }
-  .c-link:hover { border-color: var(--accent); }
-  .c-link small { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
-  form { padding: 32px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); display: grid; gap: 16px; }
-  label { font: 600 11px "JetBrains Mono", monospace; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; display: grid; gap: 8px; }
-  input, textarea {
-    font: 15px "Space Grotesk", sans-serif; color: var(--text); background: var(--bg-2); border: 1px solid var(--line);
-    border-radius: 12px; padding: 13px 14px; outline: none; transition: border-color .2s; width: 100%;
-  }
-  input:focus, textarea:focus { border-color: var(--accent); }
-  textarea { min-height: 130px; resize: vertical; }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.certs { list-style: none; border-top: 1px solid var(--line); }
+.certs li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) 7em; gap: 4px 24px; padding-block: 15px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.certs .c-name { font-weight: 600; }
+.certs .c-by { color: var(--ink-2); }
+.certs .c-by a { text-underline-offset: 3px; }
+.certs .c-when { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.langs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.langs dt { font-weight: 650; }
+.langs dd { color: var(--ink-2); }
 
-  footer { border-top: 1px solid var(--line); padding: 30px 0; color: var(--muted); font: 12px "JetBrains Mono", monospace; }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+/* Contact */
+.contact .lead { font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; color: var(--ink-2); max-width: 46ch; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: clamp(36px, 5vw, 56px); }
+.mail { font-stretch: 125%; font-weight: 750; font-size: clamp(22px, 5vw, 64px); letter-spacing: -.02em; line-height: 1.1; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .14em; overflow-wrap: anywhere; }
+.mail:hover { color: var(--scan); }
+.contact .actions { margin-top: 32px; }
 
-  .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 80px); background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 10px; font: 13px "JetBrains Mono", monospace; transition: transform .3s; z-index: 99; }
-  .toast.show { transform: translate(-50%, 0); }
+.foot { border-top: 1px solid var(--line); padding-block: 28px; font-size: 14.5px; color: var(--muted); }
+.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.foot a { text-underline-offset: 3px; }
 
-  .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
-  .js .reveal.in, .js .hero .reveal { opacity: 1; transform: none; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 10px; font: 600 13px "JetBrains Mono", monospace; }
-  .skip:focus { top: 12px; }
+/* Lightbox */
+.lb { border: 0; padding: 0; background: transparent; max-width: min(1200px, 94vw); max-height: 92vh; margin: auto; overflow: visible; }
+.lb::backdrop { background: rgba(20, 22, 26, .78); }
+.lb[open] { animation: lb-in .28s cubic-bezier(.2, .7, .2, 1); }
+.lb img { max-width: min(1200px, 94vw); max-height: 82vh; width: auto; border-radius: 6px; background: var(--paper); }
+.lb p { color: #fff; margin-top: 10px; font-size: 15px; display: flex; justify-content: space-between; gap: 20px; }
+.lb button { background: none; border: 0; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+@keyframes lb-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
 
-  /* RESPONSIVE */
-  @media (max-width: 960px) {
-    .hero, .about-grid, .project, .contact, .edu-grid, .case, .learn-grid { grid-template-columns: 1fr; }
-    .interests { grid-template-columns: 1fr 1fr; }
-    .hero { min-height: auto; padding-top: 48px; }
-    .id-card { max-width: 420px; }
-    .project-visual { border-left: 0; border-top: 1px solid var(--line); }
-    .stack-grid { grid-template-columns: 1fr 1fr; }
-    .stats, .langs { grid-template-columns: 1fr 1fr; }
-    .job { grid-template-columns: 1fr; gap: 10px; }
-    .job .idx { display: none; }
-    .links, .status { display: none; }
-    .burger { display: inline-block; }
-    .links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); }
-    .links.open a { padding: 16px 24px; border-top: 1px solid var(--line); }
-  }
-  @media (max-width: 600px) {
-    .wrap { padding: 0 16px; }
-    section { padding: 76px 0; }
-    .sec-head { grid-template-columns: 1fr; gap: 4px; margin-bottom: 36px; }
-    .stack-grid, .feat-list, .row2, .interests { grid-template-columns: 1fr; }
-    .learn-now, .learn-goal { padding: 24px; }
-    .project-body, .project-visual, form, .case { padding: 24px; }
-    .gallery { padding: 24px; }
-    .g-grid { grid-template-columns: 1fr; }
-    .g-grid .g-wide, .g-grid .g-uml { grid-column: auto; grid-row: auto; }
-    .decisions { grid-template-columns: 1fr; gap: 2px; }
-    .decisions dd { margin-bottom: 10px; }
-    .cert { grid-template-columns: 1fr; gap: 4px; }
-    .cert .d { text-align: left; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-    .reveal { opacity: 1; transform: none; }
-  }
+/* Responsive */
+@media (max-width: 980px) {
+  .proj, .proj.flip, .about { grid-template-columns: 1fr; }
+  .proj.flip .proj-media { order: 0; }
+  .intro { grid-template-columns: 1fr; align-items: start; }
+  .strip { grid-template-columns: 1fr 1fr; }
+  .strip .frame img { height: 130px; }
+  .portrait { max-width: 340px; }
+  .langs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .map { height: clamp(340px, 54svh, 480px); }
+  .statusbar-in { flex-wrap: wrap; gap: 4px 16px; padding-block: 8px; }
+  .hint { flex-basis: 100%; }
+  .job { grid-template-columns: 1fr; gap: 4px; padding-block: 26px; }
+  .when { padding-top: 0; }
+  .rows li { grid-template-columns: 1fr; gap: 6px; }
+  .certs li { grid-template-columns: 1fr; gap: 2px; }
+  .certs .c-when { text-align: left; }
+  .facts { grid-template-columns: 1fr; gap: 2px; }
+  .facts dd { margin-bottom: 12px; }
+  .kit dl { grid-template-columns: 1fr; }
+  .kit dt { border-bottom: 0; padding-bottom: 0; }
+  .kit dd { padding-top: 2px; }
+}
+@media (max-width: 420px) {
+  .brand { font-size: 15px; }
+  .top-in { gap: 14px; }
+  .actions .btn { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .mapbox { --sweep: 360deg; }
+  .js .agent .step { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#about">Skip to content</a>
+<a class="skip" href="#work" data-i="skip">Skip to projects</a>
 
-<header>
-  <div class="wrap">
-    <nav aria-label="Main">
-      <a href="#top" class="logo" aria-label="Home">AA</a>
-      <div class="links" id="links">
-        <a href="#about" data-i="nav.about">About</a>
-        <a href="#stack" data-i="nav.stack">Stack</a>
-        <a href="#projects" data-i="nav.projects">Projects</a>
-        <a href="#experience" data-i="nav.exp">Experience</a>
-        <a href="#education" data-i="nav.edu">Education</a>
-        <a href="#learning" data-i="nav.learning">Learning</a>
-        <a href="#contact" data-i="nav.contact">Contact</a>
-      </div>
-      <div class="nav-right">
-        <div class="status"><span class="dot"></span><span data-i="nav.status">Open to work</span></div>
-        <button class="pill-btn" id="langBtn" aria-label="Switch language"><b>EN</b> / DE</button>
-        <button class="pill-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
-        <button class="pill-btn burger" id="burger" aria-label="Menu">☰</button>
-      </div>
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#">Achraf Aroua</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work" data-i="nav.work">Work</a>
+      <a href="#experience" data-i="nav.exp">Experience</a>
+      <a href="#about" data-i="nav.about">About</a>
+      <a href="#contact" data-i="nav.contact">Contact</a>
     </nav>
+    <div class="top-actions">
+      <button class="lang" id="lang" type="button" lang="de">Deutsch</button>
+      <a class="btn btn-sm btn-solid" href="Achraf_Aroua_CV.pdf" download data-i="nav.cv">CV</a>
+    </div>
   </div>
 </header>
 
-<main id="top">
-  <!-- HERO -->
-  <div class="wrap">
-    <div class="hero">
-      <div class="reveal">
-        <span class="eyebrow" data-i="hero.eyebrow">Aachen, Germany · Open to Werkstudent roles & internships</span>
-        <h1><span data-i="hero.t1">I build full-stack applications with</span> <span class="grad" data-i="hero.t2">practical AI features.</span></h1>
-        <p class="lead" data-i="hero.lead">I'm Achraf, an M.Sc. Computer Science student at TH Köln with hands-on experience building web applications, secure backends and AI-powered workflows.</p>
-        <div class="ctas">
-          <a href="#projects" class="btn primary" data-i="hero.cta1">Explore my projects →</a>
-          <a href="Achraf_Aroua_CV.pdf" download class="btn" data-i="hero.cta3">Download CV ↓</a>
-          <a href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
-        </div>
-        <div class="chips">
-          <span data-i="hero.c1">Full-stack web apps</span>
-          <span data-i="hero.c2">AI-powered workflows</span>
-          <span data-i="hero.c3">Plus: SAP / ABAP experience</span>
-        </div>
-      </div>
-
-      <div class="id-card reveal">
-        <div class="avatar">
-          <img src="photo.webp" alt="Portrait of Achraf Aroua" width="1254" height="1254" fetchpriority="high" />
-          <span class="tag">FULL-STACK · AI</span>
-        </div>
-        <div class="code">
-          <span class="k">const</span> dev = {<br />
-          &nbsp;&nbsp;<span class="p">name</span>: <span class="s">"Achraf Aroua"</span>,<br />
-          &nbsp;&nbsp;<span class="p">based</span>: <span class="s">"Aachen, DE"</span>,<br />
-          &nbsp;&nbsp;<span class="p">studying</span>: <span class="s">"M.Sc. @ TH Köln"</span>,<br />
-          &nbsp;&nbsp;<span class="p">loves</span>: [<span class="s">"React"</span>, <span class="s">"Node"</span>, <span class="s">"AI"</span>]<br />
-          };
-        </div>
+<main>
+  <section class="hero" aria-labelledby="name">
+    <h1 class="sr" id="name">Achraf Aroua</h1>
+    <div class="map" id="map">
+      <canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="statusbar">
+      <div class="wrap statusbar-in">
+        <p class="hint" id="hint" aria-live="polite">Exploring. Click anywhere on the map to send the robot there.</p>
+        <p class="cov"><span data-i="hud.mapped">Mapped</span> <b id="cov">0%</b></p>
+        <button class="again" id="again" type="button" data-i="hud.again">Map it again</button>
       </div>
     </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">01</div>
-        <div>
-          <div class="sec-label" data-i="about.label">About me</div>
-          <h2 data-i="about.title">From business need to working product.</h2>
+    <div class="wrap intro">
+      <p class="lede" data-i="hero.lede">Software engineer in Aachen. I build full-stack web apps with AI features, and I'm doing my Master's in Computer Science at TH Köln.</p>
+      <div>
+        <p class="open"><span class="dot" aria-hidden="true"></span><span data-i="hero.open">Open to working student roles and internships in Cologne and Aachen, on site or hybrid.</span></p>
+        <div class="actions">
+          <a class="btn btn-solid" href="mailto:arouaachref8@gmail.com" data-i="hero.mail">Email me</a>
+          <a class="btn" href="Achraf_Aroua_CV.pdf" download data-i="hero.cv">Download CV</a>
+          <a class="btn" href="https://github.com/achref-2" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p data-i="about.p1">I'm <strong>Achraf Aroua</strong>, a Full-Stack & AI Developer who enjoys turning complex requirements into clean, maintainable applications.</p>
-          <p data-i="about.p2">I hold a <strong>Bachelor's in Computer Science – Software Engineering</strong> from the Faculty of Sciences of Bizerte, where my final-year project in AI and full-stack development earned the mention <strong>Excellent</strong>. I'm now pursuing an <strong>M.Sc. in Computer Science and Systems Engineering</strong> at TH Köln.</p>
-          <p data-i="about.p3">My experience spans the frontend, backend, databases, authentication and AI integrations — plus hands-on exposure to enterprise ERP systems and ABAP development.</p>
-        </div>
-        <div class="pillars reveal">
-          <div class="pillar"><h4><i>01</i><span data-i="about.k1">End-to-end product thinking</span></h4><p data-i="about.k1d">Frontend, backend, data and delivery as one coherent system.</p></div>
-          <div class="pillar"><h4><i>02</i><span data-i="about.k2">AI that is actually useful</span></h4><p data-i="about.k2d">CV analysis, matching and generation where AI truly improves a workflow.</p></div>
-          <div class="pillar"><h4><i>03</i><span data-i="about.k3">Enterprise mindset</span></h4><p data-i="about.k3d">ERP/SAP exposure, Agile/Scrum, UML and clear technical documentation.</p></div>
-        </div>
-      </div>
-      <div class="stats reveal">
-        <div class="stat"><b>3</b><span data-i="about.s1">internships</span></div>
-        <div class="stat"><b>4</b><span data-i="about.s2">languages spoken</span></div>
-        <div class="stat"><b>20+</b><span data-i="about.s3">technologies</span></div>
-        <div class="stat"><b>M.Sc.</b><span data-i="about.s4">in progress · TH Köln</span></div>
       </div>
     </div>
   </section>
 
-  <!-- STACK -->
-  <section id="stack">
+  <section class="sec" id="work" aria-labelledby="work-h">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">02</div>
-        <div>
-          <div class="sec-label" data-i="stack.label">Skills / Stack</div>
-          <h2 data-i="stack.title">A stack chosen to ship, not to decorate.</h2>
-          <p class="sec-sub" data-i="stack.sub">The tools I use across frontend, backend, data, infrastructure, enterprise systems and AI.</p>
-        </div>
-      </div>
-      <div class="stack-grid">
-        <div class="stack-card reveal"><span class="n">01</span><h3>Frontend</h3><div class="tags"><span class="tag-t">React</span><span class="tag-t">React Native</span><span class="tag-t">Next.js</span><span class="tag-t">Vue.js</span><span class="tag-t">Vite</span><span class="tag-t">TypeScript</span><span class="tag-t">Tailwind CSS</span><span class="tag-t">Figma</span></div></div>
-        <div class="stack-card reveal"><span class="n">02</span><h3>Backend</h3><div class="tags"><span class="tag-t">Node.js</span><span class="tag-t">Express.js</span><span class="tag-t">Spring Boot</span><span class="tag-t">Microservices</span><span class="tag-t">REST APIs</span><span class="tag-t">JWT / OAuth</span><span class="tag-t">Swagger</span></div></div>
-        <div class="stack-card reveal"><span class="n">03</span><h3 data-i="stack.lang">Languages</h3><div class="tags"><span class="tag-t">Java</span><span class="tag-t">Python</span><span class="tag-t">JavaScript</span><span class="tag-t">TypeScript</span><span class="tag-t">PHP</span><span class="tag-t">ABAP</span></div></div>
-        <div class="stack-card reveal"><span class="n">04</span><h3>Data</h3><div class="tags"><span class="tag-t">PostgreSQL</span><span class="tag-t">MySQL</span><span class="tag-t">PL/SQL</span><span class="tag-t">MongoDB</span><span class="tag-t">Redis</span><span class="tag-t">OpenSQL</span></div></div>
-        <div class="stack-card reveal"><span class="n">05</span><h3>Cloud & DevOps</h3><div class="tags"><span class="tag-t">AWS</span><span class="tag-t">Docker</span><span class="tag-t">Kubernetes</span><span class="tag-t">CI/CD</span><span class="tag-t">JUnit</span><span class="tag-t">Agile / Scrum</span></div></div>
-        <div class="stack-card reveal"><span class="n">06</span><h3>AI & ERP</h3><div class="tags"><span class="tag-t">Gemini API</span><span class="tag-t">scikit-learn</span><span class="tag-t">pandas</span><span class="tag-t">OCR</span><span class="tag-t">NLP</span><span class="tag-t">SAP ERP</span></div></div>
-      </div>
-      <p class="flow reveal">Frontend <b>↔</b> Backend <b>↔</b> Data <b>↔</b> AI <b>↔</b> ERP</p>
-    </div>
-  </section>
+      <h2 class="h2" id="work-h" data-i="work.h">Selected work</h2>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">03</div>
-        <div>
-          <div class="sec-label" data-i="proj.label">Featured project</div>
-          <h2 data-i="proj.title">Systems built around real workflows.</h2>
-          <p class="sec-sub" data-i="proj.sub">My final-year project: product thinking, full-stack architecture and AI where it creates real value.</p>
-        </div>
-      </div>
-      <article class="project reveal">
-        <div class="project-body">
-          <div class="p-meta"><span class="badge fill" data-i="proj.badge">FINAL-YEAR PROJECT · EXCELLENT</span><span class="badge">FRONTEND</span><span class="badge">BACKEND</span><span class="badge">AI</span></div>
-          <div class="kicker" data-i="proj.kicker">AI-powered recruitment platform · AlloGenie</div>
-          <h3>TalentSync</h3>
-          <p class="desc" data-i="proj.desc">A recruitment platform that analyzes candidate CVs against job descriptions, returns matching scores and feedback, and generates personalized cover letters — with dedicated spaces for candidates, recruiters and admins.</p>
-          <div class="h-mini">Stack</div>
-          <div class="tags"><span class="tag-t">React</span><span class="tag-t">Vite</span><span class="tag-t">Tailwind CSS</span><span class="tag-t">Node.js</span><span class="tag-t">Express.js</span><span class="tag-t">MongoDB</span><span class="tag-t">Python</span><span class="tag-t">Gemini API</span><span class="tag-t">JWT</span><span class="tag-t">Google OAuth</span></div>
-          <div class="h-mini" data-i="proj.feat">Key features</div>
-          <ul class="feat-list">
-            <li data-i="proj.f1">AI CV ↔ job matching score</li>
-            <li data-i="proj.f2">CV data extraction</li>
-            <li data-i="proj.f3">Cover letter generation</li>
-            <li data-i="proj.f4">Candidate / recruiter / admin UIs</li>
-            <li data-i="proj.f5">Role-based access control</li>
-            <li data-i="proj.f6">JWT + Google OAuth</li>
-            <li data-i="proj.f7">File upload handling</li>
-            <li data-i="proj.f8">UML, user stories, sprints</li>
-          </ul>
-          <div class="p-links">
-            <a class="btn primary" href="https://achref-2.github.io/TalentSync-App/" target="_blank" rel="noopener" data-i="proj.demo">Live preview ↗</a>
-            <a class="btn" href="https://github.com/achref-2/TalentSync-App" target="_blank" rel="noopener" data-i="proj.code">Source code ↗</a>
+      <article class="proj">
+        <div class="proj-text">
+          <p class="meta" data-i="ts.meta">Final-year project at AlloGenie, 2025</p>
+          <h3 class="h3">TalentSync</h3>
+          <p class="body" data-i="ts.desc">A recruitment platform that reads a candidate's CV, compares it with a job description and returns a match score, specific feedback and a draft cover letter. Candidates, recruiters and admins each get their own workspace.</p>
+          <dl class="facts">
+            <dt data-i="f.part">My part</dt>
+            <dd data-i="ts.part">Everything, end to end: the React interface for all three roles, an Express and MongoDB API with JWT, Google sign-in, file uploads and role-based access, and the Python scripts that use the Gemini API to extract CV data and score the match. I also wrote the user stories, UML diagrams and the project report.</dd>
+            <dt data-i="f.stack">Built with</dt>
+            <dd>React, Vite, Tailwind CSS, Node.js, Express, MongoDB, Python, Gemini API</dd>
+            <dt data-i="f.result">Result</dt>
+            <dd data-i="ts.result">Graded Excellent at the Faculty of Sciences of Bizerte</dd>
+          </dl>
+          <div class="links">
+            <a class="btn btn-solid" href="https://achref-2.github.io/TalentSync-App/" target="_blank" rel="noopener" data-i="ts.demo">Open live preview</a>
+            <a class="btn" href="https://github.com/achref-2/TalentSync-App" target="_blank" rel="noopener" data-i="f.code">View source</a>
           </div>
-          <p class="p-note" data-i="proj.note">The live preview shows the frontend. Sign-in and the AI analysis need the backend API, which isn't publicly hosted yet — the screens below show them in action.</p>
+          <p class="note" data-i="ts.note">The preview runs the frontend only. Sign-in and the CV analysis need the API, which isn't hosted publicly, so the screenshots show those parts.</p>
         </div>
-        <div class="project-visual">
-          <figure style="width:100%;max-width:420px">
-            <a href="shots/analysis.webp" target="_blank" rel="noopener" class="shot-link">
-              <img class="shot tall" src="shots/analysis.webp" alt="TalentSync resume vs. job description analysis screen showing skills, experience and overall match scores with AI-written improvement suggestions" width="662" height="866" loading="lazy" />
-            </a>
-            <figcaption class="mock-cap" data-i="mock.cap">Real screen from TalentSync: the Gemini-generated resume vs. job analysis, run on my own CV during testing.</figcaption>
+        <figure class="proj-media">
+          <button class="zoom frame tall" type="button" data-full="shots/analysis.webp">
+            <img src="shots/analysis.webp" width="662" height="866" loading="lazy" alt="TalentSync analysis screen comparing a CV with a job description, with scores for skills, experience and overall match and suggestions for improvement">
+          </button>
+          <figcaption class="cap" data-i="ts.cap">The match analysis, run on my own CV while testing.</figcaption>
+        </figure>
+        <div class="strip">
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/landing.webp"><img src="shots/landing.webp" width="1400" height="373" loading="lazy" alt="TalentSync landing page"></button>
+            <figcaption class="cap" data-i="ts.s1">Landing page</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/dashboard.webp"><img src="shots/dashboard.webp" width="1400" height="635" loading="lazy" alt="TalentSync candidate dashboard"></button>
+            <figcaption class="cap" data-i="ts.s2">Candidate dashboard</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/signin.webp"><img src="shots/signin.webp" width="1400" height="634" loading="lazy" alt="TalentSync sign-in dialog with email, password and Google sign-in"></button>
+            <figcaption class="cap" data-i="ts.s3">Sign-in with Google</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/uml.webp"><img src="shots/uml.webp" width="632" height="862" loading="lazy" alt="UML class diagram of TalentSync"></button>
+            <figcaption class="cap" data-i="ts.s4">UML class diagram</figcaption>
           </figure>
         </div>
       </article>
 
-      <div class="case reveal">
-        <div class="case-col">
-          <div class="h-mini" data-i="case.arch">How it's built</div>
-          <div class="arch" role="img" aria-label="Architecture: React frontend calls an Express API, which uses MongoDB for data and runs Python scripts that call the Gemini API.">
-            <div class="node">React · Vite<small data-i="case.n1">Candidate / recruiter / admin UI</small></div>
-            <div class="arrow">↓ REST · JWT</div>
-            <div class="node strong">Node.js · Express API<small data-i="case.n2">Auth, roles, file uploads</small></div>
-            <div class="arch-split">
-              <div><div class="arrow">↓</div><div class="node">MongoDB<small data-i="case.n3">Users, jobs, applications</small></div></div>
-              <div><div class="arrow">↓</div><div class="node">Python + Gemini API<small data-i="case.n4">CV extraction, matching, cover letters</small></div></div>
-            </div>
+      <article class="proj flip">
+        <div class="proj-text">
+          <p class="meta" data-i="gm.meta">Personal project, 2026</p>
+          <h3 class="h3">GhostMate</h3>
+          <p class="body" data-i="gm.desc">An AI assistant for my own life as a Master's student in Cologne. It keeps track of tasks and deadlines, answers questions about lecture PDFs, helps me practise German, follows my job applications and explains official letters.</p>
+          <dl class="facts">
+            <dt data-i="f.how">How it works</dt>
+            <dd data-i="gm.how">The model never touches the database. It can only call 16 typed tools that are validated with Zod and scoped to the signed-in user. Every tool call is shown with its real result, and anything that deletes data waits for a click. Answers about lecture slides cite the page, and each quote is checked against the stored text.</dd>
+            <dt data-i="f.stack">Built with</dt>
+            <dd data-i="gm.stack">React 19, TypeScript, Tailwind CSS, Express 5, MongoDB, Zod, Claude API with tool calling, BM25 retrieval</dd>
+            <dt data-i="f.tested">Tested</dt>
+            <dd data-i="gm.tested">43 server tests with Vitest, including user isolation and a prompt-injection case, plus a 14-step browser walkthrough with Playwright.</dd>
+          </dl>
+          <div class="links">
+            <a class="btn" href="https://github.com/achref-2/Agent" target="_blank" rel="noopener" data-i="f.code">View source</a>
           </div>
         </div>
-        <div class="case-col">
-          <div class="h-mini" data-i="case.role">My role & key decisions</div>
-          <dl class="decisions">
-            <dt data-i="case.d1">Scope</dt>
-            <dd data-i="case.d1t">Built the project as my final-year internship at AlloGenie — frontend, backend, AI integration and documentation.</dd>
-            <dt data-i="case.d2">Authentication</dt>
-            <dd data-i="case.d2t">JWT sessions plus Google OAuth, with role-based access separating candidates, recruiters and admins.</dd>
-            <dt data-i="case.d3">CV handling</dt>
-            <dd data-i="case.d3t">CV files are uploaded through the Express API and passed to Python scripts that extract the CV data.</dd>
-            <dt data-i="case.d4">AI integration</dt>
-            <dd data-i="case.d4t">The Gemini API compares the extracted profile with a job description, returns a score with feedback, and drafts a personalised cover letter.</dd>
-            <dt data-i="case.d5">Process</dt>
-            <dd data-i="case.d5t">User stories, UML and sequence diagrams, backlog and sprint planning, and a final project report.</dd>
+        <figure class="proj-media">
+          <div class="agent" id="agent">
+            <p class="say me step" data-i="gm.t1">Remind me to email my professor tomorrow at 10.</p>
+            <p class="call step"><b>create_task</b>({ title: "Email professor", due: "tomorrow 10:00", reminder: true })<span class="res" data-res="{ ok: true }">…</span></p>
+            <p class="say bot step" data-i="gm.t2">Done. It's on your list for tomorrow at 10:00, with a reminder.</p>
+            <p class="say me step" data-i="gm.t3">Delete the application I saved by mistake.</p>
+            <p class="call step"><b>search_applications</b>({ status: "saved" })<span class="res" data-res="{ ok: true, count: 1 }">…</span></p>
+            <p class="call step"><b>delete_application</b>({ id: "a41f" })<span class="res" data-res="{ pending_confirmation: true }">…</span></p>
+            <div class="confirm step"><span data-i="gm.wait">Waiting for your confirmation</span><span class="chip dark" data-i="gm.del">Delete</span><span class="chip" data-i="gm.keep">Keep</span></div>
+          </div>
+          <figcaption class="cap" data-i="gm.cap">A simplified agent turn. Every tool call is visible, and deleting needs your confirmation.</figcaption>
+        </figure>
+      </article>
+
+      <article class="proj">
+        <div class="proj-text">
+          <p class="meta" data-i="mp.meta">Team project at TH Köln, winter semester 2026/27</p>
+          <h3 class="h3">Map → Plan → Drive</h3>
+          <p class="body" data-i="mp.desc">A TurtleBot3 explores a building it has never seen and builds the map on its own. My part is the simulation and the baseline the team tests against: Gazebo, slam_toolbox for mapping, Nav2 for driving and explore_lite for picking the next frontier, all started with one launch file.</p>
+          <dl class="facts">
+            <dt data-i="f.fixed">Problems solved</dt>
+            <dd data-i="mp.fixed">The robot spawned outside the house, exploration got stuck in a loop because the next goal sat inside Nav2's goal tolerance, and wheel slip near furniture smeared the walls. I fixed each one and documented the fix in the README.</dd>
+            <dt data-i="f.next">Next</dt>
+            <dd data-i="mp.next">Our own occupancy-grid mapping, an A* planner and a fuzzy controller, compared against this baseline.</dd>
+            <dt data-i="f.stack">Built with</dt>
+            <dd data-i="mp.stack">ROS 2, Gazebo, Nav2, slam_toolbox, Python, Ubuntu on WSL2</dd>
+          </dl>
+          <div class="links">
+            <a class="btn" href="https://github.com/achref-2/ams-map-plan-drive" target="_blank" rel="noopener" data-i="f.code">View source</a>
+          </div>
+          <p class="note" data-i="mp.note">The robot at the top of this page runs the same idea in your browser: frontier exploration to decide where to go next, and A* to get there.</p>
+        </div>
+        <figure class="proj-media">
+          <div class="mapbox" id="housemap">
+            <div class="reveal"><img src="img/house-map.png" width="843" height="732" loading="lazy" alt="Occupancy grid map of the simulated TurtleBot3 house: free space in light grey, walls in black, unexplored space in darker grey"></div>
+            <span class="beam" aria-hidden="true"></span>
+            <span class="bot" aria-hidden="true"></span>
+          </div>
+          <figcaption class="cap" data-i="mp.cap">The map the robot built of the simulated house on its own, after about 28 minutes of simulated time.</figcaption>
+        </figure>
+      </article>
+
+      <div class="more">
+        <h3 data-i="more.h">Smaller projects</h3>
+        <ul class="rows">
+          <li>
+            <span class="name"><span data-i="gym.name">Gym platform</span><small data-i="gym.when">University project, 2024</small></span>
+            <p data-i="gym.desc">A web app for running a gym, with a Spring Boot API and a React frontend.</p>
+            <span class="go"><a href="https://github.com/achref-2/Gym-backend" target="_blank" rel="noopener">Backend</a><a href="https://github.com/achref-2/Gym_frontend" target="_blank" rel="noopener">Frontend</a></span>
+          </li>
+          <li>
+            <span class="name"><span data-i="yt.name">YouTube music search</span><small>FastAPI, YouTube Data API</small></span>
+            <p data-i="yt.desc">Search for music videos, rank them by views and likes, and play them right on the page.</p>
+            <span class="go"><a href="https://github.com/achref-2/YoutubeSearchEngine" target="_blank" rel="noopener" data-i="f.code">View source</a></span>
+          </li>
+        </ul>
+        <p class="tline"><span data-i="more.rest">Everything else is on</span> <a href="https://github.com/achref-2" target="_blank" rel="noopener">github.com/achref-2</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="experience" aria-labelledby="exp-h">
+    <div class="wrap">
+      <h2 class="h2" id="exp-h" data-i="exp.h">Experience</h2>
+      <ol class="jobs">
+        <li class="job">
+          <p class="when" data-i="exp.d1">Feb – Jun 2025</p>
+          <div>
+            <h3>AlloGenie</h3>
+            <p class="role" data-i="exp.r1">Full-stack and AI developer, final-year internship</p>
+            <p class="body" data-i="exp.b1">Built TalentSync from the first user stories to the final report: React interfaces for three roles, a Node.js API with JWT, Google OAuth and file uploads, and Python scripts on the Gemini API for the CV analysis.</p>
+            <p class="where">Remote</p>
+          </div>
+        </li>
+        <li class="job">
+          <p class="when" data-i="exp.d2">Jun – Jul 2024</p>
+          <div>
+            <h3>Groupe ASAP Siryos</h3>
+            <p class="role" data-i="exp.r2">ERP and ABAP intern</p>
+            <p class="body" data-i="exp.b2">Worked with SAP ERP and ABAP, including OpenSQL, and learned how enterprise modules map to real business processes.</p>
+            <p class="where" data-i="loc.tn">Tunisia</p>
+          </div>
+        </li>
+        <li class="job">
+          <p class="when" data-i="exp.d3">Jun – Jul 2023</p>
+          <div>
+            <h3>Tunisair Technics</h3>
+            <p class="role" data-i="exp.r3">Web development intern</p>
+            <p class="body" data-i="exp.b3">Built a PHP and SQL web application for managing and classifying data, and improved its interface.</p>
+            <p class="where" data-i="loc.tunis">Tunis, Tunisia</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="about" aria-labelledby="about-h">
+    <div class="wrap about">
+      <div class="portrait"><img src="img/portrait.webp" width="900" height="900" loading="lazy" alt="Portrait of Achraf Aroua"></div>
+      <div>
+        <h2 class="h2" id="about-h" data-i="about.h">About me</h2>
+        <p class="body" data-i="about.p1">I studied software engineering at the Faculty of Sciences of Bizerte in Tunisia, and I'm now doing my Master's in Computer Science and Systems Engineering at TH Köln. I live in Aachen.</p>
+        <p class="body" data-i="about.p2">Most of what I've built so far are web applications: React in front, Node.js or Spring Boot behind it, and a database designed with some care. Over the past year I've moved toward AI engineering, meaning language models doing useful work inside real software, with retrieval, tools and tests around them.</p>
+        <p class="body" data-i="about.p3">Right now I'm learning retrieval-augmented generation by building a small RAG system from scratch, and I'm working on robot navigation in my team project at TH Köln. I work in German and English, and I also speak French and Arabic.</p>
+        <div class="kit">
+          <h3 data-i="kit.h">What I work with</h3>
+          <dl>
+            <dt>Frontend</dt><dd>React, TypeScript, Next.js, Vue.js, Tailwind CSS, React Native</dd>
+            <dt>Backend</dt><dd data-i="kit.be">Node.js, Express, Spring Boot, REST APIs, JWT and OAuth</dd>
+            <dt data-i="kit.ai">AI</dt><dd data-i="kit.aid">Python, LLM APIs (Gemini, Claude), tool calling, retrieval, scikit-learn, pandas</dd>
+            <dt data-i="kit.data">Data</dt><dd>MongoDB, PostgreSQL, MySQL, Redis</dd>
+            <dt data-i="kit.rob">Robotics</dt><dd>ROS 2, Gazebo, Nav2, slam_toolbox</dd>
+            <dt data-i="kit.ops">Delivery</dt><dd>Docker, Kubernetes, AWS, CI/CD, Git, Vitest, JUnit</dd>
+            <dt>Enterprise</dt><dd>SAP ERP, ABAP</dd>
+            <dt data-i="kit.way">Way of working</dt><dd data-i="kit.wayd">Agile and Scrum, user stories, UML</dd>
           </dl>
         </div>
       </div>
-
-      <div class="gallery reveal">
-        <div class="h-mini" data-i="case.shots">Screens from the app</div>
-        <div class="g-grid">
-          <figure class="g-wide"><a href="shots/landing.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/landing.webp" alt="TalentSync landing page" width="1400" height="373" loading="lazy" /></a><figcaption data-i="case.s1">Landing page</figcaption></figure>
-          <figure><a href="shots/dashboard.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/dashboard.webp" alt="TalentSync candidate dashboard with sidebar navigation" width="1400" height="635" loading="lazy" /></a><figcaption data-i="case.s2">Candidate dashboard</figcaption></figure>
-          <figure><a href="shots/signin.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/signin.webp" alt="TalentSync sign-in dialog with email, password and Google sign-in" width="1400" height="634" loading="lazy" /></a><figcaption data-i="case.s3">Sign-in · email/password + Google OAuth</figcaption></figure>
-          <figure class="g-uml"><a href="shots/uml.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/uml.webp" alt="UML class diagram of TalentSync: User, Candidate, Recruiter, Job, JobApplication, Interview, Message and Score classes" width="632" height="862" loading="lazy" /></a><figcaption data-i="case.s4">UML class diagram</figcaption></figure>
-        </div>
-        <p class="g-hint" data-i="case.hint">Click any screen to open it full size.</p>
-      </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
+  <section class="sec" id="education" aria-labelledby="edu-h">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">04</div>
-        <div>
-          <div class="sec-label" data-i="exp.label">Professional experience</div>
-          <h2 data-i="exp.title">Learning by shipping in real teams.</h2>
-        </div>
-      </div>
-      <div class="timeline">
-        <div class="job reveal">
-          <div class="when">FEB 2025 — JUN 2025<br /><em data-i="exp.latest">MOST RECENT</em></div>
+      <h2 class="h2" id="edu-h" data-i="edu.h">Education and certificates</h2>
+      <ol class="jobs">
+        <li class="job">
+          <p class="when" data-i="edu.d1">Since Oct 2026</p>
           <div>
-            <h3>AlloGenie</h3>
-            <div class="role" data-i="exp.r1">Final-Year Intern — Full-Stack & AI Developer</div>
-            <ul>
-              <li data-i="exp.j1a">Built TalentSync, an AI recruitment platform with matching scores, feedback and cover letter generation.</li>
-              <li data-i="exp.j1b">Responsive candidate, recruiter and admin interfaces with React, Vite and Tailwind CSS.</li>
-              <li data-i="exp.j1c">Backend with Node.js, Express, MongoDB, JWT, Google OAuth, file uploads and RBAC.</li>
-              <li data-i="exp.j1d">Integrated Python AI scripts and the Gemini API for CV extraction and compatibility analysis.</li>
-            </ul>
-            <div class="loc" data-i="loc.remote">Remote · Tunisia</div>
+            <h3 data-i="edu.n1">M.Sc. Computer Science and Systems Engineering</h3>
+            <p class="role">TH Köln, University of Applied Sciences</p>
+            <p class="body" data-i="edu.b1">This semester includes Computational Intelligence and a team project on mobile autonomous systems.</p>
           </div>
-          <div class="idx">01</div>
-        </div>
-        <div class="job reveal">
-          <div class="when">JUN 2024 — JUL 2024</div>
+        </li>
+        <li class="job">
+          <p class="when">2022 – 2025</p>
           <div>
-            <h3>Groupe ASAP Siryos</h3>
-            <div class="role" data-i="exp.r2">ERP / ABAP Intern</div>
-            <ul>
-              <li data-i="exp.j2a">Hands-on experience with ERP systems and ABAP development concepts.</li>
-              <li data-i="exp.j2b">Studied business processes, enterprise modules and database-oriented development.</li>
-              <li data-i="exp.j2c">Learned professional development workflows inside an enterprise environment.</li>
-            </ul>
-            <div class="loc" data-i="loc.tn">Tunisia</div>
+            <h3 data-i="edu.n2">Bachelor's in Computer Science, Software Engineering</h3>
+            <p class="role">Faculty of Sciences of Bizerte, University of Carthage</p>
+            <p class="body" data-i="edu.b2">Final-year project TalentSync graded Excellent.</p>
           </div>
-          <div class="idx">02</div>
-        </div>
-        <div class="job reveal">
-          <div class="when">JUN 2023 — JUL 2023</div>
-          <div>
-            <h3>Tunisair Technics</h3>
-            <div class="role" data-i="exp.r3">Web Development Intern</div>
-            <ul>
-              <li data-i="exp.j3a">Developed a web application with PHP, HTML, CSS, JavaScript and SQL.</li>
-              <li data-i="exp.j3b">Worked on data management, classification features and UI improvements.</li>
-            </ul>
-            <div class="loc" data-i="loc.tn">Tunisia</div>
-          </div>
-          <div class="idx">03</div>
-        </div>
-      </div>
+        </li>
+      </ol>
+
+      <h3 class="sub-h" style="margin-top:64px" data-i="cert.h">Certificates</h3>
+      <ul class="certs">
+        <li><span class="c-name">AI Foundation Microcredential (AIFM)</span><span class="c-by">Certiprof, <a href="certs/AIFM_Achraf_Aroua.pdf" target="_blank" rel="noopener" data-i="cert.pdf">certificate (PDF)</a></span><span class="c-when" data-i="cert.d1">Nov 2026</span></li>
+        <li><span class="c-name">telc Deutsch C1 Hochschule</span><span class="c-by">telc</span><span class="c-when">2026</span></li>
+        <li><span class="c-name">UX Research</span><span class="c-by">Space Academy</span><span class="c-when"></span></li>
+        <li><span class="c-name" data-i="cert.dn">Design Night, 24-hour design competition</span><span class="c-by">Art of Code Club</span><span class="c-when" data-i="cert.d2">Apr 2023</span></li>
+        <li><span class="c-name">Angular</span><span class="c-by">CPU Club</span><span class="c-when" data-i="cert.d3">Mar 2023</span></li>
+        <li><span class="c-name" data-i="cert.ai">Artificial Intelligence</span><span class="c-by">Google Developer Student Club FSB</span><span class="c-when" data-i="cert.d3b">Mar 2023</span></li>
+        <li><span class="c-name">DevOps</span><span class="c-by">Art of Code Club</span><span class="c-when" data-i="cert.d4">Feb 2023</span></li>
+      </ul>
+
+      <dl class="langs">
+        <div><dt data-i="l.de">German</dt><dd data-i="l.ded">C1, telc Hochschule</dd></div>
+        <div><dt data-i="l.en">English</dt><dd data-i="l.end">Good</dd></div>
+        <div><dt data-i="l.fr">French</dt><dd data-i="l.frd">Fluent</dd></div>
+        <div><dt data-i="l.ar">Arabic</dt><dd data-i="l.ard">Native</dd></div>
+      </dl>
     </div>
   </section>
 
-  <!-- EDUCATION -->
-  <section id="education">
+  <section class="sec contact" id="contact" aria-labelledby="contact-h">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">05</div>
-        <div>
-          <div class="sec-label" data-i="edu.label">Education & certifications</div>
-          <h2 data-i="edu.title">A solid foundation, still growing.</h2>
-        </div>
+      <h2 class="h2" id="contact-h" data-i="c.h">Looking for a working student?</h2>
+      <p class="lead" data-i="c.lead">I'm looking for a working student position or an internship in software or AI engineering, in Cologne, Aachen or hybrid. Email is the quickest way to reach me.</p>
+      <div class="mail-row">
+        <a class="mail" href="mailto:arouaachref8@gmail.com">arouaachref8@gmail.com</a>
+        <button class="btn btn-sm" type="button" id="copy" data-i="c.copy">Copy address</button>
       </div>
-      <div class="edu-grid">
-        <div class="edu reveal">
-          <div class="when">OCT 2026 — <span data-i="edu.present">PRESENT</span></div>
-          <h3 data-i="edu.d1">M.Sc. Computer Science and Systems Engineering</h3>
-          <div class="school">TH Köln – University of Applied Sciences · Cologne</div>
-          <p class="course">Informatik und Systems-Engineering</p>
-        </div>
-        <div class="edu reveal">
-          <div class="when">2022 — 2025</div>
-          <h3 data-i="edu.d2">Bachelor's in Computer Science – Software Engineering</h3>
-          <div class="school">Faculty of Sciences of Bizerte · Tunisia</div>
-          <p class="course" data-i="edu.course">Algorithms, Databases, Web Development, Software Engineering, AI, Machine Learning, Cloud Computing, Distributed Systems.</p>
-          <div class="kv"><div><span data-i="edu.pfe">Final project</span><b>TalentSync</b></div><div><span data-i="edu.grade">Mention</span><b data-i="edu.exc">Excellent</b></div></div>
-        </div>
-      </div>
-
-      <div class="h-mini reveal" style="margin-top:56px" data-i="edu.certs">Certifications & learning</div>
-      <div class="certs reveal">
-        <div class="cert"><span class="n">01</span><div><h4>AI Foundation Microcredential (AIFM™)</h4><small><span data-i="cert.aifm">Certiprof · ID 117676034 · valid until Nov 12, 2027</span> · <a href="certs/AIFM_Achraf_Aroua.pdf" target="_blank" rel="noopener" class="cert-link" data-i="cert.view">View certificate (PDF)</a></small></div><span class="d">NOV 2026</span></div>
-        <div class="cert"><span class="n">02</span><div><h4>telc Deutsch C1 Hochschule</h4><small data-i="edu.c1">German C1 exam taken · currently certified at B1</small></div><span class="d">AUG 2026</span></div>
-        <div class="cert"><span class="n">03</span><div><h4>UX Research</h4><small>Space Academy · ID d9ca97e9b551fdb7</small></div><span class="d">—</span></div>
-        <div class="cert"><span class="n">04</span><div><h4>Artificial Intelligence</h4><small>Google Developer Student Club FSB</small></div><span class="d">MAR 2023</span></div>
-        <div class="cert"><span class="n">05</span><div><h4>Design Night — 24h Competition</h4><small>Art of Code Club</small></div><span class="d">APR 2023</span></div>
-        <div class="cert"><span class="n">06</span><div><h4>DevOps</h4><small>Art of Code Club</small></div><span class="d">FEB 2023</span></div>
-      </div>
-
-      <div class="langs reveal">
-        <div class="lang"><b data-i="l.ar">Arabic</b><span data-i="l.native">Native</span><div class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
-        <div class="lang"><b data-i="l.fr">French</b><span data-i="l.fluent">Fluent</span><div class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
-        <div class="lang"><b data-i="l.en">English</b><span data-i="l.good">Good</span><div class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
-        <div class="lang"><b data-i="l.de">German</b><span data-i="l.b1">B1 certified · C1 exam taken</span><div class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LEARNING -->
-  <section id="learning">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="sec-num">06</div>
-        <div>
-          <div class="sec-label" data-i="learn.label">Currently learning</div>
-          <h2 data-i="learn.title">Growing towards AI engineering.</h2>
-          <p class="sec-sub" data-i="learn.sub">Where I'm investing my time now, and where I want to be.</p>
-        </div>
-      </div>
-      <div class="learn-grid">
-        <div class="learn-now reveal">
-          <div class="h-mini" data-i="learn.nowH">What I'm learning now</div>
-          <p data-i="learn.now1">Alongside my <strong>M.Sc. in Computer Science at TH Köln</strong>, I'm strengthening my foundations in software engineering, algorithms and system design.</p>
-          <p data-i="learn.now2">My current focus is <strong>Python, AI engineering and full-stack development</strong>: building AI-powered applications, working with large language models (LLMs), and integrating intelligent features into reliable, scalable software.</p>
-          <a class="learn-badge" href="certs/AIFM_Achraf_Aroua.pdf" target="_blank" rel="noopener">
-            <span class="lb-icon" aria-hidden="true">✓</span>
-            <span><b data-i="learn.badgeT">Recently earned: AI Foundation Microcredential (AIFM™)</b><small data-i="learn.badgeS">Certiprof · Nov 2026 · view certificate ↗</small></span>
-          </a>
-        </div>
-        <div class="learn-goal reveal">
-          <div class="h-mini" data-i="learn.goalH">Where I'm heading</div>
-          <p data-i="learn.goal">My long-term goal is to become an <strong>AI Engineer specialising in RAG and agentic AI systems</strong>: applications that retrieve the right information, use external tools and solve complex tasks through structured workflows.</p>
-        </div>
-      </div>
-      <div class="interests">
-        <div class="interest reveal"><span class="n">01</span><h4 data-i="learn.i1">AI Engineering</h4><p data-i="learn.i1d">LLMs, prompt engineering, embeddings and model evaluation.</p></div>
-        <div class="interest reveal"><span class="n">02</span><h4 data-i="learn.i2">RAG Systems</h4><p data-i="learn.i2d">Document processing, vector databases, semantic search and reliable retrieval pipelines.</p></div>
-        <div class="interest reveal"><span class="n">03</span><h4 data-i="learn.i3">AI Agents</h4><p data-i="learn.i3d">Tool calling, multi-step workflows and agent orchestration.</p></div>
-        <div class="interest reveal"><span class="n">04</span><h4 data-i="learn.i4">Backend &amp; Infrastructure</h4><p data-i="learn.i4d">Python APIs, databases, testing, deployment and scalable architecture.</p></div>
-        <div class="interest reveal"><span class="n">05</span><h4 data-i="learn.i5">Full-Stack Integration</h4><p data-i="learn.i5d">Complete applications that combine modern web technologies with practical AI.</p></div>
-      </div>
-      <p class="learn-close reveal" data-i="learn.close">My goal is to move beyond experimenting with AI tools — to engineer, evaluate and deploy AI systems that solve real problems.</p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact">
-        <div class="reveal">
-          <div class="sec-label"><span style="color:var(--accent)">07 · </span><span data-i="c.label">Start a conversation</span></div>
-          <h2 class="contact-big" data-i="c.title">Have a project or a role in mind?</h2>
-          <p class="sec-sub" data-i="c.sub">I'm open to working student positions, internships and junior developer roles in Germany — and to interesting freelance projects.</p>
-          <div class="contact-links">
-            <a class="c-link" href="mailto:arouaachref8@gmail.com"><span>arouaachref8@gmail.com</span><small data-i="c.write">Write me →</small></a>
-            <button class="c-link" id="copyMail" style="cursor:pointer;color:inherit;font:inherit;text-align:left"><span data-i="c.copy">Copy email</span><small>⧉</small></button>
-            <a class="c-link" href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener"><span>LinkedIn</span><small>↗</small></a>
-            <a class="c-link" href="https://github.com/achref-2" target="_blank" rel="noopener"><span>GitHub</span><small>↗</small></a>
-          </div>
-        </div>
-        <form class="reveal" id="form">
-          <div class="row2">
-            <label><span data-i="c.name">Full name *</span><input name="name" required /></label>
-            <label><span data-i="c.email">Your email *</span><input type="email" name="email" required /></label>
-          </div>
-          <label><span data-i="c.subject">Subject</span><input name="subject" /></label>
-          <label><span data-i="c.msg">Your message *</span><textarea name="message" required></textarea></label>
-          <button class="btn primary" type="submit" style="justify-content:center" data-i="c.send">Send message →</button>
-        </form>
+      <div class="actions">
+        <a class="btn" href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/achref-2" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="Achraf_Aroua_CV.pdf" download data-i="hero.cv">Download CV</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="foot">
   <div class="wrap">
-    <span>© <span id="yr"></span> Achraf Aroua</span>
-    <span>AACHEN · DE / FULL-STACK & AI</span>
+    <span>© <span id="yr">2026</span> Achraf Aroua</span>
+    <a href="#top" data-i="foot.top">Back to top</a>
   </div>
 </footer>
-<div class="toast" id="toast"></div>
 
-<!-- FAQ CHAT -->
-<button class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel">
-  <img src="photo.webp" alt="" width="34" height="34" /><span id="chatFabLabel">Ask Achraf</span>
-</button>
-<section class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>
-  <header class="chat-head">
-    <img src="photo.webp" alt="" width="38" height="38" />
-    <div>
-      <b id="chatTitle">Ask Achraf</b>
-      <small id="chatSub">Prepared answers, written by me</small>
-    </div>
-    <button class="chat-x" id="chatClose" aria-label="Close chat">✕</button>
-  </header>
-  <div class="chat-log" id="chatLog" aria-live="polite"></div>
-  <div class="chat-chips" id="chatChips"></div>
-  <form class="chat-form" id="chatForm" autocomplete="off">
-    <label class="sr" for="chatInput" id="chatInputLabel">Your question</label>
-    <input id="chatInput" maxlength="300" placeholder="Ask about my skills, projects, availability…" />
-    <button type="submit" aria-label="Send" id="chatSend">➤</button>
-  </form>
-</section>
+<dialog class="lb" id="lb">
+  <img alt="">
+  <p><span id="lb-cap"></span><button type="button" id="lb-close" data-i="lb.close">Close</button></p>
+</dialog>
 
 <script>
-  const DE = {
-    "nav.about":"Über mich","nav.stack":"Stack","nav.projects":"Projekte","nav.exp":"Erfahrung","nav.edu":"Ausbildung","nav.contact":"Kontakt","nav.status":"Offen für Jobs",
-    "hero.eyebrow":"Aachen, Deutschland · Offen für Werkstudentenstellen & Praktika",
-    "hero.t1":"Ich entwickle Full-Stack-Anwendungen mit","hero.t2":"praxisnahen KI-Funktionen.",
-    "hero.lead":"Ich bin Achraf, M.Sc.-Informatikstudent an der TH Köln, mit praktischer Erfahrung in Webanwendungen, sicheren Backends und KI-gestützten Workflows.",
-    "hero.cta1":"Projekte entdecken →","hero.cta3":"Lebenslauf herunterladen ↓",
-    "hero.c1":"Full-Stack-Webanwendungen","hero.c2":"KI-gestützte Workflows","hero.c3":"Dazu: SAP / ABAP-Erfahrung",
-    "about.label":"Über mich","about.title":"Vom Geschäftsbedarf zum fertigen Produkt.",
-    "about.p1":"Ich bin <strong>Achraf Aroua</strong>, Full-Stack- & KI-Entwickler, und verwandle komplexe Anforderungen in klare, wartbare Anwendungen.",
-    "about.p2":"Ich habe einen <strong>Bachelor in Informatik – Software Engineering</strong> der Faculty of Sciences of Bizerte; mein Abschlussprojekt in KI und Full-Stack-Entwicklung wurde mit <strong>Excellent</strong> bewertet. Jetzt studiere ich <strong>M.Sc. Informatik und Systems-Engineering</strong> an der TH Köln.",
-    "about.p3":"Meine Erfahrung umfasst Frontend, Backend, Datenbanken, Authentifizierung und KI-Integrationen — sowie praktische Einblicke in ERP-Systeme und ABAP-Entwicklung.",
-    "about.k1":"Ganzheitliches Produktdenken","about.k1d":"Frontend, Backend, Daten und Delivery als ein stimmiges System.",
-    "about.k2":"KI, die wirklich hilft","about.k2d":"Lebenslauf-Analyse, Matching und Generierung dort, wo KI den Workflow verbessert.",
-    "about.k3":"Enterprise-Denkweise","about.k3d":"ERP/SAP-Erfahrung, Agile/Scrum, UML und klare technische Dokumentation.",
-    "about.s1":"Praktika","about.s2":"Sprachen","about.s3":"Technologien","about.s4":"laufend · TH Köln",
-    "stack.label":"Skills / Stack","stack.title":"Ein Stack zum Liefern, nicht zum Dekorieren.","stack.sub":"Meine Werkzeuge für Frontend, Backend, Daten, Infrastruktur, Enterprise-Systeme und KI.","stack.lang":"Sprachen",
-    "proj.label":"Hauptprojekt","proj.title":"Systeme rund um echte Workflows.","proj.sub":"Mein Abschlussprojekt: Produktdenken, Full-Stack-Architektur und KI dort, wo sie echten Mehrwert schafft.",
-    "proj.badge":"ABSCHLUSSPROJEKT · EXCELLENT","proj.kicker":"KI-gestützte Recruiting-Plattform · AlloGenie",
-    "proj.desc":"Eine Recruiting-Plattform, die Lebensläufe mit Stellenbeschreibungen abgleicht, Matching-Scores und Feedback liefert und personalisierte Anschreiben generiert — mit eigenen Bereichen für Kandidaten, Recruiter und Admins.",
-    "proj.demo":"Live-Vorschau ↗","proj.code":"Quellcode ↗",
-    "proj.note":"Die Live-Vorschau zeigt das Frontend. Anmeldung und KI-Analyse benötigen die Backend-API, die noch nicht öffentlich gehostet ist – die Screens unten zeigen sie in Aktion.",
-    "proj.feat":"Hauptfunktionen","proj.f1":"KI-Matching Lebenslauf ↔ Stelle","proj.f2":"Extraktion von CV-Daten","proj.f3":"Anschreiben-Generierung","proj.f4":"UIs für Kandidaten / Recruiter / Admin","proj.f5":"Rollenbasierte Zugriffskontrolle","proj.f6":"JWT + Google OAuth","proj.f7":"Datei-Upload","proj.f8":"UML, User Stories, Sprints",
-    "exp.label":"Berufserfahrung","exp.title":"Lernen durch Liefern in echten Teams.","exp.latest":"AKTUELLSTE",
-    "exp.r1":"Abschlusspraktikant — Full-Stack- & KI-Entwickler",
-    "exp.j1a":"TalentSync entwickelt: KI-Recruiting-Plattform mit Matching-Scores, Feedback und Anschreiben-Generierung.",
-    "exp.j1b":"Responsive Oberflächen für Kandidaten, Recruiter und Admins mit React, Vite und Tailwind CSS.",
-    "exp.j1c":"Backend mit Node.js, Express, MongoDB, JWT, Google OAuth, Datei-Uploads und RBAC.",
-    "exp.j1d":"Python-KI-Skripte und Gemini API für CV-Extraktion und Kompatibilitätsanalyse integriert.",
-    "exp.r2":"ERP / ABAP Praktikant",
-    "exp.j2a":"Praktische Erfahrung mit ERP-Systemen und ABAP-Entwicklungskonzepten.",
-    "exp.j2b":"Geschäftsprozesse, Enterprise-Module und datenbankorientierte Entwicklung kennengelernt.",
-    "exp.j2c":"Professionelle Entwicklungsabläufe im Unternehmensumfeld gelernt.",
-    "exp.r3":"Praktikant Webentwicklung",
-    "exp.j3a":"Webanwendung mit PHP, HTML, CSS, JavaScript und SQL entwickelt.",
-    "exp.j3b":"An Datenverwaltung, Klassifizierungsfunktionen und UI-Verbesserungen gearbeitet.",
-    "edu.label":"Ausbildung & Zertifikate","edu.title":"Ein solides Fundament, das weiter wächst.","edu.present":"HEUTE",
-    "edu.d1":"M.Sc. Informatik und Systems-Engineering","edu.d2":"Bachelor Informatik – Software Engineering",
-    "edu.course":"Algorithmen, Datenbanken, Webentwicklung, Software Engineering, KI, Machine Learning, Cloud Computing, Verteilte Systeme.",
-    "edu.pfe":"Abschlussprojekt","edu.grade":"Bewertung","edu.exc":"Excellent","edu.certs":"Zertifikate & Weiterbildung","edu.c1":"C1-Prüfung abgelegt · derzeit B1 zertifiziert",
-    "mock.score":"Match-Score","mock.skills":"Skills","mock.exp":"Erfahrung","mock.edu":"Ausbildung",
-    "mock.note":"<b>KI-Feedback:</b> starke React- & Node-Übereinstimmung — Testerfahrung hervorheben, um die Passung zu verbessern.",
-    "mock.cap":"Echter Screen aus TalentSync: die von Gemini erzeugte Analyse Lebenslauf vs. Stelle, beim Testen mit meinem eigenen CV.",
-    "case.shots":"Screens aus der App","case.s1":"Landingpage","case.s2":"Kandidaten-Dashboard","case.s3":"Anmeldung · E-Mail/Passwort + Google OAuth","case.s4":"UML-Klassendiagramm","case.hint":"Klicke auf einen Screen, um ihn in voller Größe zu öffnen.",
-    "case.arch":"Aufbau","case.n1":"UI für Kandidaten / Recruiter / Admins","case.n2":"Auth, Rollen, Datei-Uploads","case.n3":"Nutzer, Stellen, Bewerbungen","case.n4":"CV-Extraktion, Matching, Anschreiben",
-    "case.role":"Meine Rolle & zentrale Entscheidungen",
-    "case.d1":"Umfang","case.d1t":"Als Abschlusspraktikum bei AlloGenie umgesetzt — Frontend, Backend, KI-Integration und Dokumentation.",
-    "case.d2":"Authentifizierung","case.d2t":"JWT-Sessions plus Google OAuth, mit rollenbasierter Zugriffskontrolle für Kandidaten, Recruiter und Admins.",
-    "case.d3":"CV-Verarbeitung","case.d3t":"Lebensläufe werden über die Express-API hochgeladen und an Python-Skripte übergeben, die die Daten extrahieren.",
-    "case.d4":"KI-Integration","case.d4t":"Die Gemini API vergleicht das extrahierte Profil mit der Stellenbeschreibung, liefert Score und Feedback und entwirft ein personalisiertes Anschreiben.",
-    "case.d5":"Vorgehen","case.d5t":"User Stories, UML- und Sequenzdiagramme, Backlog und Sprintplanung sowie ein Abschlussbericht.",
-    "loc.remote":"Remote · Tunesien","loc.tn":"Tunesien",
-    "l.ar":"Arabisch","l.fr":"Französisch","l.en":"Englisch","l.de":"Deutsch","l.native":"Muttersprache","l.fluent":"Fließend","l.good":"Gut","l.b1":"B1 zertifiziert · C1-Prüfung abgelegt",
-    "nav.learning":"Lernen",
-    "cert.aifm":"Certiprof · ID 117676034 · gültig bis 12.11.2027","cert.view":"Zertifikat ansehen (PDF)",
-    "learn.label":"Aktuell am Lernen","learn.title":"Auf dem Weg zum AI Engineering.","learn.sub":"Worin ich gerade meine Zeit investiere – und wo ich hinwill.",
-    "learn.nowH":"Was ich gerade lerne",
-    "learn.now1":"Neben meinem <strong>M.Sc. Informatik an der TH Köln</strong> vertiefe ich meine Grundlagen in Software Engineering, Algorithmen und Systemdesign.",
-    "learn.now2":"Mein aktueller Fokus liegt auf <strong>Python, AI Engineering und Full-Stack-Entwicklung</strong>: KI-gestützte Anwendungen bauen, mit Large Language Models (LLMs) arbeiten und intelligente Funktionen in zuverlässige, skalierbare Software integrieren.",
-    "learn.badgeT":"Neu erworben: AI Foundation Microcredential (AIFM™)","learn.badgeS":"Certiprof · Nov. 2026 · Zertifikat ansehen ↗",
-    "learn.goalH":"Wo ich hinwill",
-    "learn.goal":"Mein langfristiges Ziel ist es, <strong>AI Engineer mit Schwerpunkt RAG und agentenbasierte KI-Systeme</strong> zu werden: Anwendungen, die relevante Informationen finden, externe Tools nutzen und komplexe Aufgaben über strukturierte Workflows lösen.",
-    "learn.i1":"AI Engineering","learn.i1d":"LLMs, Prompt Engineering, Embeddings und Modellevaluierung.",
-    "learn.i2":"RAG-Systeme","learn.i2d":"Dokumentenverarbeitung, Vektordatenbanken, semantische Suche und zuverlässige Retrieval-Pipelines.",
-    "learn.i3":"KI-Agenten","learn.i3d":"Tool Calling, mehrstufige Workflows und Agenten-Orchestrierung.",
-    "learn.i4":"Backend & Infrastruktur","learn.i4d":"Python-APIs, Datenbanken, Testing, Deployment und skalierbare Architektur.",
-    "learn.i5":"Full-Stack-Integration","learn.i5d":"Komplette Anwendungen, die moderne Webtechnologien mit praxisnaher KI verbinden.",
-    "learn.close":"Mein Ziel: nicht nur mit KI-Tools experimentieren, sondern nützliche KI-Systeme entwickeln, evaluieren und in Betrieb bringen, die echte Probleme lösen.",
-    "c.label":"Gespräch starten","c.title":"Ein Projekt oder eine Stelle im Kopf?","c.sub":"Ich bin offen für Werkstudentenstellen, Praktika und Junior-Entwicklerrollen in Deutschland — und für spannende Freelance-Projekte.",
-    "c.write":"Schreib mir →","c.copy":"E-Mail kopieren","c.name":"Name *","c.email":"Deine E-Mail *","c.subject":"Betreff","c.msg":"Deine Nachricht *","c.send":"Nachricht senden →"
-  };
-  const EN = {};
-  document.querySelectorAll("[data-i]").forEach(el => EN[el.dataset.i] = el.innerHTML);
-
-  const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
-  const root = document.documentElement;
-  const langBtn = document.getElementById("langBtn");
-  const themeBtn = document.getElementById("themeBtn");
-
-  function setLang(l) {
-    const dict = l === "de" ? DE : EN;
-    document.querySelectorAll("[data-i]").forEach(el => { if (dict[el.dataset.i]) el.innerHTML = dict[el.dataset.i]; });
-    root.lang = l;
-    langBtn.innerHTML = l === "de" ? "EN / <b>DE</b>" : "<b>EN</b> / DE";
-    store.set("lang", l);
+const DE = {
+  "skip": "Zu den Projekten springen",
+  "nav.work": "Projekte", "nav.exp": "Erfahrung", "nav.about": "Über mich", "nav.contact": "Kontakt", "nav.cv": "Lebenslauf",
+  "hud.mapped": "Kartiert", "hud.again": "Neu kartieren",
+  "hero.lede": "Softwareentwickler in Aachen. Ich baue Full-Stack-Webanwendungen mit KI-Funktionen und mache meinen Master in Informatik an der TH Köln.",
+  "hero.open": "Offen für Werkstudentenstellen und Praktika in Köln und Aachen, vor Ort oder hybrid.",
+  "hero.mail": "E-Mail schreiben", "hero.cv": "Lebenslauf herunterladen",
+  "work.h": "Ausgewählte Projekte",
+  "f.part": "Mein Teil", "f.stack": "Technik", "f.result": "Ergebnis", "f.how": "So funktioniert es", "f.tested": "Getestet", "f.fixed": "Gelöste Probleme", "f.next": "Als Nächstes", "f.code": "Quellcode ansehen",
+  "ts.meta": "Abschlussprojekt bei AlloGenie, 2025",
+  "ts.desc": "Eine Recruiting-Plattform, die einen Lebenslauf liest, ihn mit einer Stellenbeschreibung vergleicht und einen Match-Score, konkretes Feedback und einen Entwurf für das Anschreiben liefert. Kandidaten, Recruiter und Admins haben jeweils einen eigenen Bereich.",
+  "ts.part": "Alles, von Anfang bis Ende: die React-Oberfläche für alle drei Rollen, eine API mit Express und MongoDB inklusive JWT, Google-Login, Datei-Uploads und rollenbasierter Zugriffskontrolle, und die Python-Skripte, die mit der Gemini API Lebenslaufdaten auslesen und die Passung bewerten. Dazu User Stories, UML-Diagramme und der Projektbericht.",
+  "ts.result": "Mit „Excellent“ an der Faculty of Sciences of Bizerte bewertet",
+  "ts.demo": "Live-Vorschau öffnen",
+  "ts.note": "Die Vorschau zeigt nur das Frontend. Login und Lebenslauf-Analyse brauchen die API, die nicht öffentlich gehostet ist. Diese Teile zeigen die Screenshots.",
+  "ts.cap": "Die Match-Analyse, beim Testen mit meinem eigenen Lebenslauf.",
+  "ts.s1": "Startseite", "ts.s2": "Kandidaten-Dashboard", "ts.s3": "Login mit Google", "ts.s4": "UML-Klassendiagramm",
+  "gm.meta": "Eigenes Projekt, 2026",
+  "gm.desc": "Ein KI-Assistent für meinen Alltag als Masterstudent in Köln. Er verwaltet Aufgaben und Fristen, beantwortet Fragen zu Vorlesungs-PDFs, übt mit mir Deutsch, verfolgt meine Bewerbungen und erklärt Behördenbriefe.",
+  "gm.how": "Das Modell greift nie direkt auf die Datenbank zu. Es kann nur 16 typisierte Tools aufrufen, die mit Zod validiert und auf den angemeldeten Nutzer beschränkt sind. Jeder Tool-Aufruf wird mit seinem echten Ergebnis angezeigt, und alles, was Daten löscht, wartet auf einen Klick. Antworten zu Vorlesungsfolien nennen die Seite, und jedes Zitat wird mit dem gespeicherten Text abgeglichen.",
+  "gm.stack": "React 19, TypeScript, Tailwind CSS, Express 5, MongoDB, Zod, Claude API mit Tool Calling, BM25-Retrieval",
+  "gm.tested": "43 Server-Tests mit Vitest, unter anderem zur Trennung der Nutzerdaten und zu Prompt-Injection, dazu ein Browser-Durchlauf mit Playwright in 14 Schritten.",
+  "gm.t1": "Erinnere mich, morgen um 10 meinem Professor zu schreiben.",
+  "gm.t2": "Erledigt. Steht für morgen um 10:00 auf deiner Liste, mit Erinnerung.",
+  "gm.t3": "Lösch die Bewerbung, die ich aus Versehen gespeichert habe.",
+  "gm.wait": "Wartet auf deine Bestätigung", "gm.del": "Löschen", "gm.keep": "Behalten",
+  "gm.cap": "Ein vereinfachter Ablauf. Jeder Tool-Aufruf ist sichtbar, und Löschen muss bestätigt werden.",
+  "mp.meta": "Teamprojekt an der TH Köln, Wintersemester 2026/27",
+  "mp.desc": "Ein TurtleBot3 erkundet ein unbekanntes Gebäude und erstellt die Karte selbstständig. Mein Teil ist die Simulation und die Baseline, gegen die das Team testet: Gazebo, slam_toolbox für die Kartierung, Nav2 zum Fahren und explore_lite für die Wahl der nächsten Frontier, alles mit einer einzigen Launch-Datei gestartet.",
+  "mp.fixed": "Der Roboter startete außerhalb des Hauses, die Erkundung hing in einer Schleife fest, weil das nächste Ziel innerhalb der Zieltoleranz von Nav2 lag, und Radschlupf an Möbeln verschmierte die Wände. Ich habe alles behoben und die Lösungen im README dokumentiert.",
+  "mp.next": "Eigene Occupancy-Grid-Kartierung, ein A*-Planer und ein Fuzzy-Regler, verglichen mit dieser Baseline.",
+  "mp.stack": "ROS 2, Gazebo, Nav2, slam_toolbox, Python, Ubuntu unter WSL2",
+  "mp.note": "Der Roboter oben auf dieser Seite macht dasselbe in Ihrem Browser: Frontier-Exploration für das nächste Ziel und A* für den Weg dorthin.",
+  "mp.cap": "Die Karte, die der Roboter selbstständig vom simulierten Haus erstellt hat, nach etwa 28 Minuten Simulationszeit.",
+  "more.h": "Kleinere Projekte",
+  "gym.name": "Fitnessstudio-Plattform", "gym.when": "Uni-Projekt, 2024",
+  "gym.desc": "Eine Web-App für die Verwaltung eines Fitnessstudios, mit Spring-Boot-API und React-Frontend.",
+  "yt.name": "YouTube-Musiksuche",
+  "yt.desc": "Musikvideos suchen, nach Aufrufen und Likes sortieren und direkt auf der Seite abspielen.",
+  "more.rest": "Alles Weitere auf",
+  "exp.h": "Berufserfahrung",
+  "exp.d1": "Feb. – Juni 2025", "exp.d2": "Juni – Juli 2024", "exp.d3": "Juni – Juli 2023",
+  "exp.r1": "Full-Stack- und KI-Entwickler, Abschlusspraktikum",
+  "exp.b1": "TalentSync von den ersten User Stories bis zum Abschlussbericht entwickelt: React-Oberflächen für drei Rollen, eine Node.js-API mit JWT, Google OAuth und Datei-Uploads sowie Python-Skripte mit der Gemini API für die Lebenslauf-Analyse.",
+  "exp.r2": "Praktikant ERP und ABAP",
+  "exp.b2": "Mit SAP ERP und ABAP gearbeitet, inklusive OpenSQL, und gelernt, wie Unternehmensmodule echte Geschäftsprozesse abbilden.",
+  "exp.r3": "Praktikant Webentwicklung",
+  "exp.b3": "Eine Webanwendung mit PHP und SQL zur Verwaltung und Klassifizierung von Daten entwickelt und die Oberfläche verbessert.",
+  "loc.tn": "Tunesien", "loc.tunis": "Tunis, Tunesien",
+  "about.h": "Über mich",
+  "about.p1": "Ich habe Software Engineering an der Faculty of Sciences of Bizerte in Tunesien studiert und mache jetzt meinen Master in Informatik und Systems-Engineering an der TH Köln. Ich wohne in Aachen.",
+  "about.p2": "Gebaut habe ich bisher vor allem Webanwendungen: React im Frontend, Node.js oder Spring Boot dahinter und eine sorgfältig entworfene Datenbank. Im letzten Jahr hat sich mein Schwerpunkt Richtung AI Engineering verschoben: Sprachmodelle, die in echter Software nützliche Arbeit leisten, mit Retrieval, Tools und Tests drumherum.",
+  "about.p3": "Gerade lerne ich Retrieval-Augmented Generation, indem ich ein kleines RAG-System von Grund auf baue, und arbeite in meinem Teamprojekt an der TH Köln an Roboternavigation. Ich arbeite auf Deutsch und Englisch und spreche außerdem Französisch und Arabisch.",
+  "kit.h": "Womit ich arbeite",
+  "kit.be": "Node.js, Express, Spring Boot, REST-APIs, JWT und OAuth",
+  "kit.ai": "KI", "kit.aid": "Python, LLM-APIs (Gemini, Claude), Tool Calling, Retrieval, scikit-learn, pandas",
+  "kit.data": "Daten", "kit.rob": "Robotik", "kit.ops": "Betrieb",
+  "kit.way": "Arbeitsweise", "kit.wayd": "Agile und Scrum, User Stories, UML",
+  "edu.h": "Ausbildung und Zertifikate",
+  "edu.d1": "Seit Okt. 2026",
+  "edu.n1": "M.Sc. Informatik und Systems-Engineering",
+  "edu.b1": "Dieses Semester unter anderem Computational Intelligence und ein Teamprojekt zu mobilen autonomen Systemen.",
+  "edu.n2": "Bachelor Informatik, Software Engineering",
+  "edu.b2": "Abschlussprojekt TalentSync mit „Excellent“ bewertet.",
+  "cert.h": "Zertifikate", "cert.pdf": "Zertifikat (PDF)",
+  "cert.d1": "Nov. 2026", "cert.d2": "Apr. 2023", "cert.d3": "März 2023", "cert.d3b": "März 2023", "cert.d4": "Feb. 2023",
+  "cert.dn": "Design Night, 24-Stunden-Designwettbewerb", "cert.ai": "Künstliche Intelligenz",
+  "l.de": "Deutsch", "l.ded": "C1, telc Hochschule", "l.en": "Englisch", "l.end": "Gut", "l.fr": "Französisch", "l.frd": "Fließend", "l.ar": "Arabisch", "l.ard": "Muttersprache",
+  "c.h": "Sie suchen einen Werkstudenten?",
+  "c.lead": "Ich suche eine Werkstudentenstelle oder ein Praktikum im Software- oder AI-Engineering, in Köln, Aachen oder hybrid. Am schnellsten erreichen Sie mich per E-Mail.",
+  "c.copy": "Adresse kopieren",
+  "foot.top": "Nach oben",
+  "lb.close": "Schließen"
+};
+const UI = {
+  en: {
+    title: "Achraf Aroua, software engineer", langBtn: "Deutsch", copied: "Copied",
+    explore: "Exploring. Click anywhere on the map to send the robot there.",
+    user: "Driving to the spot you picked.",
+    unreach: "It can't get there yet. Try an area that's already mapped.",
+    done: "Map complete. Click anywhere to send the robot.",
+    still: "Motion is off because your device prefers reduced motion."
+  },
+  de: {
+    title: "Achraf Aroua, Softwareentwickler", langBtn: "English", copied: "Kopiert",
+    explore: "Erkundet gerade. Klicken Sie auf die Karte, um den Roboter dorthin zu schicken.",
+    user: "Fährt zu der Stelle, die Sie gewählt haben.",
+    unreach: "Dorthin kommt er noch nicht. Versuchen Sie einen bereits kartierten Bereich.",
+    done: "Karte fertig. Klicken Sie irgendwo hin, um den Roboter zu schicken.",
+    still: "Die Animation ist aus, weil Ihr Gerät reduzierte Bewegung bevorzugt."
   }
-  function setTheme(t) {
-    root.dataset.theme = t;
-    themeBtn.textContent = t === "dark" ? "☾" : "☀";
-    store.set("theme", t);
-  }
-  setTheme(store.get("theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
-  setLang(store.get("lang") || "en");
-  langBtn.onclick = () => setLang(root.lang === "de" ? "en" : "de");
-  themeBtn.onclick = () => setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+};
 
-  const links = document.getElementById("links");
-  document.getElementById("burger").onclick = () => links.classList.toggle("open");
-  links.querySelectorAll("a").forEach(a => a.onclick = () => links.classList.remove("open"));
+const $ = (s, r = document) => r.querySelector(s);
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+let lang = "en";
+const EN = {};
+document.querySelectorAll("[data-i]").forEach(el => { EN[el.dataset.i] = el.innerHTML; });
+const listeners = [];
 
-  const toast = msg => { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2000); };
-  document.getElementById("copyMail").onclick = () => {
-    navigator.clipboard?.writeText("arouaachref8@gmail.com").then(() => toast(root.lang === "de" ? "E-Mail kopiert ✓" : "Email copied ✓"));
+function setLang(l) {
+  lang = l;
+  const dict = l === "de" ? DE : EN;
+  document.querySelectorAll("[data-i]").forEach(el => {
+    const v = dict[el.dataset.i];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  document.documentElement.lang = l;
+  document.title = UI[l].title;
+  const b = $("#lang");
+  b.textContent = UI[l].langBtn;
+  b.lang = l === "de" ? "en" : "de";
+  store.set("lang", l);
+  listeners.forEach(fn => fn());
+}
+$("#lang").addEventListener("click", () => setLang(lang === "de" ? "en" : "de"));
+setLang(store.get("lang") || ((navigator.language || "").toLowerCase().startsWith("de") ? "de" : "en"));
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const topBar = $("#top");
+const onScroll = () => topBar.classList.toggle("scrolled", scrollY > 8);
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+$("#copy").addEventListener("click", e => {
+  const btn = e.currentTarget;
+  const done = () => {
+    btn.textContent = UI[lang].copied;
+    setTimeout(() => { btn.innerHTML = lang === "de" ? DE["c.copy"] : EN["c.copy"]; }, 1600);
   };
-  document.getElementById("form").onsubmit = e => {
-    e.preventDefault();
-    const f = new FormData(e.target);
-    const body = `${f.get("message")}\n\n— ${f.get("name")} (${f.get("email")})`;
-    location.href = `mailto:arouaachref8@gmail.com?subject=${encodeURIComponent(f.get("subject") || "Portfolio contact")}&body=${encodeURIComponent(body)}`;
-  };
+  if (navigator.clipboard) navigator.clipboard.writeText("arouaachref8@gmail.com").then(done, () => {});
+});
 
-  document.getElementById("yr").textContent = new Date().getFullYear();
-
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-</script>
-
-<script>
-/* ---------- "Ask Achraf" FAQ bot: prepared answers only, no AI, no data leaves the page ---------- */
+/* Lightbox for screenshots */
 (() => {
-  const MAIL = '<a href="mailto:arouaachref8@gmail.com">arouaachref8@gmail.com</a>';
-  const LI = '<a href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener">LinkedIn</a>';
-  const GH = '<a href="https://github.com/achref-2" target="_blank" rel="noopener">GitHub</a>';
-  const CV = '<a href="Achraf_Aroua_CV.pdf" download>CV</a>';
+  const lb = $("#lb"), img = $("img", lb), cap = $("#lb-cap");
+  if (!lb.showModal) return;
+  document.querySelectorAll(".zoom").forEach(b => b.addEventListener("click", () => {
+    const fig = b.closest("figure");
+    img.src = b.dataset.full;
+    img.alt = $("img", b).alt;
+    cap.textContent = fig ? ($("figcaption", fig)?.textContent || "") : "";
+    lb.showModal();
+  }));
+  $("#lb-close").addEventListener("click", () => lb.close());
+  lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+})();
 
-  // Each entry: keywords (EN + DE, lowercase, matched as substrings), answer in EN and DE.
-  const FAQ = [
-    { id: "intro", chip: { en: "Who are you?", de: "Wer bist du?" },
-      k: ["who are you", "about you", "introduce", "yourself", "wer bist", "über dich", "vorstellen", "stell dich"],
-      en: "Hi, I'm Achraf 👋 I build full-stack applications with practical AI features. I'm doing my M.Sc. in Computer Science and Systems Engineering at TH Köln and I live in Aachen. Before that I finished a Bachelor's in Software Engineering in Tunisia, with an \"Excellent\" final-year project in AI and full-stack development.",
-      de: "Hallo, ich bin Achraf 👋 Ich entwickle Full-Stack-Anwendungen mit praxisnahen KI-Funktionen. Ich studiere M.Sc. Informatik und Systems-Engineering an der TH Köln und wohne in Aachen. Davor habe ich meinen Bachelor in Software Engineering in Tunesien abgeschlossen – mit einem Abschlussprojekt in KI und Full-Stack-Entwicklung, bewertet mit „Excellent“." },
-
-    { id: "looking", chip: { en: "What roles are you looking for?", de: "Welche Stellen suchst du?" },
-      k: ["looking for", "role", "position", "job", "werkstudent", "working student", "an internship", "praktikum", "open to", "hiring", "stelle", "suchst", "suche", "einstellen"],
-      en: "I'm looking for a Werkstudent (working student) role or an internship in full-stack development, ideally with AI features involved. I'm open to on-site and hybrid work in the Aachen / Cologne area.",
-      de: "Ich suche eine Werkstudentenstelle oder ein Praktikum in der Full-Stack-Entwicklung, idealerweise mit KI-Bezug. Ich bin offen für Vor-Ort- und Hybrid-Arbeit im Raum Aachen / Köln." },
-
-    { id: "avail", chip: { en: "When can you start?", de: "Wann kannst du anfangen?" },
-      k: ["start", "available", "availability", "when can", "hours", "per week", "verfügbar", "anfangen", "beginnen", "stunden", "wann"],
-      en: "I'm available for Werkstudent roles alongside my Master's. For an exact start date and weekly hours, the quickest way is to email me at " + MAIL + " and we can match it to your team's needs.",
-      de: "Ich bin neben meinem Master für Werkstudentenstellen verfügbar. Für den genauen Starttermin und die Wochenstunden schreib mir am besten an " + MAIL + " – dann stimmen wir das auf euer Team ab." },
-
-    { id: "location", chip: { en: "Where are you based?", de: "Wo wohnst du?" },
-      k: ["where", "based", "location", "live", "city", "remote", "hybrid", "on-site", "onsite", "relocat", "wo wohnst", "wohnort", "standort", "umzug", "vor ort"],
-      en: "I live in Aachen and study at TH Köln in Cologne, so anywhere in the Aachen–Cologne area works well for me. I'm open to on-site and hybrid setups.",
-      de: "Ich wohne in Aachen und studiere an der TH Köln, daher passt mir der gesamte Raum Aachen–Köln gut. Ich bin offen für Vor-Ort- und Hybrid-Modelle." },
-
-    { id: "skills", chip: { en: "What's your tech stack?", de: "Was ist dein Tech-Stack?" },
-      k: ["skill", "stack", "technolog", "tech", "framework", "programming language", "programming", "tools", "experience with", "kenntnisse", "fähigkeiten", "programmier", "kannst du",
-          "react", "node", "express", "javascript", "typescript", "java", "spring", "python", "php", "mongodb", "postgres", "mysql", "sql", "redis", "docker", "kubernetes", "aws", "cloud", "vue", "next.js", "nextjs", "tailwind", "frontend", "backend", "full-stack", "fullstack", "testing", "junit"],
-      en: "My main stack:\n• Frontend: React, Vite, Tailwind CSS, TypeScript (also Next.js, Vue.js, React Native)\n• Backend: Node.js, Express, REST APIs, JWT / Google OAuth; also Java with Spring Boot\n• Data: MongoDB, PostgreSQL, MySQL, Redis\n• AI: Python, Gemini API, scikit-learn, pandas, OCR\n• Enterprise: SAP ERP, ABAP\n• Tooling: Docker, Git, Swagger, JUnit, Agile/Scrum",
-      de: "Mein Haupt-Stack:\n• Frontend: React, Vite, Tailwind CSS, TypeScript (außerdem Next.js, Vue.js, React Native)\n• Backend: Node.js, Express, REST-APIs, JWT / Google OAuth; außerdem Java mit Spring Boot\n• Daten: MongoDB, PostgreSQL, MySQL, Redis\n• KI: Python, Gemini API, scikit-learn, pandas, OCR\n• Enterprise: SAP ERP, ABAP\n• Tools: Docker, Git, Swagger, JUnit, Agile/Scrum" },
-
-    { id: "ai", chip: { en: "What AI work have you done?", de: "Welche KI-Erfahrung hast du?" },
-      k: ["ai", "artificial", "machine learning", "ml", "gemini", "llm", "nlp", "ki", "künstliche", "maschinelles"],
-      en: "My main AI work is TalentSync, my final-year project: I integrated Python scripts and the Gemini API to extract data from CVs, score how well a CV matches a job description, give improvement feedback and generate personalised cover letters. I also work with scikit-learn and pandas, I completed an AI programme with the Google Developer Student Club, and in November 2026 I earned the Certiprof AI Foundation Microcredential (AIFM™).",
-      de: "Meine wichtigste KI-Arbeit ist TalentSync, mein Abschlussprojekt: Ich habe Python-Skripte und die Gemini API integriert, um Daten aus Lebensläufen zu extrahieren, die Passung zu einer Stellenbeschreibung zu bewerten, Verbesserungsfeedback zu geben und personalisierte Anschreiben zu erzeugen. Außerdem arbeite ich mit scikit-learn und pandas habe ein KI-Programm beim Google Developer Student Club absolviert und im November 2026 das Certiprof AI Foundation Microcredential (AIFM™) erworben." },
-
-    { id: "talentsync", chip: { en: "Tell me about TalentSync", de: "Erzähl von TalentSync" },
-      k: ["talentsync", "talent sync", "talentsync!", "project", "projekt", "built", "pfe", "final year", "abschlussprojekt", "gebaut", "demo", "source code", "repo", "quellcode", "try it"],
-      en: "TalentSync is an AI-powered recruitment platform I built during my final-year internship at AlloGenie. Candidates upload a CV and get a match score against a job, feedback and a generated cover letter; recruiters see applicants with their scores; admins manage the platform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API.\nTry the <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">live frontend preview</a> or read the <a href=\"https://github.com/achref-2/TalentSync-App\" target=\"_blank\" rel=\"noopener\">source code</a>. Sign-in and the AI analysis need the backend, which isn't publicly hosted yet, so the screens in the Projects section show those parts.",
-      de: "TalentSync ist eine KI-gestützte Recruiting-Plattform, die ich in meinem Abschlusspraktikum bei AlloGenie gebaut habe. Kandidaten laden ihren Lebenslauf hoch und erhalten einen Match-Score zur Stelle, Feedback und ein generiertes Anschreiben; Recruiter sehen Bewerber mit ihren Scores; Admins verwalten die Plattform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API.\nProbier die <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">Live-Vorschau des Frontends</a> oder schau dir den <a href=\"https://github.com/achref-2/TalentSync-App\" target=\"_blank\" rel=\"noopener\">Quellcode</a> an. Anmeldung und KI-Analyse benötigen das Backend, das noch nicht öffentlich gehostet ist – die Screens im Projektbereich zeigen diese Teile." },
-
-    { id: "learning", chip: { en: "What are you learning?", de: "Was lernst du gerade?" },
-      k: ["learning", "learn", "goal", "goals", "future", "career", "long-term", "rag", "retrieval", "agent", "agents", "agentic", "vector", "embedding", "ai engineer", "lernst", "lernen", "ziel", "ziele", "zukunft", "karriere"],
-      en: "Right now I'm focusing on Python, AI engineering and full-stack development, alongside my M.Sc. at TH Köln. I recently earned the Certiprof AI Foundation Microcredential (AIFM™).\nMy long-term goal is to become an AI Engineer specialising in RAG and agentic AI systems: LLMs and embeddings, vector databases and semantic search, tool calling and multi-step agent workflows. I want to go beyond experimenting with AI tools and learn to engineer, evaluate and deploy AI systems that solve real problems.",
-      de: "Aktuell konzentriere ich mich neben meinem M.Sc. an der TH Köln auf Python, AI Engineering und Full-Stack-Entwicklung. Vor Kurzem habe ich das Certiprof AI Foundation Microcredential (AIFM™) erworben.\nMein langfristiges Ziel ist es, AI Engineer mit Schwerpunkt RAG und agentenbasierte KI-Systeme zu werden: LLMs und Embeddings, Vektordatenbanken und semantische Suche, Tool Calling und mehrstufige Agenten-Workflows. Ich möchte nicht nur mit KI-Tools experimentieren, sondern KI-Systeme entwickeln, evaluieren und in Betrieb bringen, die echte Probleme lösen." },
-
-    { id: "experience", chip: { en: "What's your experience?", de: "Welche Erfahrung hast du?" },
-      k: ["experience", "worked", "work history", "internship", "where was", "previous", "companies", "allogenie", "siryos", "tunisair", "erfahrung", "gearbeitet", "berufserfahrung", "firmen"],
-      en: "I've done three internships:\n• AlloGenie (Feb–Jun 2025, remote): Full-Stack & AI developer, built TalentSync\n• Groupe ASAP Siryos (Jun–Jul 2024): ERP / ABAP intern\n• Tunisair Technics (Jun–Jul 2023): web development intern, built a PHP web application for data management",
-      de: "Ich habe drei Praktika gemacht:\n• AlloGenie (Feb.–Juni 2025, remote): Full-Stack- & KI-Entwickler, TalentSync gebaut\n• Groupe ASAP Siryos (Juni–Juli 2024): ERP-/ABAP-Praktikant\n• Tunisair Technics (Juni–Juli 2023): Webentwicklungs-Praktikant, PHP-Webanwendung zur Datenverwaltung entwickelt" },
-
-    { id: "sap", chip: { en: "Do you know SAP?", de: "Kennst du SAP?" },
-      k: ["sap", "abap", "erp", "opensql"],
-      en: "Yes. During my internship at Groupe ASAP Siryos I worked with SAP ERP and ABAP development concepts, including OpenSQL and database-oriented development, and learned how enterprise modules map to business processes. My main focus is full-stack and AI, but I'm happy to work in SAP environments too.",
-      de: "Ja. In meinem Praktikum bei Groupe ASAP Siryos habe ich mit SAP ERP und ABAP-Entwicklungskonzepten gearbeitet, inklusive OpenSQL und datenbankorientierter Entwicklung, und gelernt, wie Enterprise-Module Geschäftsprozesse abbilden. Mein Schwerpunkt ist Full-Stack und KI, aber ich arbeite auch gern im SAP-Umfeld." },
-
-    { id: "education", chip: { en: "What are you studying?", de: "Was studierst du?" },
-      k: ["study", "studying", "education", "degree", "master", "bachelor", "university", "th köln", "th koln", "uni", "studium", "studierst", "hochschule", "abschluss"],
-      en: "I'm doing an M.Sc. in Computer Science and Systems Engineering (Informatik und Systems-Engineering) at TH Köln, started October 2026. Before that: a Bachelor's in Computer Science – Software Engineering at the Faculty of Sciences of Bizerte (2022–2025), with coursework in algorithms, databases, AI, machine learning, cloud computing and distributed systems.",
-      de: "Ich studiere M.Sc. Informatik und Systems-Engineering an der TH Köln, seit Oktober 2026. Davor: Bachelor Informatik – Software Engineering an der Faculty of Sciences of Bizerte (2022–2025), u. a. mit Algorithmen, Datenbanken, KI, Machine Learning, Cloud Computing und verteilten Systemen." },
-
-    { id: "languages", chip: { en: "How good is your German?", de: "Wie gut ist dein Deutsch?" },
-      k: ["german", "deutsch", "english", "englisch", "french", "französisch", "arabic", "arabisch", "language skills", "speak", "sprichst", "sprachkenntnisse", "c1", "b1"],
-      en: "I speak Arabic (native), French (fluent), English (good) and German. My German is B1-certified, and I took the telc Deutsch C1 Hochschule exam in August 2026. I'm happy to work in German or English.",
-      de: "Ich spreche Arabisch (Muttersprache), Französisch (fließend), Englisch (gut) und Deutsch. Mein Deutsch ist auf B1 zertifiziert, und im August 2026 habe ich die telc Deutsch C1 Hochschule-Prüfung abgelegt. Ich arbeite gern auf Deutsch oder Englisch." },
-
-    { id: "why", chip: { en: "Why should we hire you?", de: "Warum sollten wir dich einstellen?" },
-      k: ["why should", "why you", "strength", "strengths", "stand out", "warum sollten", "warum du", "stärken", "besonders"],
-      en: "Three reasons: I think end-to-end, from the UI through the API to the database; I've already shipped a real AI feature (CV matching and cover letters with the Gemini API) rather than just experimenting; and I bring an enterprise mindset from my ERP/SAP internship, with Agile/Scrum, UML and clear documentation.",
-      de: "Drei Gründe: Ich denke End-to-End, von der UI über die API bis zur Datenbank; ich habe bereits eine echte KI-Funktion umgesetzt (CV-Matching und Anschreiben mit der Gemini API), statt nur zu experimentieren; und ich bringe aus meinem ERP/SAP-Praktikum eine Enterprise-Denkweise mit – Agile/Scrum, UML und klare Dokumentation." },
-
-    { id: "certs", chip: null,
-      k: ["certif", "certificate", "zertifik", "course", "kurs", "aifm", "certiprof", "microcredential"],
-      en: "My certifications and programmes: AI Foundation Microcredential (AIFM™) from Certiprof (Nov 2026, valid until Nov 2027, <a href=\"certs/AIFM_Achraf_Aroua.pdf\" target=\"_blank\" rel=\"noopener\">view certificate</a>), telc Deutsch C1 Hochschule (exam taken Aug 2026), UX Research (Space Academy), Artificial Intelligence (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023), plus the Design Night 24-hour competition (2023).",
-      de: "Meine Zertifikate und Programme: AI Foundation Microcredential (AIFM™) von Certiprof (Nov. 2026, gültig bis Nov. 2027, <a href=\"certs/AIFM_Achraf_Aroua.pdf\" target=\"_blank\" rel=\"noopener\">Zertifikat ansehen</a>), telc Deutsch C1 Hochschule (Prüfung abgelegt Aug. 2026), UX Research (Space Academy), Künstliche Intelligenz (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023) sowie der 24-Stunden-Wettbewerb Design Night (2023)." },
-
-    { id: "contact", chip: { en: "How can I contact you?", de: "Wie erreiche ich dich?" },
-      k: ["contact", "email", "e-mail", "mail", "reach", "phone", "call", "linkedin", "github", "cv", "resume", "lebenslauf", "kontakt", "erreichen", "anrufen", "telefon"],
-      en: "The best way is email: " + MAIL + ". You can also message me on " + LI + ", see my code on " + GH + ", or download my " + CV + ".",
-      de: "Am besten per E-Mail: " + MAIL + ". Du kannst mir auch auf " + LI + " schreiben, meinen Code auf " + GH + " ansehen oder meinen " + CV + " herunterladen." },
-
-    { id: "salary", chip: null,
-      k: ["salary", "pay", "rate", "wage", "gehalt", "vergütung", "stundenlohn", "lohn"],
-      en: "I'd rather discuss compensation directly, since it depends on the role and hours. Just email me at " + MAIL + ".",
-      de: "Über die Vergütung spreche ich lieber direkt, da sie von Stelle und Stunden abhängt. Schreib mir einfach an " + MAIL + "." },
-
-    { id: "permit", chip: null,
-      k: ["visa", "permit", "work authori", "authorization", "authorisation", "aufenthalt", "arbeitserlaubnis", "visum"],
-      en: "For questions about my work authorisation, please email me at " + MAIL + " and I'll give you the exact details.",
-      de: "Bei Fragen zu meiner Arbeitserlaubnis schreib mir bitte an " + MAIL + ", dann gebe ich dir die genauen Details." },
-
-    { id: "hi", chip: null,
-      k: ["hello", "hi ", "hey", "good morning", "hallo", "guten tag", "moin", "servus"],
-      en: "Hi! 👋 Ask me anything about my skills, projects, experience or availability — or tap one of the suggestions below.",
-      de: "Hallo! 👋 Frag mich gern zu meinen Skills, Projekten, Erfahrungen oder meiner Verfügbarkeit – oder tippe auf einen der Vorschläge unten." },
-
-    { id: "thanks", chip: null,
-      k: ["thank", "thanks", "danke", "merci", "great", "super", "cool"],
-      en: "Thanks for stopping by! If you'd like to talk, I'm one email away: " + MAIL,
-      de: "Danke fürs Vorbeischauen! Wenn du sprechen möchtest, bin ich nur eine E-Mail entfernt: " + MAIL },
-  ];
-
-  const UI = {
-    en: { title: "Ask Achraf", sub: "Prepared answers, written by me", fab: "Ask Achraf", ph: "Ask about my skills, projects, availability…", label: "Your question",
-          hello: "Hi, I'm Achraf 👋 Ask me about my skills, projects or availability. These are answers I've prepared myself; for anything else, email me.",
-          miss: "I don't have a prepared answer for that one. Try one of the suggestions below, or ask me directly at " + MAIL + " – I usually reply quickly." },
-    de: { title: "Frag Achraf", sub: "Vorbereitete Antworten, von mir geschrieben", fab: "Frag Achraf", ph: "Frag nach Skills, Projekten, Verfügbarkeit…", label: "Deine Frage",
-          hello: "Hallo, ich bin Achraf 👋 Frag mich zu meinen Skills, Projekten oder meiner Verfügbarkeit. Die Antworten habe ich selbst vorbereitet; für alles andere schreib mir eine E-Mail.",
-          miss: "Darauf habe ich keine vorbereitete Antwort. Probier einen der Vorschläge unten oder frag mich direkt unter " + MAIL + " – ich antworte meist schnell." }
-  };
-
-  const $ = id => document.getElementById(id);
-  const fab = $("chatFab"), panel = $("chatPanel"), log = $("chatLog"), chips = $("chatChips"), form = $("chatForm"), input = $("chatInput");
-  const lang = () => (document.documentElement.lang === "de" ? "de" : "en");
-  const DE_HINTS = /\b(ich|du|dein|deine|wie|wann|warum|welche|kannst|hast|bist|sprichst|und|nicht|erzähl|sind)\b|[äöüß]/i;
-  let greeted = false, asked = new Set();
-
-  function esc(s) { return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-  function add(html, who) {
-    const d = document.createElement("div");
-    d.className = "msg " + who;
-    d.innerHTML = html;
-    log.appendChild(d);
-    log.scrollTop = log.scrollHeight;
-    return d;
-  }
-  function renderUI() {
-    const t = UI[lang()];
-    $("chatTitle").textContent = t.title; $("chatSub").textContent = t.sub; $("chatFabLabel").textContent = t.fab;
-    input.placeholder = t.ph; $("chatInputLabel").textContent = t.label;
-    renderChips();
-  }
-  function renderChips() {
-    chips.innerHTML = "";
-    FAQ.filter(f => f.chip && !asked.has(f.id)).slice(0, 4).forEach(f => {
-      const b = document.createElement("button");
-      b.type = "button"; b.textContent = f.chip[lang()];
-      b.onclick = () => ask(f.chip[lang()], f);
-      chips.appendChild(b);
+/* One-time scroll-in moments: the saved map sweep and the agent transcript */
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const agent = $("#agent"), house = $("#housemap");
+  const steps = [...agent.querySelectorAll(".step")];
+  function playAgent() {
+    let t = 0;
+    steps.forEach(el => {
+      const res = $(".res", el);
+      setTimeout(() => el.classList.add("on"), t);
+      if (res) {
+        t += 520;
+        setTimeout(() => { res.textContent = "→ " + res.dataset.res; res.classList.toggle("ok", !res.dataset.res.includes("pending")); }, t);
+        t += 260;
+      } else {
+        t += 650;
+      }
     });
   }
-  function match(q) {
-    const s = " " + q.toLowerCase().replace(/[?!.,;:]/g, " ") + " ";
-    let best = null, score = 0;
-    for (const f of FAQ) {
-      let sc = 0;
-      for (const k of f.k) {
-        const short = k.trim().length <= 4;
-        const hit = short ? new RegExp("(^|[^a-zäöüß])" + k.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-zäöüß]|$)").test(s) : s.includes(k);
-        // Short exact words (sap, ai, erp, java) and long phrases count double; topic names count triple.
-        if (hit) sc += (k === f.id || k.startsWith("talentsync")) ? 3 : (short || k.length > 6) ? 2 : 1;
+  if (reduce || !("IntersectionObserver" in window)) {
+    steps.forEach(el => el.classList.add("on"));
+    agent.querySelectorAll(".res").forEach(r => { r.textContent = "→ " + r.dataset.res; r.classList.toggle("ok", !r.dataset.res.includes("pending")); });
+    house.classList.add("on");
+    return;
+  }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    io.unobserve(en.target);
+    if (en.target === agent) playAgent(); else house.classList.add("on");
+  }), { threshold: .3 });
+  io.observe(agent);
+  io.observe(house);
+})();
+
+/* Hero: a robot maps my name with a simulated lidar.
+   Frontier exploration picks the next goal, A* plans the path. */
+(() => {
+  const host = $("#map"), cv = $("canvas", host), ctx = cv.getContext("2d");
+  const covEl = $("#cov"), hintEl = $("#hint"), againBtn = $("#again");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const UNK = [211, 215, 220], UNK_WALL = [194, 199, 205], FREE = [242, 243, 245], SCAN = [36, 54, 240];
+  const DX = [1, -1, 0, 0, 1, 1, -1, -1], DY = [0, 0, 1, -1, 1, -1, 1, -1];
+
+  let W, H, DPR, C, cols, rows, N, R, RINF, SPEED, nameBox;
+  let truth, known, blocked, reach, seen, fading = [];
+  let buf, bctx, idata, px;
+  let rob, spawnCell, path = [], goal = -1, mode = "explore", done = false;
+  let clusters = [], hits = [], trail = [], bad = new Set();
+  let reachTotal = 1, reachKnown = 0, lastScan = 0, nextThink = 0, idleAt = 0, speedMul = 1;
+  let hintKey = "explore", hintTimer = 0, clickMark = null;
+  let raf = 0, lastT = 0, built = false, visible = true;
+  let gS, par, stamp, closed, gen = 0, distA, fmark;
+
+  const ix = (x, y) => y * cols + x;
+
+  function setHint(key, ms) {
+    clearTimeout(hintTimer);
+    hintEl.textContent = UI[lang][key];
+    if (ms) hintTimer = setTimeout(() => { hintEl.textContent = UI[lang][hintKey]; }, ms);
+    else hintKey = key;
+  }
+  listeners.push(() => { hintEl.textContent = UI[lang][hintKey]; });
+
+  function contentBox() {
+    const intro = $(".intro"), ir = intro.getBoundingClientRect(), cs = getComputedStyle(intro);
+    const hr = host.getBoundingClientRect();
+    return {
+      left: (ir.left - hr.left + parseFloat(cs.paddingLeft)) / C,
+      right: (ir.right - hr.left - parseFloat(cs.paddingRight)) / C
+    };
+  }
+
+  function drawName() {
+    const t = document.createElement("canvas");
+    t.width = cols; t.height = rows;
+    const g = t.getContext("2d", { willReadFrequently: true });
+    const narrow = W < 700;
+    const box = contentBox();
+    const lines = ["ACHRAF", "AROUA"];
+    const setFont = fs => {
+      g.font = `800 ${fs}px Archivo, "Arial Black", sans-serif`;
+      if ("fontStretch" in g) g.fontStretch = "expanded";
+      if ("letterSpacing" in g) g.letterSpacing = `${(fs * .05).toFixed(2)}px`;
+    };
+    setFont(100);
+    const tw = Math.max(...lines.map(s => g.measureText(s).width));
+    const capR = (g.measureText("H").actualBoundingBoxAscent || 72) / 100;
+    const gapR = narrow ? .8 : .62;
+    let fs = 100 * ((box.right - box.left) * (narrow ? .86 : .7)) / tw;
+    fs = Math.min(fs, rows * (narrow ? .56 : .62) / (capR * (2 + gapR)));
+    setFont(fs);
+    const cap = capR * fs, blockH = cap * (2 + gapR);
+    const top = narrow ? rows * .4 - blockH / 2 : (rows - blockH) / 2 - rows * .02;
+    g.fillStyle = "#000";
+    let right = 0;
+    lines.forEach((s, k) => {
+      const m = g.measureText(s);
+      const x = box.left + (m.actualBoundingBoxLeft || 0);
+      g.fillText(s, x, top + cap + k * cap * (1 + gapR));
+      right = Math.max(right, x + m.width);
+    });
+    nameBox = { right, mid: top + cap * (1 + gapR / 2) };
+    const d = g.getImageData(0, 0, cols, rows).data;
+    for (let i = 0; i < N; i++) truth[i] = d[i * 4 + 3] > 110 ? 1 : 0;
+  }
+
+  function clear(x, y, r) {
+    if (x < r + 2 || y < r + 2 || x >= cols - r - 2 || y >= rows - r - 2) return false;
+    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (truth[ix(x + dx, y + dy)]) return false;
+    return true;
+  }
+
+  function pickSpawn() {
+    // Start just to the right of the name, level with the gap between the two lines.
+    const sx = Math.min(cols - 8, Math.round(nameBox.right + Math.max(8, (cols - nameBox.right) * .35)));
+    const sy = Math.round(nameBox.mid);
+    const cands = [[sx, sy], [sx, Math.round(rows * .8)], [Math.round(cols * .5), Math.round(rows * .88)]];
+    for (const [x, y] of cands) {
+      if (clear(x, y, RINF + 2)) return ix(x, y);
+    }
+    for (let y = rows - 6; y > 5; y--) for (let x = cols - 6; x > 5; x--) if (clear(x, y, RINF + 1)) return ix(x, y);
+    return ix(cols >> 1, rows - 4);
+  }
+
+  function build() {
+    const r = host.getBoundingClientRect();
+    W = Math.round(r.width); H = Math.round(r.height);
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    C = W < 700 ? 3 : 4;
+    cols = Math.ceil(W / C); rows = Math.ceil(H / C); N = cols * rows;
+    R = Math.round((W < 700 ? 210 : 330) / C);
+    RINF = 3;
+    SPEED = (W < 700 ? 170 : 224) / C;
+    truth = new Uint8Array(N); known = new Uint8Array(N); blocked = new Uint8Array(N);
+    reach = new Uint8Array(N); seen = new Float64Array(N);
+    gS = new Float32Array(N); par = new Int32Array(N); stamp = new Uint32Array(N); closed = new Uint32Array(N);
+    distA = new Int32Array(N); fmark = new Uint32Array(N);
+    drawName();
+    spawnCell = pickSpawn();
+
+    // Free space reachable from the spawn point; used for the coverage figure.
+    const q = [spawnCell]; reach[spawnCell] = 1;
+    for (let h = 0; h < q.length; h++) {
+      const c = q[h], x = c % cols, y = (c / cols) | 0;
+      for (let k = 0; k < 4; k++) {
+        const nx = x + DX[k], ny = y + DY[k];
+        if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) continue;
+        const n = ix(nx, ny);
+        if (!truth[n] && !reach[n]) { reach[n] = 1; q.push(n); }
       }
-      if (sc > score) { score = sc; best = f; }
+    }
+    reachTotal = q.length;
+
+    buf = document.createElement("canvas"); buf.width = cols; buf.height = rows;
+    bctx = buf.getContext("2d");
+    idata = bctx.createImageData(cols, rows); px = idata.data;
+    reset();
+    built = true;
+  }
+
+  function reset() {
+    known.fill(0); blocked.fill(0); fading = [];
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      if (x < 2 || y < 2 || x >= cols - 2 || y >= rows - 2) blocked[ix(x, y)] = 1;
+    }
+    for (let i = 0; i < N; i++) { const o = i * 4, c = truth[i] ? UNK_WALL : UNK; px[o] = c[0]; px[o + 1] = c[1]; px[o + 2] = c[2]; px[o + 3] = 255; }
+    rob = { x: spawnCell % cols + .5, y: ((spawnCell / cols) | 0) + .5, th: Math.PI };
+    path = []; goal = -1; mode = "explore"; done = false; clusters = []; hits = []; trail = [];
+    bad = new Set(); reachKnown = 0; speedMul = 1; clickMark = null; nextThink = 0;
+    setHint("explore");
+    covEl.textContent = "0%";
+  }
+
+  function inflate(i) {
+    const x = i % cols, y = (i / cols) | 0;
+    for (let dy = -RINF; dy <= RINF; dy++) for (let dx = -RINF; dx <= RINF; dx++) {
+      if (dx * dx + dy * dy > RINF * RINF + 1) continue;
+      const nx = x + dx, ny = y + dy;
+      if (nx >= 0 && ny >= 0 && nx < cols && ny < rows) blocked[ix(nx, ny)] = 1;
+    }
+  }
+  function markFree(i, now) {
+    if (known[i] !== 0) return;
+    known[i] = 1; seen[i] = now; fading.push(i);
+    if (reach[i]) reachKnown++;
+  }
+  function markWall(i, now) {
+    if (known[i] === 2) return;
+    known[i] = 2; seen[i] = now; fading.push(i); inflate(i);
+  }
+
+  function scan(now) {
+    const x0 = rob.x, y0 = rob.y, NR = W < 700 ? 360 : 480;
+    hits.length = 0;
+    for (let k = 0; k < NR; k++) {
+      const a = rob.th + (k / NR) * Math.PI * 2 + .0007;
+      const dx = Math.cos(a), dy = Math.sin(a);
+      let cx = Math.floor(x0), cy = Math.floor(y0);
+      const sx = dx > 0 ? 1 : -1, sy = dy > 0 ? 1 : -1;
+      const tdx = Math.abs(1 / dx), tdy = Math.abs(1 / dy);
+      let tmx = (dx > 0 ? cx + 1 - x0 : x0 - cx) * tdx;
+      let tmy = (dy > 0 ? cy + 1 - y0 : y0 - cy) * tdy;
+      let t = 0, kind = 0;
+      while (t < R) {
+        if (cx < 0 || cy < 0 || cx >= cols || cy >= rows) { kind = 2; break; }
+        const i = ix(cx, cy);
+        if (truth[i]) {
+          markWall(i, now);
+          const nx = tmx < tmy ? cx + sx : cx, ny = tmx < tmy ? cy : cy + sy;
+          if (nx >= 0 && ny >= 0 && nx < cols && ny < rows && truth[ix(nx, ny)]) markWall(ix(nx, ny), now);
+          kind = 1; break;
+        }
+        markFree(i, now);
+        if (tmx < tmy) { t = tmx; tmx += tdx; cx += sx; } else { t = tmy; tmy += tdy; cy += sy; }
+      }
+      const tt = Math.min(t, R), j = kind === 1 ? (Math.random() - .5) * .3 : 0;
+      hits.push(x0 + dx * (tt + j), y0 + dy * (tt + j), kind);
+    }
+  }
+
+  // Close single unknown cells left between rays.
+  function despeckle(now) {
+    for (let y = 1; y < rows - 1; y++) for (let x = 1; x < cols - 1; x++) {
+      const i = ix(x, y);
+      if (known[i] || truth[i]) continue;
+      const f = (known[i - 1] === 1) + (known[i + 1] === 1) + (known[i - cols] === 1) + (known[i + cols] === 1);
+      if (f >= 3) markFree(i, now);
+    }
+  }
+
+  const isFrontier = i => {
+    if (known[i] !== 1) return false;
+    const x = i % cols, y = (i / cols) | 0;
+    return (x > 0 && !known[i - 1]) || (x < cols - 1 && !known[i + 1]) || (y > 0 && !known[i - cols]) || (y < rows - 1 && !known[i + cols]);
+  };
+  const cellOf = p => ix(Math.min(cols - 1, Math.max(0, Math.floor(p.x))), Math.min(rows - 1, Math.max(0, Math.floor(p.y))));
+
+  function findGoal() {
+    gen++;
+    const s = cellOf(rob), sx = s % cols, sy = (s / cols) | 0;
+    const q = [s]; stamp[s] = gen; distA[s] = 0;
+    const F = [];
+    for (let h = 0; h < q.length; h++) {
+      const c = q[h], x = c % cols, y = (c / cols) | 0;
+      if (!blocked[c] && isFrontier(c) && !bad.has(c)) { F.push(c); fmark[c] = gen; }
+      for (let k = 0; k < 4; k++) {
+        const nx = x + DX[k], ny = y + DY[k];
+        if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) continue;
+        const n = ix(nx, ny);
+        if (stamp[n] === gen || known[n] !== 1) continue;
+        if (blocked[n] && Math.max(Math.abs(nx - sx), Math.abs(ny - sy)) > 4) continue;
+        stamp[n] = gen; distA[n] = distA[c] + 1; q.push(n);
+      }
+    }
+    clusters = [];
+    let best = -1, bestScore = -Infinity;
+    const seenC = new Set();
+    for (const f of F) {
+      if (seenC.has(f)) continue;
+      const members = [f]; seenC.add(f);
+      for (let h = 0; h < members.length; h++) {
+        const c = members[h], x = c % cols, y = (c / cols) | 0;
+        for (let k = 0; k < 8; k++) {
+          const nx = x + DX[k], ny = y + DY[k];
+          if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) continue;
+          const n = ix(nx, ny);
+          if (fmark[n] === gen && !seenC.has(n)) { seenC.add(n); members.push(n); }
+        }
+      }
+      if (members.length < 4) continue;
+      let mx = 0, my = 0;
+      for (const m of members) { mx += m % cols; my += (m / cols) | 0; }
+      mx /= members.length; my /= members.length;
+      let pick = members[0], pd = Infinity;
+      for (const m of members) {
+        const d = (m % cols - mx) ** 2 + (((m / cols) | 0) - my) ** 2;
+        if (d < pd) { pd = d; pick = m; }
+      }
+      clusters.push(mx + .5, my + .5);
+      const score = Math.min(members.length, 80) - distA[pick] * .45;
+      if (score > bestScore) { bestScore = score; best = pick; }
     }
     return best;
   }
-  function ask(text, forced) {
-    add(esc(text), "me");
-    const replyLang = DE_HINTS.test(text) ? "de" : lang();
-    const f = forced || match(text);
-    if (f) { asked.add(f.id); renderChips(); }
-    const typing = add("…", "bot typing");
-    setTimeout(() => { typing.remove(); add(f ? f[replyLang] : UI[replyLang].miss, "bot"); }, 450);
-  }
-  function open() {
-    panel.hidden = false; fab.setAttribute("aria-expanded", "true");
-    if (!greeted) { add(UI[lang()].hello, "bot"); greeted = true; }
-    renderUI(); input.focus();
-  }
-  function close() { panel.hidden = true; fab.setAttribute("aria-expanded", "false"); fab.focus(); }
 
-  fab.onclick = () => (panel.hidden ? open() : close());
-  $("chatClose").onclick = close;
-  panel.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-  form.onsubmit = e => { e.preventDefault(); const q = input.value.trim(); if (!q) return; input.value = ""; ask(q); };
-  document.getElementById("langBtn").addEventListener("click", () => setTimeout(renderUI, 0));
-  renderUI();
+  const heapK = [], heapV = [];
+  function hpush(k, v) {
+    let i = heapK.length; heapK.push(k); heapV.push(v);
+    while (i > 0) {
+      const p = (i - 1) >> 1;
+      if (heapK[p] <= k) break;
+      heapK[i] = heapK[p]; heapV[i] = heapV[p]; i = p;
+    }
+    heapK[i] = k; heapV[i] = v;
+  }
+  function hpop() {
+    const top = heapV[0], lk = heapK.pop(), lv = heapV.pop(), n = heapK.length;
+    if (n) {
+      let i = 0;
+      for (;;) {
+        let c = 2 * i + 1;
+        if (c >= n) break;
+        if (c + 1 < n && heapK[c + 1] < heapK[c]) c++;
+        if (heapK[c] >= lk) break;
+        heapK[i] = heapK[c]; heapV[i] = heapV[c]; i = c;
+      }
+      heapK[i] = lk; heapV[i] = lv;
+    }
+    return top;
+  }
+
+  function astar(s, g) {
+    gen++;
+    heapK.length = 0; heapV.length = 0;
+    const gx = g % cols, gy = (g / cols) | 0;
+    const h = i => {
+      const dx = Math.abs(i % cols - gx), dy = Math.abs(((i / cols) | 0) - gy);
+      return dx + dy - .5858 * Math.min(dx, dy);
+    };
+    stamp[s] = gen; gS[s] = 0; par[s] = -1; hpush(h(s), s);
+    while (heapK.length) {
+      const c = hpop();
+      if (c === g) {
+        const out = [];
+        for (let k = c; k !== -1; k = par[k]) out.push(k);
+        return out.reverse();
+      }
+      if (closed[c] === gen) continue;
+      closed[c] = gen;
+      const cx = c % cols, cy = (c / cols) | 0;
+      for (let k = 0; k < 8; k++) {
+        const nx = cx + DX[k], ny = cy + DY[k];
+        if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) continue;
+        const n = ix(nx, ny);
+        if (known[n] !== 1 || closed[n] === gen) continue;
+        if (k >= 4 && (known[ix(nx, cy)] !== 1 || known[ix(cx, ny)] !== 1)) continue;
+        const cost = gS[c] + (k < 4 ? 1 : 1.4142) + (blocked[n] ? 40 : 0);
+        if (stamp[n] !== gen || cost < gS[n]) { stamp[n] = gen; gS[n] = cost; par[n] = c; hpush(cost + h(n), n); }
+      }
+    }
+    return null;
+  }
+
+  function los(ax, ay, bx, by) {
+    const d = Math.hypot(bx - ax, by - ay), n = Math.ceil(d / .35);
+    for (let k = 1; k <= n; k++) {
+      const x = Math.floor(ax + (bx - ax) * k / n), y = Math.floor(ay + (by - ay) * k / n);
+      const i = ix(x, y);
+      if (known[i] !== 1 || blocked[i]) return false;
+    }
+    return true;
+  }
+
+  function smooth(cells) {
+    const pts = cells.map(i => [i % cols + .5, ((i / cols) | 0) + .5]);
+    const out = [];
+    let a = 0;
+    while (a < pts.length - 1) {
+      let b = Math.min(pts.length - 1, a + 70);
+      while (b > a + 1 && !los(pts[a][0], pts[a][1], pts[b][0], pts[b][1])) b--;
+      out.push(pts[b]); a = b;
+    }
+    return out;
+  }
+
+  function planTo(g) {
+    const p = astar(cellOf(rob), g);
+    if (!p) return false;
+    path = smooth(p);
+    return true;
+  }
+
+  function think(now) {
+    nextThink = now + 280;
+    despeckle(now);
+    if (mode === "user") {
+      if (path.length) return;
+      mode = done ? "idle" : "explore";
+      goal = -1; idleAt = now + 3500; speedMul = 1;
+      setHint(done ? "done" : "explore");
+    }
+    if (mode === "explore") {
+      const stale = goal < 0 || !path.length || !isFrontier(goal) ||
+        (path.length && !los(rob.x, rob.y, path[0][0], path[0][1]) && !blocked[cellOf(rob)]);
+      if (!stale) return;
+      for (let tries = 0; tries < 6; tries++) {
+        const g = findGoal();
+        if (g < 0) {
+          done = true; mode = "idle"; goal = -1; path = []; clusters = [];
+          idleAt = now + 2500; setHint("done"); covEl.textContent = "100%";
+          return;
+        }
+        if (planTo(g)) { goal = g; return; }
+        bad.add(g);
+      }
+    }
+    if (mode === "idle" && !path.length && now > idleAt) {
+      const s = cellOf(rob), sx = s % cols, sy = (s / cols) | 0;
+      for (let tries = 0; tries < 40; tries++) {
+        const x = 3 + Math.floor(Math.random() * (cols - 6)), y = 3 + Math.floor(Math.random() * (rows - 6));
+        const i = ix(x, y), d = Math.hypot(x - sx, y - sy);
+        if (known[i] !== 1 || blocked[i] || d < 20 || d > 90) continue;
+        if (planTo(i)) { speedMul = .55; break; }
+      }
+      idleAt = now + 5000 + Math.random() * 3000;
+    }
+  }
+
+  function drive(dt) {
+    if (!path.length) return;
+    const [tx, ty] = path[0];
+    const dx = tx - rob.x, dy = ty - rob.y, d = Math.hypot(dx, dy);
+    if (d < .55) { path.shift(); return; }
+    let da = Math.atan2(dy, dx) - rob.th;
+    while (da > Math.PI) da -= 2 * Math.PI;
+    while (da < -Math.PI) da += 2 * Math.PI;
+    const turn = 6.5 * dt;
+    rob.th += Math.max(-turn, Math.min(turn, da));
+    const step = Math.min(d, SPEED * speedMul * dt * Math.max(0, Math.cos(da)) ** 2);
+    const nx = rob.x + Math.cos(rob.th) * step, ny = rob.y + Math.sin(rob.th) * step;
+    if (truth[cellOf({ x: nx, y: ny })]) { path = []; goal = -1; return; }
+    rob.x = nx; rob.y = ny;
+    const last = trail[trail.length - 1];
+    if (!last || Math.hypot(last[0] - rob.x, last[1] - rob.y) > 1.2) {
+      trail.push([rob.x, rob.y]);
+      if (trail.length > 900) trail.shift();
+    }
+  }
+
+  function paint(now) {
+    let w = 0;
+    for (let k = 0; k < fading.length; k++) {
+      const i = fading[k], wall = known[i] === 2;
+      const p = Math.min(1, (now - seen[i]) / (wall ? 900 : 450));
+      const o = i * 4;
+      if (wall) {
+        const e = p * p;
+        px[o] = SCAN[0] * (1 - e); px[o + 1] = SCAN[1] * (1 - e); px[o + 2] = SCAN[2] * (1 - e);
+      } else {
+        const e = 1 - (1 - p) * (1 - p);
+        px[o] = UNK[0] + (FREE[0] - UNK[0]) * e; px[o + 1] = UNK[1] + (FREE[1] - UNK[1]) * e; px[o + 2] = UNK[2] + (FREE[2] - UNK[2]) * e;
+      }
+      if (p < 1) fading[w++] = i;
+    }
+    fading.length = w;
+    bctx.putImageData(idata, 0, 0);
+  }
+
+  function render(now, still) {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(buf, 0, 0, cols * C, rows * C);
+
+    ctx.strokeStyle = "rgba(0,0,0,.05)"; ctx.lineWidth = 1;
+    ctx.beginPath();
+    const step = 64;
+    for (let x = step; x < W; x += step) { ctx.moveTo(Math.round(x) + .5, 0); ctx.lineTo(Math.round(x) + .5, H); }
+    for (let y = step; y < H; y += step) { ctx.moveTo(0, Math.round(y) + .5); ctx.lineTo(W, Math.round(y) + .5); }
+    ctx.stroke();
+
+    if (trail.length > 1) {
+      ctx.strokeStyle = "rgba(0,0,0,.14)"; ctx.lineWidth = 1.5; ctx.lineJoin = "round";
+      ctx.beginPath(); ctx.moveTo(trail[0][0] * C, trail[0][1] * C);
+      for (const p of trail) ctx.lineTo(p[0] * C, p[1] * C);
+      ctx.lineTo(rob.x * C, rob.y * C);
+      ctx.stroke();
+    }
+
+    if (!still && hits.length) {
+      ctx.fillStyle = "rgba(36,54,240,.075)";
+      ctx.beginPath(); ctx.moveTo(hits[0] * C, hits[1] * C);
+      for (let k = 3; k < hits.length; k += 3) ctx.lineTo(hits[k] * C, hits[k + 1] * C);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "rgba(36,54,240,.9)";
+      for (let k = 0; k < hits.length; k += 3) if (hits[k + 2] === 1) ctx.fillRect(hits[k] * C - 1, hits[k + 1] * C - 1, 2, 2);
+    }
+
+    if (mode === "explore") {
+      ctx.fillStyle = "#12a150";
+      for (let k = 0; k < clusters.length; k += 2) {
+        ctx.beginPath(); ctx.arc(clusters[k] * C, clusters[k + 1] * C, 3, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    if (path.length) {
+      ctx.strokeStyle = "rgba(36,54,240,.9)"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
+      ctx.beginPath(); ctx.moveTo(rob.x * C, rob.y * C);
+      for (const p of path) ctx.lineTo(p[0] * C, p[1] * C);
+      ctx.stroke(); ctx.setLineDash([]);
+      const e = path[path.length - 1];
+      ctx.strokeStyle = "#12a150"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(e[0] * C, e[1] * C, 6, 0, Math.PI * 2); ctx.stroke();
+    }
+
+    if (clickMark) {
+      const p = (now - clickMark.t) / 700;
+      if (p >= 1) clickMark = null;
+      else {
+        ctx.strokeStyle = clickMark.ok ? `rgba(18,161,80,${1 - p})` : `rgba(0,0,0,${1 - p})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(clickMark.x, clickMark.y, 6 + p * 16, 0, Math.PI * 2); ctx.stroke();
+      }
+    }
+
+    const rx = rob.x * C, ry = rob.y * C, rr = Math.max(6.5, C * 1.3);
+    ctx.fillStyle = "#000";
+    ctx.beginPath(); ctx.arc(rx, ry, rr, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "#f2f3f5"; ctx.lineWidth = 2; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx + Math.cos(rob.th) * rr * .8, ry + Math.sin(rob.th) * rr * .8); ctx.stroke();
+    ctx.lineCap = "butt";
+  }
+
+  function coverage() {
+    if (done) return;
+    covEl.textContent = Math.min(99, Math.floor(reachKnown / reachTotal * 100)) + "%";
+  }
+
+  function tick(now) {
+    raf = requestAnimationFrame(tick);
+    const dt = Math.min(.05, (now - lastT) / 1000 || 0);
+    lastT = now;
+    if (now - lastScan > 40) { scan(now); lastScan = now; coverage(); }
+    if (now >= nextThink) think(now);
+    drive(dt);
+    paint(now);
+    render(now, false);
+  }
+  function start() { if (!raf && built && visible && !reduce) { lastT = performance.now(); raf = requestAnimationFrame(tick); } }
+  function stop() { cancelAnimationFrame(raf); raf = 0; }
+
+  function revealAll() {
+    for (let i = 0; i < N; i++) {
+      if (reach[i]) known[i] = 1;
+      else if (truth[i]) {
+        const x = i % cols, y = (i / cols) | 0;
+        let edge = false;
+        for (let k = 0; k < 4 && !edge; k++) for (let s = 1; s <= 2 && !edge; s++) {
+          const nx = x + DX[k] * s, ny = y + DY[k] * s;
+          if (nx >= 0 && ny >= 0 && nx < cols && ny < rows && reach[ix(nx, ny)]) edge = true;
+        }
+        if (edge) known[i] = 2;
+      }
+      const o = i * 4, c = known[i] === 1 ? FREE : known[i] === 2 ? [0, 0, 0] : truth[i] ? UNK_WALL : UNK;
+      px[o] = c[0]; px[o + 1] = c[1]; px[o + 2] = c[2];
+    }
+    fading = [];
+    bctx.putImageData(idata, 0, 0);
+    done = true; mode = "idle";
+    covEl.textContent = "100%";
+  }
+
+  function init() {
+    stop();
+    build();
+    if (reduce) { revealAll(); render(0, true); setHint("still"); againBtn.hidden = true; return; }
+    start();
+  }
+
+  cv.addEventListener("pointerdown", e => {
+    if (!built || reduce) return;
+    const r = cv.getBoundingClientRect();
+    const mx = e.clientX - r.left, my = e.clientY - r.top;
+    const cx = Math.floor(mx / C), cy = Math.floor(my / C);
+    let g = -1, gd = Infinity;
+    for (let dy = -8; dy <= 8; dy++) for (let dx = -8; dx <= 8; dx++) {
+      const x = cx + dx, y = cy + dy;
+      if (x < 0 || y < 0 || x >= cols || y >= rows) continue;
+      const i = ix(x, y), d = dx * dx + dy * dy;
+      if (known[i] === 1 && !blocked[i] && d < gd) { gd = d; g = i; }
+    }
+    const ok = g >= 0 && planTo(g);
+    clickMark = { x: mx, y: my, t: performance.now(), ok };
+    if (!ok) { setHint("unreach", 2600); return; }
+    mode = "user"; goal = g; speedMul = 1;
+    setHint("user");
+  });
+  againBtn.addEventListener("click", () => { if (built) { reset(); start(); } });
+
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; visible ? start() : stop(); }).observe(host);
+
+  let lastW = 0, rt = 0;
+  new ResizeObserver(() => {
+    const w = host.clientWidth;
+    if (!built || Math.abs(w - lastW) < 2) { lastW = w; return; }
+    lastW = w;
+    clearTimeout(rt); rt = setTimeout(init, 250);
+  }).observe(host);
+
+  const fontReady = document.fonts && document.fonts.load ? document.fonts.load('800 100px "Archivo"') : Promise.resolve();
+  Promise.race([fontReady, new Promise(r => setTimeout(r, 1500))]).then(() => { lastW = host.clientWidth; init(); });
 })();
 </script>
 </body>
