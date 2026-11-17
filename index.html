@@ -228,6 +228,38 @@
   .g-grid figcaption { margin-top: 8px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
   .g-hint { margin-top: 14px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
 
+  /* CHAT */
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .chat-fab { position: fixed; right: 20px; bottom: 20px; z-index: 80; display: flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px; border-radius: 999px; border: 1px solid var(--accent); background: var(--card); color: var(--text); font: 600 14px "JetBrains Mono", monospace; cursor: pointer; box-shadow: var(--shadow); transition: transform .2s; }
+  .chat-fab:hover { transform: translateY(-2px); }
+  .chat-fab img { border-radius: 50%; object-fit: cover; }
+  .chat-fab::after { content: ""; position: absolute; left: 32px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--ok); border: 2px solid var(--card); }
+  .chat-panel { position: fixed; right: 20px; bottom: 84px; z-index: 81; width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 110px); display: flex; flex-direction: column; padding: 0; border-radius: 20px; border: 1px solid var(--line); background: var(--card); box-shadow: 0 24px 70px rgba(0,0,0,.5); overflow: hidden; }
+  .chat-panel[hidden] { display: none; }
+  .chat-panel .chat-head { position: static; backdrop-filter: none; }
+  .chat-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line); background: var(--card-2); }
+  .chat-head img { border-radius: 50%; object-fit: cover; }
+  .chat-head div { flex: 1; line-height: 1.3; }
+  .chat-head small { display: block; color: var(--muted); font: 11px "JetBrains Mono", monospace; }
+  .chat-x { background: none; border: 0; color: var(--muted); font-size: 16px; cursor: pointer; padding: 6px; }
+  .chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 88%; padding: 10px 13px; border-radius: 14px; font-size: 14px; line-height: 1.5; white-space: pre-line; }
+  .msg.bot { background: var(--bg-2); border: 1px solid var(--line); border-bottom-left-radius: 4px; align-self: flex-start; }
+  .msg.me { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
+  .msg a { color: var(--accent); text-decoration: underline; }
+  .msg.typing { color: var(--muted); font: 13px "JetBrains Mono", monospace; }
+  .chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 10px; flex-shrink: 0; }
+  .chat-chips:empty { display: none; }
+  .chat-chips button { flex-shrink: 0; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); border-radius: 999px; padding: 6px 11px; font: 12px "JetBrains Mono", monospace; cursor: pointer; }
+  .chat-chips button:hover { border-color: var(--accent); }
+  .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+  .chat-form input { flex: 1; padding: 11px 13px; border-radius: 12px; font-size: 14px; }
+  .chat-form button { width: 44px; border: 0; border-radius: 12px; background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; font-size: 16px; cursor: pointer; }
+  @media (max-width: 600px) {
+    .chat-fab { right: 12px; bottom: 12px; }
+    .chat-panel { right: 8px; left: 8px; bottom: 72px; width: auto; max-width: none; height: calc(100vh - 96px); }
+  }
+
   /* TIMELINE */
   .timeline { position: relative; display: grid; gap: 18px; }
   .job { display: grid; grid-template-columns: 200px 1fr 50px; gap: 28px; padding: 30px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s; }
@@ -671,6 +703,28 @@
 </footer>
 <div class="toast" id="toast"></div>
 
+<!-- FAQ CHAT -->
+<button class="chat-fab" id="chatFab" aria-expanded="false" aria-controls="chatPanel">
+  <img src="photo.webp" alt="" width="34" height="34" /><span id="chatFabLabel">Ask Achraf</span>
+</button>
+<section class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>
+  <header class="chat-head">
+    <img src="photo.webp" alt="" width="38" height="38" />
+    <div>
+      <b id="chatTitle">Ask Achraf</b>
+      <small id="chatSub">Prepared answers, written by me</small>
+    </div>
+    <button class="chat-x" id="chatClose" aria-label="Close chat">✕</button>
+  </header>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <form class="chat-form" id="chatForm" autocomplete="off">
+    <label class="sr" for="chatInput" id="chatInputLabel">Your question</label>
+    <input id="chatInput" maxlength="300" placeholder="Ask about my skills, projects, availability…" />
+    <button type="submit" aria-label="Send" id="chatSend">➤</button>
+  </form>
+</section>
+
 <script>
   const DE = {
     "nav.about":"Über mich","nav.stack":"Stack","nav.projects":"Projekte","nav.exp":"Erfahrung","nav.edu":"Ausbildung","nav.contact":"Kontakt","nav.status":"Offen für Jobs",
@@ -769,6 +823,186 @@
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+
+<script>
+/* ---------- "Ask Achraf" FAQ bot: prepared answers only, no AI, no data leaves the page ---------- */
+(() => {
+  const MAIL = '<a href="mailto:arouaachref8@gmail.com">arouaachref8@gmail.com</a>';
+  const LI = '<a href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener">LinkedIn</a>';
+  const GH = '<a href="https://github.com/achref-2" target="_blank" rel="noopener">GitHub</a>';
+  const CV = '<a href="Achraf_Aroua_CV.pdf" download>CV</a>';
+
+  // Each entry: keywords (EN + DE, lowercase, matched as substrings), answer in EN and DE.
+  const FAQ = [
+    { id: "intro", chip: { en: "Who are you?", de: "Wer bist du?" },
+      k: ["who are you", "about you", "introduce", "yourself", "wer bist", "über dich", "vorstellen", "stell dich"],
+      en: "Hi, I'm Achraf 👋 I build full-stack applications with practical AI features. I'm doing my M.Sc. in Computer Science and Systems Engineering at TH Köln and I live in Aachen. Before that I finished a Bachelor's in Software Engineering in Tunisia, with an \"Excellent\" final-year project in AI and full-stack development.",
+      de: "Hallo, ich bin Achraf 👋 Ich entwickle Full-Stack-Anwendungen mit praxisnahen KI-Funktionen. Ich studiere M.Sc. Informatik und Systems-Engineering an der TH Köln und wohne in Aachen. Davor habe ich meinen Bachelor in Software Engineering in Tunesien abgeschlossen – mit einem Abschlussprojekt in KI und Full-Stack-Entwicklung, bewertet mit „Excellent“." },
+
+    { id: "looking", chip: { en: "What roles are you looking for?", de: "Welche Stellen suchst du?" },
+      k: ["looking for", "role", "position", "job", "werkstudent", "working student", "an internship", "praktikum", "open to", "hiring", "stelle", "suchst", "suche", "einstellen"],
+      en: "I'm looking for a Werkstudent (working student) role or an internship in full-stack development, ideally with AI features involved. I'm open to on-site and hybrid work in the Aachen / Cologne area.",
+      de: "Ich suche eine Werkstudentenstelle oder ein Praktikum in der Full-Stack-Entwicklung, idealerweise mit KI-Bezug. Ich bin offen für Vor-Ort- und Hybrid-Arbeit im Raum Aachen / Köln." },
+
+    { id: "avail", chip: { en: "When can you start?", de: "Wann kannst du anfangen?" },
+      k: ["start", "available", "availability", "when can", "hours", "per week", "verfügbar", "anfangen", "beginnen", "stunden", "wann"],
+      en: "I'm available for Werkstudent roles alongside my Master's. For an exact start date and weekly hours, the quickest way is to email me at " + MAIL + " and we can match it to your team's needs.",
+      de: "Ich bin neben meinem Master für Werkstudentenstellen verfügbar. Für den genauen Starttermin und die Wochenstunden schreib mir am besten an " + MAIL + " – dann stimmen wir das auf euer Team ab." },
+
+    { id: "location", chip: { en: "Where are you based?", de: "Wo wohnst du?" },
+      k: ["where", "based", "location", "live", "city", "remote", "hybrid", "on-site", "onsite", "relocat", "wo wohnst", "wohnort", "standort", "umzug", "vor ort"],
+      en: "I live in Aachen and study at TH Köln in Cologne, so anywhere in the Aachen–Cologne area works well for me. I'm open to on-site and hybrid setups.",
+      de: "Ich wohne in Aachen und studiere an der TH Köln, daher passt mir der gesamte Raum Aachen–Köln gut. Ich bin offen für Vor-Ort- und Hybrid-Modelle." },
+
+    { id: "skills", chip: { en: "What's your tech stack?", de: "Was ist dein Tech-Stack?" },
+      k: ["skill", "stack", "technolog", "tech", "framework", "programming language", "programming", "tools", "experience with", "kenntnisse", "fähigkeiten", "programmier", "kannst du",
+          "react", "node", "express", "javascript", "typescript", "java", "spring", "python", "php", "mongodb", "postgres", "mysql", "sql", "redis", "docker", "kubernetes", "aws", "cloud", "vue", "next.js", "nextjs", "tailwind", "frontend", "backend", "full-stack", "fullstack", "testing", "junit"],
+      en: "My main stack:\n• Frontend: React, Vite, Tailwind CSS, TypeScript (also Next.js, Vue.js, React Native)\n• Backend: Node.js, Express, REST APIs, JWT / Google OAuth; also Java with Spring Boot\n• Data: MongoDB, PostgreSQL, MySQL, Redis\n• AI: Python, Gemini API, scikit-learn, pandas, OCR\n• Enterprise: SAP ERP, ABAP\n• Tooling: Docker, Git, Swagger, JUnit, Agile/Scrum",
+      de: "Mein Haupt-Stack:\n• Frontend: React, Vite, Tailwind CSS, TypeScript (außerdem Next.js, Vue.js, React Native)\n• Backend: Node.js, Express, REST-APIs, JWT / Google OAuth; außerdem Java mit Spring Boot\n• Daten: MongoDB, PostgreSQL, MySQL, Redis\n• KI: Python, Gemini API, scikit-learn, pandas, OCR\n• Enterprise: SAP ERP, ABAP\n• Tools: Docker, Git, Swagger, JUnit, Agile/Scrum" },
+
+    { id: "ai", chip: { en: "What AI work have you done?", de: "Welche KI-Erfahrung hast du?" },
+      k: ["ai", "artificial", "machine learning", "ml", "gemini", "llm", "nlp", "ki", "künstliche", "maschinelles"],
+      en: "My main AI work is TalentSync, my final-year project: I integrated Python scripts and the Gemini API to extract data from CVs, score how well a CV matches a job description, give improvement feedback and generate personalised cover letters. I also work with scikit-learn and pandas, and I completed an AI programme with the Google Developer Student Club.",
+      de: "Meine wichtigste KI-Arbeit ist TalentSync, mein Abschlussprojekt: Ich habe Python-Skripte und die Gemini API integriert, um Daten aus Lebensläufen zu extrahieren, die Passung zu einer Stellenbeschreibung zu bewerten, Verbesserungsfeedback zu geben und personalisierte Anschreiben zu erzeugen. Außerdem arbeite ich mit scikit-learn und pandas und habe ein KI-Programm beim Google Developer Student Club absolviert." },
+
+    { id: "talentsync", chip: { en: "Tell me about TalentSync", de: "Erzähl von TalentSync" },
+      k: ["talentsync", "talent sync", "talentsync!", "project", "projekt", "built", "pfe", "final year", "abschlussprojekt", "gebaut"],
+      en: "TalentSync is an AI-powered recruitment platform I built during my final-year internship at AlloGenie. Candidates upload a CV and get a match score against a job, feedback and a generated cover letter; recruiters see applicants with their scores; admins manage the platform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. You can see real screens in the Projects section above.",
+      de: "TalentSync ist eine KI-gestützte Recruiting-Plattform, die ich in meinem Abschlusspraktikum bei AlloGenie gebaut habe. Kandidaten laden ihren Lebenslauf hoch und erhalten einen Match-Score zur Stelle, Feedback und ein generiertes Anschreiben; Recruiter sehen Bewerber mit ihren Scores; Admins verwalten die Plattform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. Echte Screens findest du oben im Projektbereich." },
+
+    { id: "experience", chip: { en: "What's your experience?", de: "Welche Erfahrung hast du?" },
+      k: ["experience", "worked", "work history", "internship", "where was", "previous", "companies", "allogenie", "siryos", "tunisair", "erfahrung", "gearbeitet", "berufserfahrung", "firmen"],
+      en: "I've done three internships:\n• AlloGenie (Feb–Jun 2025, remote): Full-Stack & AI developer, built TalentSync\n• Groupe ASAP Siryos (Jun–Jul 2024): ERP / ABAP intern\n• Tunisair Technics (Jun–Jul 2023): web development intern, built a PHP web application for data management",
+      de: "Ich habe drei Praktika gemacht:\n• AlloGenie (Feb.–Juni 2025, remote): Full-Stack- & KI-Entwickler, TalentSync gebaut\n• Groupe ASAP Siryos (Juni–Juli 2024): ERP-/ABAP-Praktikant\n• Tunisair Technics (Juni–Juli 2023): Webentwicklungs-Praktikant, PHP-Webanwendung zur Datenverwaltung entwickelt" },
+
+    { id: "sap", chip: { en: "Do you know SAP?", de: "Kennst du SAP?" },
+      k: ["sap", "abap", "erp", "opensql"],
+      en: "Yes. During my internship at Groupe ASAP Siryos I worked with SAP ERP and ABAP development concepts, including OpenSQL and database-oriented development, and learned how enterprise modules map to business processes. My main focus is full-stack and AI, but I'm happy to work in SAP environments too.",
+      de: "Ja. In meinem Praktikum bei Groupe ASAP Siryos habe ich mit SAP ERP und ABAP-Entwicklungskonzepten gearbeitet, inklusive OpenSQL und datenbankorientierter Entwicklung, und gelernt, wie Enterprise-Module Geschäftsprozesse abbilden. Mein Schwerpunkt ist Full-Stack und KI, aber ich arbeite auch gern im SAP-Umfeld." },
+
+    { id: "education", chip: { en: "What are you studying?", de: "Was studierst du?" },
+      k: ["study", "studying", "education", "degree", "master", "bachelor", "university", "th köln", "th koln", "uni", "studium", "studierst", "hochschule", "abschluss"],
+      en: "I'm doing an M.Sc. in Computer Science and Systems Engineering (Informatik und Systems-Engineering) at TH Köln, started October 2026. Before that: a Bachelor's in Computer Science – Software Engineering at the Faculty of Sciences of Bizerte (2022–2025), with coursework in algorithms, databases, AI, machine learning, cloud computing and distributed systems.",
+      de: "Ich studiere M.Sc. Informatik und Systems-Engineering an der TH Köln, seit Oktober 2026. Davor: Bachelor Informatik – Software Engineering an der Faculty of Sciences of Bizerte (2022–2025), u. a. mit Algorithmen, Datenbanken, KI, Machine Learning, Cloud Computing und verteilten Systemen." },
+
+    { id: "languages", chip: { en: "How good is your German?", de: "Wie gut ist dein Deutsch?" },
+      k: ["german", "deutsch", "english", "englisch", "french", "französisch", "arabic", "arabisch", "language skills", "speak", "sprichst", "sprachkenntnisse", "c1", "b1"],
+      en: "I speak Arabic (native), French (fluent), English (good) and German. My German is B1-certified, and I took the telc Deutsch C1 Hochschule exam in August 2026. I'm happy to work in German or English.",
+      de: "Ich spreche Arabisch (Muttersprache), Französisch (fließend), Englisch (gut) und Deutsch. Mein Deutsch ist auf B1 zertifiziert, und im August 2026 habe ich die telc Deutsch C1 Hochschule-Prüfung abgelegt. Ich arbeite gern auf Deutsch oder Englisch." },
+
+    { id: "why", chip: { en: "Why should we hire you?", de: "Warum sollten wir dich einstellen?" },
+      k: ["why should", "why you", "strength", "strengths", "stand out", "warum sollten", "warum du", "stärken", "besonders"],
+      en: "Three reasons: I think end-to-end, from the UI through the API to the database; I've already shipped a real AI feature (CV matching and cover letters with the Gemini API) rather than just experimenting; and I bring an enterprise mindset from my ERP/SAP internship, with Agile/Scrum, UML and clear documentation.",
+      de: "Drei Gründe: Ich denke End-to-End, von der UI über die API bis zur Datenbank; ich habe bereits eine echte KI-Funktion umgesetzt (CV-Matching und Anschreiben mit der Gemini API), statt nur zu experimentieren; und ich bringe aus meinem ERP/SAP-Praktikum eine Enterprise-Denkweise mit – Agile/Scrum, UML und klare Dokumentation." },
+
+    { id: "certs", chip: null,
+      k: ["certif", "certificate", "zertifik", "course", "kurs"],
+      en: "My certifications and programmes: telc Deutsch C1 Hochschule (exam taken Aug 2026), UX Research (Space Academy), Artificial Intelligence (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023), plus the Design Night 24-hour competition (2023).",
+      de: "Meine Zertifikate und Programme: telc Deutsch C1 Hochschule (Prüfung abgelegt Aug. 2026), UX Research (Space Academy), Künstliche Intelligenz (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023) sowie der 24-Stunden-Wettbewerb Design Night (2023)." },
+
+    { id: "contact", chip: { en: "How can I contact you?", de: "Wie erreiche ich dich?" },
+      k: ["contact", "email", "e-mail", "mail", "reach", "phone", "call", "linkedin", "github", "cv", "resume", "lebenslauf", "kontakt", "erreichen", "anrufen", "telefon"],
+      en: "The best way is email: " + MAIL + ". You can also message me on " + LI + ", see my code on " + GH + ", or download my " + CV + ".",
+      de: "Am besten per E-Mail: " + MAIL + ". Du kannst mir auch auf " + LI + " schreiben, meinen Code auf " + GH + " ansehen oder meinen " + CV + " herunterladen." },
+
+    { id: "salary", chip: null,
+      k: ["salary", "pay", "rate", "wage", "gehalt", "vergütung", "stundenlohn", "lohn"],
+      en: "I'd rather discuss compensation directly, since it depends on the role and hours. Just email me at " + MAIL + ".",
+      de: "Über die Vergütung spreche ich lieber direkt, da sie von Stelle und Stunden abhängt. Schreib mir einfach an " + MAIL + "." },
+
+    { id: "permit", chip: null,
+      k: ["visa", "permit", "work authori", "authorization", "authorisation", "aufenthalt", "arbeitserlaubnis", "visum"],
+      en: "For questions about my work authorisation, please email me at " + MAIL + " and I'll give you the exact details.",
+      de: "Bei Fragen zu meiner Arbeitserlaubnis schreib mir bitte an " + MAIL + ", dann gebe ich dir die genauen Details." },
+
+    { id: "hi", chip: null,
+      k: ["hello", "hi ", "hey", "good morning", "hallo", "guten tag", "moin", "servus"],
+      en: "Hi! 👋 Ask me anything about my skills, projects, experience or availability — or tap one of the suggestions below.",
+      de: "Hallo! 👋 Frag mich gern zu meinen Skills, Projekten, Erfahrungen oder meiner Verfügbarkeit – oder tippe auf einen der Vorschläge unten." },
+
+    { id: "thanks", chip: null,
+      k: ["thank", "thanks", "danke", "merci", "great", "super", "cool"],
+      en: "Thanks for stopping by! If you'd like to talk, I'm one email away: " + MAIL,
+      de: "Danke fürs Vorbeischauen! Wenn du sprechen möchtest, bin ich nur eine E-Mail entfernt: " + MAIL },
+  ];
+
+  const UI = {
+    en: { title: "Ask Achraf", sub: "Prepared answers, written by me", fab: "Ask Achraf", ph: "Ask about my skills, projects, availability…", label: "Your question",
+          hello: "Hi, I'm Achraf 👋 Ask me about my skills, projects or availability. These are answers I've prepared myself; for anything else, email me.",
+          miss: "I don't have a prepared answer for that one. Try one of the suggestions below, or ask me directly at " + MAIL + " – I usually reply quickly." },
+    de: { title: "Frag Achraf", sub: "Vorbereitete Antworten, von mir geschrieben", fab: "Frag Achraf", ph: "Frag nach Skills, Projekten, Verfügbarkeit…", label: "Deine Frage",
+          hello: "Hallo, ich bin Achraf 👋 Frag mich zu meinen Skills, Projekten oder meiner Verfügbarkeit. Die Antworten habe ich selbst vorbereitet; für alles andere schreib mir eine E-Mail.",
+          miss: "Darauf habe ich keine vorbereitete Antwort. Probier einen der Vorschläge unten oder frag mich direkt unter " + MAIL + " – ich antworte meist schnell." }
+  };
+
+  const $ = id => document.getElementById(id);
+  const fab = $("chatFab"), panel = $("chatPanel"), log = $("chatLog"), chips = $("chatChips"), form = $("chatForm"), input = $("chatInput");
+  const lang = () => (document.documentElement.lang === "de" ? "de" : "en");
+  const DE_HINTS = /\b(ich|du|dein|deine|wie|wann|warum|welche|kannst|hast|bist|sprichst|und|nicht|erzähl|sind)\b|[äöüß]/i;
+  let greeted = false, asked = new Set();
+
+  function esc(s) { return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+  function add(html, who) {
+    const d = document.createElement("div");
+    d.className = "msg " + who;
+    d.innerHTML = html;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+  function renderUI() {
+    const t = UI[lang()];
+    $("chatTitle").textContent = t.title; $("chatSub").textContent = t.sub; $("chatFabLabel").textContent = t.fab;
+    input.placeholder = t.ph; $("chatInputLabel").textContent = t.label;
+    renderChips();
+  }
+  function renderChips() {
+    chips.innerHTML = "";
+    FAQ.filter(f => f.chip && !asked.has(f.id)).slice(0, 4).forEach(f => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = f.chip[lang()];
+      b.onclick = () => ask(f.chip[lang()], f);
+      chips.appendChild(b);
+    });
+  }
+  function match(q) {
+    const s = " " + q.toLowerCase().replace(/[?!.,;:]/g, " ") + " ";
+    let best = null, score = 0;
+    for (const f of FAQ) {
+      let sc = 0;
+      for (const k of f.k) {
+        const short = k.trim().length <= 4;
+        const hit = short ? new RegExp("(^|[^a-zäöüß])" + k.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-zäöüß]|$)").test(s) : s.includes(k);
+        // Short exact words (sap, ai, erp, java) and long phrases count double; topic names count triple.
+        if (hit) sc += (k === f.id || k.startsWith("talentsync")) ? 3 : (short || k.length > 6) ? 2 : 1;
+      }
+      if (sc > score) { score = sc; best = f; }
+    }
+    return best;
+  }
+  function ask(text, forced) {
+    add(esc(text), "me");
+    const replyLang = DE_HINTS.test(text) ? "de" : lang();
+    const f = forced || match(text);
+    if (f) { asked.add(f.id); renderChips(); }
+    const typing = add("…", "bot typing");
+    setTimeout(() => { typing.remove(); add(f ? f[replyLang] : UI[replyLang].miss, "bot"); }, 450);
+  }
+  function open() {
+    panel.hidden = false; fab.setAttribute("aria-expanded", "true");
+    if (!greeted) { add(UI[lang()].hello, "bot"); greeted = true; }
+    renderUI(); input.focus();
+  }
+  function close() { panel.hidden = true; fab.setAttribute("aria-expanded", "false"); fab.focus(); }
+
+  fab.onclick = () => (panel.hidden ? open() : close());
+  $("chatClose").onclick = close;
+  panel.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  form.onsubmit = e => { e.preventDefault(); const q = input.value.trim(); if (!q) return; input.value = ""; ask(q); };
+  document.getElementById("langBtn").addEventListener("click", () => setTimeout(renderUI, 0));
+  renderUI();
+})();
 </script>
 </body>
 </html>
