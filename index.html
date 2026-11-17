@@ -4,7 +4,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Achraf Aroua — Full-Stack & AI Developer</title>
-<meta name="description" content="Achraf Aroua — Full-Stack & AI Developer based in Aachen, Germany. React, Node.js, Spring Boot, SAP/ABAP and AI integrations." />
+<meta name="description" content="Achraf Aroua builds full-stack applications with practical AI features. M.Sc. Computer Science student at TH Köln, based in Aachen and open to Werkstudent roles and internships." />
+<link rel="canonical" href="https://achref-2.github.io/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://achref-2.github.io/" />
+<meta property="og:title" content="Achraf Aroua — Full-Stack & AI Developer" />
+<meta property="og:description" content="I build full-stack applications with practical AI features. M.Sc. student at TH Köln · Aachen, Germany." />
+<meta property="og:image" content="https://achref-2.github.io/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0b0b12" />
+<script>document.documentElement.classList.add("js");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -93,7 +102,7 @@
   .hero { min-height: calc(100vh - 68px); display: grid; grid-template-columns: 1.25fr .9fr; gap: 56px; align-items: center; padding: 60px 0 40px; }
   .eyebrow { font: 500 12px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; display: inline-flex; gap: 10px; align-items: center; }
   .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--accent); }
-  h1 { font-size: clamp(38px, 5.6vw, 66px); line-height: 1.05; letter-spacing: -.03em; margin: 22px 0; font-weight: 700; }
+  h1 { font-size: clamp(34px, 4.8vw, 58px); line-height: 1.05; letter-spacing: -.03em; margin: 22px 0; font-weight: 700; }
   h1 .grad { background: linear-gradient(90deg, var(--accent), #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
   h1 .dim { color: var(--muted); font-weight: 500; }
   .lead { color: var(--muted); font-size: 18px; max-width: 560px; }
@@ -193,6 +202,32 @@
   .mock-note { margin-top: 14px; padding: 12px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
   .mock-note b { color: var(--text); }
 
+  .mock-cap { margin-top: 12px; font: 11.5px/1.5 "JetBrains Mono", monospace; color: var(--muted); text-align: center; }
+  .case { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 16px; padding: 36px 40px; border-radius: 24px; border: 1px solid var(--line); background: var(--card); }
+  .case .h-mini { margin-top: 0; margin-bottom: 18px; }
+  .arch { display: grid; gap: 8px; text-align: center; }
+  .node { padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); font-weight: 600; font-size: 14.5px; }
+  .node.strong { border-color: var(--accent); }
+  .node small { display: block; font: 400 11.5px "JetBrains Mono", monospace; color: var(--muted); margin-top: 3px; }
+  .arrow { font: 11px "JetBrains Mono", monospace; color: var(--accent); }
+  .arch-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .arch-split > div { display: grid; gap: 8px; }
+  .decisions { display: grid; grid-template-columns: 130px 1fr; gap: 12px 18px; font-size: 14.5px; }
+  .decisions dt { font: 600 12px "JetBrains Mono", monospace; color: var(--accent); padding-top: 3px; }
+  .decisions dd { color: var(--muted); }
+
+  .shot-link { display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .2s, border-color .2s; background: #000; }
+  .shot-link:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .shot { display: block; width: 100%; height: auto; }
+  .shot.tall { max-height: 560px; object-fit: cover; object-position: top; }
+  .gallery { margin-top: 16px; padding: 36px 40px; border-radius: 24px; border: 1px solid var(--line); background: var(--card); }
+  .gallery .h-mini { margin-top: 0; margin-bottom: 18px; }
+  .g-grid { display: grid; grid-template-columns: 1fr 1fr 0.55fr; gap: 16px; align-items: start; }
+  .g-grid .g-wide { grid-column: 1 / 3; }
+  .g-grid .g-uml { grid-column: 3; grid-row: 1 / 3; }
+  .g-grid figcaption { margin-top: 8px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
+  .g-hint { margin-top: 14px; font: 11.5px "JetBrains Mono", monospace; color: var(--muted); }
+
   /* TIMELINE */
   .timeline { position: relative; display: grid; gap: 18px; }
   .job { display: grid; grid-template-columns: 200px 1fr 50px; gap: 28px; padding: 30px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s; }
@@ -257,12 +292,15 @@
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 80px); background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 10px; font: 13px "JetBrains Mono", monospace; transition: transform .3s; z-index: 99; }
   .toast.show { transform: translate(-50%, 0); }
 
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+  .js .reveal.in, .js .hero .reveal { opacity: 1; transform: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 10px; font: 600 13px "JetBrains Mono", monospace; }
+  .skip:focus { top: 12px; }
 
   /* RESPONSIVE */
   @media (max-width: 960px) {
-    .hero, .about-grid, .project, .contact, .edu-grid { grid-template-columns: 1fr; }
+    .hero, .about-grid, .project, .contact, .edu-grid, .case { grid-template-columns: 1fr; }
     .hero { min-height: auto; padding-top: 48px; }
     .id-card { max-width: 420px; }
     .project-visual { border-left: 0; border-top: 1px solid var(--line); }
@@ -280,7 +318,12 @@
     section { padding: 76px 0; }
     .sec-head { grid-template-columns: 1fr; gap: 4px; margin-bottom: 36px; }
     .stack-grid, .feat-list, .row2 { grid-template-columns: 1fr; }
-    .project-body, .project-visual, form { padding: 24px; }
+    .project-body, .project-visual, form, .case { padding: 24px; }
+    .gallery { padding: 24px; }
+    .g-grid { grid-template-columns: 1fr; }
+    .g-grid .g-wide, .g-grid .g-uml { grid-column: auto; grid-row: auto; }
+    .decisions { grid-template-columns: 1fr; gap: 2px; }
+    .decisions dd { margin-bottom: 10px; }
     .cert { grid-template-columns: 1fr; gap: 4px; }
     .cert .d { text-align: left; }
   }
@@ -291,10 +334,11 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#about">Skip to content</a>
 
 <header>
   <div class="wrap">
-    <nav>
+    <nav aria-label="Main">
       <a href="#top" class="logo" aria-label="Home">AA</a>
       <div class="links" id="links">
         <a href="#about" data-i="nav.about">About</a>
@@ -319,24 +363,24 @@
   <div class="wrap">
     <div class="hero">
       <div class="reveal">
-        <span class="eyebrow" data-i="hero.eyebrow">Aachen, Germany · Open to working student & junior roles</span>
-        <h1><span data-i="hero.t1">Turning ideas into</span><br /><span class="grad" data-i="hero.t2">intelligent, reliable</span><br /><span class="dim" data-i="hero.t3">software.</span></h1>
-        <p class="lead" data-i="hero.lead">Full-Stack & AI Developer building modern web apps, solid backends and AI-powered features — with a foot in enterprise ERP/SAP. Currently doing my M.Sc. at TH Köln.</p>
+        <span class="eyebrow" data-i="hero.eyebrow">Aachen, Germany · Open to Werkstudent roles & internships</span>
+        <h1><span data-i="hero.t1">I build full-stack applications with</span> <span class="grad" data-i="hero.t2">practical AI features.</span></h1>
+        <p class="lead" data-i="hero.lead">I'm Achraf, an M.Sc. Computer Science student at TH Köln with hands-on experience building web applications, secure backends and AI-powered workflows.</p>
         <div class="ctas">
-          <a href="#projects" class="btn primary" data-i="hero.cta1">View my projects →</a>
-          <a href="#contact" class="btn" data-i="hero.cta2">Let's work together</a>
-          <a href="Achraf_Aroua_CV.pdf" download class="btn" data-i="hero.cta3">↓ Download CV</a>
+          <a href="#projects" class="btn primary" data-i="hero.cta1">Explore my projects →</a>
+          <a href="Achraf_Aroua_CV.pdf" download class="btn" data-i="hero.cta3">Download CV ↓</a>
+          <a href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
         </div>
         <div class="chips">
-          <span data-i="hero.c1">Full-Stack web</span>
-          <span data-i="hero.c2">AI integrations</span>
-          <span data-i="hero.c3">SAP / ABAP</span>
+          <span data-i="hero.c1">Full-stack web apps</span>
+          <span data-i="hero.c2">AI-powered workflows</span>
+          <span data-i="hero.c3">Plus: SAP / ABAP experience</span>
         </div>
       </div>
 
       <div class="id-card reveal">
         <div class="avatar">
-          <img src="photo.webp" alt="Achraf Aroua" />
+          <img src="photo.webp" alt="Portrait of Achraf Aroua" width="1254" height="1254" fetchpriority="high" />
           <span class="tag">FULL-STACK · AI</span>
         </div>
         <div class="code">
@@ -437,21 +481,55 @@
           </ul>
         </div>
         <div class="project-visual">
-          <div class="mock" aria-hidden="true">
-            <div class="mock-bar"><i></i><i></i><i></i></div>
-            <div class="mock-in">
-              <div class="score">
-                <div class="ring"><span>87%</span></div>
-                <div><b>Match score</b><div class="bar-row" style="margin:4px 0 0">Senior React Developer</div></div>
-              </div>
-              <div class="bar-row">Skills <div class="bar"><i style="width:92%"></i></div></div>
-              <div class="bar-row">Experience <div class="bar"><i style="width:78%"></i></div></div>
-              <div class="bar-row">Education <div class="bar"><i style="width:88%"></i></div></div>
-              <div class="mock-note"><b>Gemini feedback:</b> strong React & Node match — highlight testing experience to improve fit.</div>
+          <figure style="width:100%;max-width:420px">
+            <a href="shots/analysis.webp" target="_blank" rel="noopener" class="shot-link">
+              <img class="shot tall" src="shots/analysis.webp" alt="TalentSync resume vs. job description analysis screen showing skills, experience and overall match scores with AI-written improvement suggestions" width="662" height="866" loading="lazy" />
+            </a>
+            <figcaption class="mock-cap" data-i="mock.cap">Real screen from TalentSync: the Gemini-generated resume vs. job analysis, run on my own CV during testing.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <div class="case reveal">
+        <div class="case-col">
+          <div class="h-mini" data-i="case.arch">How it's built</div>
+          <div class="arch" role="img" aria-label="Architecture: React frontend calls an Express API, which uses MongoDB for data and runs Python scripts that call the Gemini API.">
+            <div class="node">React · Vite<small data-i="case.n1">Candidate / recruiter / admin UI</small></div>
+            <div class="arrow">↓ REST · JWT</div>
+            <div class="node strong">Node.js · Express API<small data-i="case.n2">Auth, roles, file uploads</small></div>
+            <div class="arch-split">
+              <div><div class="arrow">↓</div><div class="node">MongoDB<small data-i="case.n3">Users, jobs, applications</small></div></div>
+              <div><div class="arrow">↓</div><div class="node">Python + Gemini API<small data-i="case.n4">CV extraction, matching, cover letters</small></div></div>
             </div>
           </div>
         </div>
-      </article>
+        <div class="case-col">
+          <div class="h-mini" data-i="case.role">My role & key decisions</div>
+          <dl class="decisions">
+            <dt data-i="case.d1">Scope</dt>
+            <dd data-i="case.d1t">Built the project as my final-year internship at AlloGenie — frontend, backend, AI integration and documentation.</dd>
+            <dt data-i="case.d2">Authentication</dt>
+            <dd data-i="case.d2t">JWT sessions plus Google OAuth, with role-based access separating candidates, recruiters and admins.</dd>
+            <dt data-i="case.d3">CV handling</dt>
+            <dd data-i="case.d3t">CV files are uploaded through the Express API and passed to Python scripts that extract the CV data.</dd>
+            <dt data-i="case.d4">AI integration</dt>
+            <dd data-i="case.d4t">The Gemini API compares the extracted profile with a job description, returns a score with feedback, and drafts a personalised cover letter.</dd>
+            <dt data-i="case.d5">Process</dt>
+            <dd data-i="case.d5t">User stories, UML and sequence diagrams, backlog and sprint planning, and a final project report.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="gallery reveal">
+        <div class="h-mini" data-i="case.shots">Screens from the app</div>
+        <div class="g-grid">
+          <figure class="g-wide"><a href="shots/landing.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/landing.webp" alt="TalentSync landing page" width="1400" height="373" loading="lazy" /></a><figcaption data-i="case.s1">Landing page</figcaption></figure>
+          <figure><a href="shots/dashboard.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/dashboard.webp" alt="TalentSync candidate dashboard with sidebar navigation" width="1400" height="635" loading="lazy" /></a><figcaption data-i="case.s2">Candidate dashboard</figcaption></figure>
+          <figure><a href="shots/signin.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/signin.webp" alt="TalentSync sign-in dialog with email, password and Google sign-in" width="1400" height="634" loading="lazy" /></a><figcaption data-i="case.s3">Sign-in · email/password + Google OAuth</figcaption></figure>
+          <figure class="g-uml"><a href="shots/uml.webp" target="_blank" rel="noopener" class="shot-link"><img class="shot" src="shots/uml.webp" alt="UML class diagram of TalentSync: User, Candidate, Recruiter, Job, JobApplication, Interview, Message and Score classes" width="632" height="862" loading="lazy" /></a><figcaption data-i="case.s4">UML class diagram</figcaption></figure>
+        </div>
+        <p class="g-hint" data-i="case.hint">Click any screen to open it full size.</p>
+      </div>
     </div>
   </section>
 
@@ -477,7 +555,7 @@
               <li data-i="exp.j1c">Backend with Node.js, Express, MongoDB, JWT, Google OAuth, file uploads and RBAC.</li>
               <li data-i="exp.j1d">Integrated Python AI scripts and the Gemini API for CV extraction and compatibility analysis.</li>
             </ul>
-            <div class="loc">Remote · Tunisia</div>
+            <div class="loc" data-i="loc.remote">Remote · Tunisia</div>
           </div>
           <div class="idx">01</div>
         </div>
@@ -491,7 +569,7 @@
               <li data-i="exp.j2b">Studied business processes, enterprise modules and database-oriented development.</li>
               <li data-i="exp.j2c">Learned professional development workflows inside an enterprise environment.</li>
             </ul>
-            <div class="loc">Tunisia</div>
+            <div class="loc" data-i="loc.tn">Tunisia</div>
           </div>
           <div class="idx">02</div>
         </div>
@@ -504,7 +582,7 @@
               <li data-i="exp.j3a">Developed a web application with PHP, HTML, CSS, JavaScript and SQL.</li>
               <li data-i="exp.j3b">Worked on data management, classification features and UI improvements.</li>
             </ul>
-            <div class="loc">Tunisia</div>
+            <div class="loc" data-i="loc.tn">Tunisia</div>
           </div>
           <div class="idx">03</div>
         </div>
@@ -540,7 +618,7 @@
 
       <div class="h-mini reveal" style="margin-top:56px" data-i="edu.certs">Certifications & learning</div>
       <div class="certs reveal">
-        <div class="cert"><span class="n">01</span><div><h4>Telc C1 Hochschule</h4><small data-i="edu.c1">German language exam</small></div><span class="d">AUG 2026</span></div>
+        <div class="cert"><span class="n">01</span><div><h4>telc Deutsch C1 Hochschule</h4><small data-i="edu.c1">German C1 exam taken · currently certified at B1</small></div><span class="d">AUG 2026</span></div>
         <div class="cert"><span class="n">02</span><div><h4>UX Research</h4><small>Space Academy · ID d9ca97e9b551fdb7</small></div><span class="d">—</span></div>
         <div class="cert"><span class="n">03</span><div><h4>Artificial Intelligence</h4><small>Google Developer Student Club FSB</small></div><span class="d">MAR 2023</span></div>
         <div class="cert"><span class="n">04</span><div><h4>Design Night — 24h Competition</h4><small>Art of Code Club</small></div><span class="d">APR 2023</span></div>
@@ -596,11 +674,11 @@
 <script>
   const DE = {
     "nav.about":"Über mich","nav.stack":"Stack","nav.projects":"Projekte","nav.exp":"Erfahrung","nav.edu":"Ausbildung","nav.contact":"Kontakt","nav.status":"Offen für Jobs",
-    "hero.eyebrow":"Aachen, Deutschland · Offen für Werkstudenten- & Junior-Stellen",
-    "hero.t1":"Ideen verwandeln in","hero.t2":"intelligente, zuverlässige","hero.t3":"Software.",
-    "hero.lead":"Full-Stack- & KI-Entwickler: moderne Web-Apps, solide Backends und KI-gestützte Features — mit Erfahrung im ERP/SAP-Umfeld. Derzeit im M.Sc. an der TH Köln.",
-    "hero.cta1":"Projekte ansehen →","hero.cta2":"Zusammenarbeiten","hero.cta3":"↓ Lebenslauf herunterladen",
-    "hero.c1":"Full-Stack Web","hero.c2":"KI-Integrationen","hero.c3":"SAP / ABAP",
+    "hero.eyebrow":"Aachen, Deutschland · Offen für Werkstudentenstellen & Praktika",
+    "hero.t1":"Ich entwickle Full-Stack-Anwendungen mit","hero.t2":"praxisnahen KI-Funktionen.",
+    "hero.lead":"Ich bin Achraf, M.Sc.-Informatikstudent an der TH Köln, mit praktischer Erfahrung in Webanwendungen, sicheren Backends und KI-gestützten Workflows.",
+    "hero.cta1":"Projekte entdecken →","hero.cta3":"Lebenslauf herunterladen ↓",
+    "hero.c1":"Full-Stack-Webanwendungen","hero.c2":"KI-gestützte Workflows","hero.c3":"Dazu: SAP / ABAP-Erfahrung",
     "about.label":"Über mich","about.title":"Vom Geschäftsbedarf zum fertigen Produkt.",
     "about.p1":"Ich bin <strong>Achraf Aroua</strong>, Full-Stack- & KI-Entwickler, und verwandle komplexe Anforderungen in klare, wartbare Anwendungen.",
     "about.p2":"Ich habe einen <strong>Bachelor in Informatik – Software Engineering</strong> der Faculty of Sciences of Bizerte; mein Abschlussprojekt in KI und Full-Stack-Entwicklung wurde mit <strong>Excellent</strong> bewertet. Jetzt studiere ich <strong>M.Sc. Informatik und Systems-Engineering</strong> an der TH Köln.",
@@ -630,7 +708,19 @@
     "edu.label":"Ausbildung & Zertifikate","edu.title":"Ein solides Fundament, das weiter wächst.","edu.present":"HEUTE",
     "edu.d1":"M.Sc. Informatik und Systems-Engineering","edu.d2":"Bachelor Informatik – Software Engineering",
     "edu.course":"Algorithmen, Datenbanken, Webentwicklung, Software Engineering, KI, Machine Learning, Cloud Computing, Verteilte Systeme.",
-    "edu.pfe":"Abschlussprojekt","edu.grade":"Bewertung","edu.exc":"Excellent","edu.certs":"Zertifikate & Weiterbildung","edu.c1":"Deutsch-Sprachprüfung",
+    "edu.pfe":"Abschlussprojekt","edu.grade":"Bewertung","edu.exc":"Excellent","edu.certs":"Zertifikate & Weiterbildung","edu.c1":"C1-Prüfung abgelegt · derzeit B1 zertifiziert",
+    "mock.score":"Match-Score","mock.skills":"Skills","mock.exp":"Erfahrung","mock.edu":"Ausbildung",
+    "mock.note":"<b>KI-Feedback:</b> starke React- & Node-Übereinstimmung — Testerfahrung hervorheben, um die Passung zu verbessern.",
+    "mock.cap":"Echter Screen aus TalentSync: die von Gemini erzeugte Analyse Lebenslauf vs. Stelle, beim Testen mit meinem eigenen CV.",
+    "case.shots":"Screens aus der App","case.s1":"Landingpage","case.s2":"Kandidaten-Dashboard","case.s3":"Anmeldung · E-Mail/Passwort + Google OAuth","case.s4":"UML-Klassendiagramm","case.hint":"Klicke auf einen Screen, um ihn in voller Größe zu öffnen.",
+    "case.arch":"Aufbau","case.n1":"UI für Kandidaten / Recruiter / Admins","case.n2":"Auth, Rollen, Datei-Uploads","case.n3":"Nutzer, Stellen, Bewerbungen","case.n4":"CV-Extraktion, Matching, Anschreiben",
+    "case.role":"Meine Rolle & zentrale Entscheidungen",
+    "case.d1":"Umfang","case.d1t":"Als Abschlusspraktikum bei AlloGenie umgesetzt — Frontend, Backend, KI-Integration und Dokumentation.",
+    "case.d2":"Authentifizierung","case.d2t":"JWT-Sessions plus Google OAuth, mit rollenbasierter Zugriffskontrolle für Kandidaten, Recruiter und Admins.",
+    "case.d3":"CV-Verarbeitung","case.d3t":"Lebensläufe werden über die Express-API hochgeladen und an Python-Skripte übergeben, die die Daten extrahieren.",
+    "case.d4":"KI-Integration","case.d4t":"Die Gemini API vergleicht das extrahierte Profil mit der Stellenbeschreibung, liefert Score und Feedback und entwirft ein personalisiertes Anschreiben.",
+    "case.d5":"Vorgehen","case.d5t":"User Stories, UML- und Sequenzdiagramme, Backlog und Sprintplanung sowie ein Abschlussbericht.",
+    "loc.remote":"Remote · Tunesien","loc.tn":"Tunesien",
     "l.ar":"Arabisch","l.fr":"Französisch","l.en":"Englisch","l.de":"Deutsch","l.native":"Muttersprache","l.fluent":"Fließend","l.good":"Gut","l.b1":"B1 zertifiziert · C1-Prüfung abgelegt",
     "c.label":"Gespräch starten","c.title":"Ein Projekt oder eine Stelle im Kopf?","c.sub":"Ich bin offen für Werkstudentenstellen, Praktika und Junior-Entwicklerrollen in Deutschland — und für spannende Freelance-Projekte.",
     "c.write":"Schreib mir →","c.copy":"E-Mail kopieren","c.name":"Name *","c.email":"Deine E-Mail *","c.subject":"Betreff","c.msg":"Deine Nachricht *","c.send":"Nachricht senden →"
