@@ -260,6 +260,27 @@
     .chat-panel { right: 8px; left: 8px; bottom: 72px; width: auto; max-width: none; height: calc(100vh - 96px); }
   }
 
+  /* LEARNING */
+  .learn-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  .learn-now, .learn-goal { padding: 32px; border-radius: 20px; border: 1px solid var(--line); background: var(--card); }
+  .learn-goal { background: linear-gradient(160deg, var(--accent-soft), var(--card)); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+  .learn-now .h-mini, .learn-goal .h-mini { margin-top: 0; }
+  .learn-now p, .learn-goal p { color: var(--muted); margin-bottom: 14px; }
+  .learn-now strong, .learn-goal strong { color: var(--text); font-weight: 600; }
+  .learn-badge { display: flex; gap: 14px; align-items: center; margin-top: 8px; padding: 14px 16px; border-radius: 14px; border: 1px dashed var(--accent); transition: background .2s; }
+  .learn-badge:hover { background: var(--accent-soft); }
+  .lb-icon { width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 700; }
+  .learn-badge b { display: block; font-size: 14.5px; }
+  .learn-badge small { color: var(--muted); font: 12px "JetBrains Mono", monospace; }
+  .interests { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+  .interest { padding: 20px; border-radius: 16px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s, transform .2s; }
+  .interest:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .interest .n { font: 12px "JetBrains Mono", monospace; color: var(--accent); }
+  .interest h4 { font-size: 16px; margin: 6px 0 6px; }
+  .interest p { color: var(--muted); font-size: 13.5px; }
+  .learn-close { margin: 28px auto 0; text-align: center; color: var(--muted); font-style: italic; max-width: 680px; }
+  .cert-link { color: var(--accent); text-decoration: underline; }
+
   /* TIMELINE */
   .timeline { position: relative; display: grid; gap: 18px; }
   .job { display: grid; grid-template-columns: 200px 1fr 50px; gap: 28px; padding: 30px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); transition: border-color .2s; }
@@ -332,7 +353,8 @@
 
   /* RESPONSIVE */
   @media (max-width: 960px) {
-    .hero, .about-grid, .project, .contact, .edu-grid, .case { grid-template-columns: 1fr; }
+    .hero, .about-grid, .project, .contact, .edu-grid, .case, .learn-grid { grid-template-columns: 1fr; }
+    .interests { grid-template-columns: 1fr 1fr; }
     .hero { min-height: auto; padding-top: 48px; }
     .id-card { max-width: 420px; }
     .project-visual { border-left: 0; border-top: 1px solid var(--line); }
@@ -349,7 +371,8 @@
     .wrap { padding: 0 16px; }
     section { padding: 76px 0; }
     .sec-head { grid-template-columns: 1fr; gap: 4px; margin-bottom: 36px; }
-    .stack-grid, .feat-list, .row2 { grid-template-columns: 1fr; }
+    .stack-grid, .feat-list, .row2, .interests { grid-template-columns: 1fr; }
+    .learn-now, .learn-goal { padding: 24px; }
     .project-body, .project-visual, form, .case { padding: 24px; }
     .gallery { padding: 24px; }
     .g-grid { grid-template-columns: 1fr; }
@@ -378,6 +401,7 @@
         <a href="#projects" data-i="nav.projects">Projects</a>
         <a href="#experience" data-i="nav.exp">Experience</a>
         <a href="#education" data-i="nav.edu">Education</a>
+        <a href="#learning" data-i="nav.learning">Learning</a>
         <a href="#contact" data-i="nav.contact">Contact</a>
       </div>
       <div class="nav-right">
@@ -650,11 +674,12 @@
 
       <div class="h-mini reveal" style="margin-top:56px" data-i="edu.certs">Certifications & learning</div>
       <div class="certs reveal">
-        <div class="cert"><span class="n">01</span><div><h4>telc Deutsch C1 Hochschule</h4><small data-i="edu.c1">German C1 exam taken · currently certified at B1</small></div><span class="d">AUG 2026</span></div>
-        <div class="cert"><span class="n">02</span><div><h4>UX Research</h4><small>Space Academy · ID d9ca97e9b551fdb7</small></div><span class="d">—</span></div>
-        <div class="cert"><span class="n">03</span><div><h4>Artificial Intelligence</h4><small>Google Developer Student Club FSB</small></div><span class="d">MAR 2023</span></div>
-        <div class="cert"><span class="n">04</span><div><h4>Design Night — 24h Competition</h4><small>Art of Code Club</small></div><span class="d">APR 2023</span></div>
-        <div class="cert"><span class="n">05</span><div><h4>DevOps</h4><small>Art of Code Club</small></div><span class="d">FEB 2023</span></div>
+        <div class="cert"><span class="n">01</span><div><h4>AI Foundation Microcredential (AIFM™)</h4><small><span data-i="cert.aifm">Certiprof · ID 117676034 · valid until Nov 12, 2027</span> · <a href="certs/AIFM_Achraf_Aroua.pdf" target="_blank" rel="noopener" class="cert-link" data-i="cert.view">View certificate (PDF)</a></small></div><span class="d">NOV 2026</span></div>
+        <div class="cert"><span class="n">02</span><div><h4>telc Deutsch C1 Hochschule</h4><small data-i="edu.c1">German C1 exam taken · currently certified at B1</small></div><span class="d">AUG 2026</span></div>
+        <div class="cert"><span class="n">03</span><div><h4>UX Research</h4><small>Space Academy · ID d9ca97e9b551fdb7</small></div><span class="d">—</span></div>
+        <div class="cert"><span class="n">04</span><div><h4>Artificial Intelligence</h4><small>Google Developer Student Club FSB</small></div><span class="d">MAR 2023</span></div>
+        <div class="cert"><span class="n">05</span><div><h4>Design Night — 24h Competition</h4><small>Art of Code Club</small></div><span class="d">APR 2023</span></div>
+        <div class="cert"><span class="n">06</span><div><h4>DevOps</h4><small>Art of Code Club</small></div><span class="d">FEB 2023</span></div>
       </div>
 
       <div class="langs reveal">
@@ -666,12 +691,49 @@
     </div>
   </section>
 
+  <!-- LEARNING -->
+  <section id="learning">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-num">06</div>
+        <div>
+          <div class="sec-label" data-i="learn.label">Currently learning</div>
+          <h2 data-i="learn.title">Growing towards AI engineering.</h2>
+          <p class="sec-sub" data-i="learn.sub">Where I'm investing my time now, and where I want to be.</p>
+        </div>
+      </div>
+      <div class="learn-grid">
+        <div class="learn-now reveal">
+          <div class="h-mini" data-i="learn.nowH">What I'm learning now</div>
+          <p data-i="learn.now1">Alongside my <strong>M.Sc. in Computer Science at TH Köln</strong>, I'm strengthening my foundations in software engineering, algorithms and system design.</p>
+          <p data-i="learn.now2">My current focus is <strong>Python, AI engineering and full-stack development</strong>: building AI-powered applications, working with large language models (LLMs), and integrating intelligent features into reliable, scalable software.</p>
+          <a class="learn-badge" href="certs/AIFM_Achraf_Aroua.pdf" target="_blank" rel="noopener">
+            <span class="lb-icon" aria-hidden="true">✓</span>
+            <span><b data-i="learn.badgeT">Recently earned: AI Foundation Microcredential (AIFM™)</b><small data-i="learn.badgeS">Certiprof · Nov 2026 · view certificate ↗</small></span>
+          </a>
+        </div>
+        <div class="learn-goal reveal">
+          <div class="h-mini" data-i="learn.goalH">Where I'm heading</div>
+          <p data-i="learn.goal">My long-term goal is to become an <strong>AI Engineer specialising in RAG and agentic AI systems</strong>: applications that retrieve the right information, use external tools and solve complex tasks through structured workflows.</p>
+        </div>
+      </div>
+      <div class="interests">
+        <div class="interest reveal"><span class="n">01</span><h4 data-i="learn.i1">AI Engineering</h4><p data-i="learn.i1d">LLMs, prompt engineering, embeddings and model evaluation.</p></div>
+        <div class="interest reveal"><span class="n">02</span><h4 data-i="learn.i2">RAG Systems</h4><p data-i="learn.i2d">Document processing, vector databases, semantic search and reliable retrieval pipelines.</p></div>
+        <div class="interest reveal"><span class="n">03</span><h4 data-i="learn.i3">AI Agents</h4><p data-i="learn.i3d">Tool calling, multi-step workflows and agent orchestration.</p></div>
+        <div class="interest reveal"><span class="n">04</span><h4 data-i="learn.i4">Backend &amp; Infrastructure</h4><p data-i="learn.i4d">Python APIs, databases, testing, deployment and scalable architecture.</p></div>
+        <div class="interest reveal"><span class="n">05</span><h4 data-i="learn.i5">Full-Stack Integration</h4><p data-i="learn.i5d">Complete applications that combine modern web technologies with practical AI.</p></div>
+      </div>
+      <p class="learn-close reveal" data-i="learn.close">My goal is to move beyond experimenting with AI tools — to engineer, evaluate and deploy AI systems that solve real problems.</p>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
       <div class="contact">
         <div class="reveal">
-          <div class="sec-label"><span style="color:var(--accent)">06 · </span><span data-i="c.label">Start a conversation</span></div>
+          <div class="sec-label"><span style="color:var(--accent)">07 · </span><span data-i="c.label">Start a conversation</span></div>
           <h2 class="contact-big" data-i="c.title">Have a project or a role in mind?</h2>
           <p class="sec-sub" data-i="c.sub">I'm open to working student positions, internships and junior developer roles in Germany — and to interesting freelance projects.</p>
           <div class="contact-links">
@@ -776,6 +838,21 @@
     "case.d5":"Vorgehen","case.d5t":"User Stories, UML- und Sequenzdiagramme, Backlog und Sprintplanung sowie ein Abschlussbericht.",
     "loc.remote":"Remote · Tunesien","loc.tn":"Tunesien",
     "l.ar":"Arabisch","l.fr":"Französisch","l.en":"Englisch","l.de":"Deutsch","l.native":"Muttersprache","l.fluent":"Fließend","l.good":"Gut","l.b1":"B1 zertifiziert · C1-Prüfung abgelegt",
+    "nav.learning":"Lernen",
+    "cert.aifm":"Certiprof · ID 117676034 · gültig bis 12.11.2027","cert.view":"Zertifikat ansehen (PDF)",
+    "learn.label":"Aktuell am Lernen","learn.title":"Auf dem Weg zum AI Engineering.","learn.sub":"Worin ich gerade meine Zeit investiere – und wo ich hinwill.",
+    "learn.nowH":"Was ich gerade lerne",
+    "learn.now1":"Neben meinem <strong>M.Sc. Informatik an der TH Köln</strong> vertiefe ich meine Grundlagen in Software Engineering, Algorithmen und Systemdesign.",
+    "learn.now2":"Mein aktueller Fokus liegt auf <strong>Python, AI Engineering und Full-Stack-Entwicklung</strong>: KI-gestützte Anwendungen bauen, mit Large Language Models (LLMs) arbeiten und intelligente Funktionen in zuverlässige, skalierbare Software integrieren.",
+    "learn.badgeT":"Neu erworben: AI Foundation Microcredential (AIFM™)","learn.badgeS":"Certiprof · Nov. 2026 · Zertifikat ansehen ↗",
+    "learn.goalH":"Wo ich hinwill",
+    "learn.goal":"Mein langfristiges Ziel ist es, <strong>AI Engineer mit Schwerpunkt RAG und agentenbasierte KI-Systeme</strong> zu werden: Anwendungen, die relevante Informationen finden, externe Tools nutzen und komplexe Aufgaben über strukturierte Workflows lösen.",
+    "learn.i1":"AI Engineering","learn.i1d":"LLMs, Prompt Engineering, Embeddings und Modellevaluierung.",
+    "learn.i2":"RAG-Systeme","learn.i2d":"Dokumentenverarbeitung, Vektordatenbanken, semantische Suche und zuverlässige Retrieval-Pipelines.",
+    "learn.i3":"KI-Agenten","learn.i3d":"Tool Calling, mehrstufige Workflows und Agenten-Orchestrierung.",
+    "learn.i4":"Backend & Infrastruktur","learn.i4d":"Python-APIs, Datenbanken, Testing, Deployment und skalierbare Architektur.",
+    "learn.i5":"Full-Stack-Integration","learn.i5d":"Komplette Anwendungen, die moderne Webtechnologien mit praxisnaher KI verbinden.",
+    "learn.close":"Mein Ziel: nicht nur mit KI-Tools experimentieren, sondern nützliche KI-Systeme entwickeln, evaluieren und in Betrieb bringen, die echte Probleme lösen.",
     "c.label":"Gespräch starten","c.title":"Ein Projekt oder eine Stelle im Kopf?","c.sub":"Ich bin offen für Werkstudentenstellen, Praktika und Junior-Entwicklerrollen in Deutschland — und für spannende Freelance-Projekte.",
     "c.write":"Schreib mir →","c.copy":"E-Mail kopieren","c.name":"Name *","c.email":"Deine E-Mail *","c.subject":"Betreff","c.msg":"Deine Nachricht *","c.send":"Nachricht senden →"
   };
@@ -863,13 +940,18 @@
 
     { id: "ai", chip: { en: "What AI work have you done?", de: "Welche KI-Erfahrung hast du?" },
       k: ["ai", "artificial", "machine learning", "ml", "gemini", "llm", "nlp", "ki", "künstliche", "maschinelles"],
-      en: "My main AI work is TalentSync, my final-year project: I integrated Python scripts and the Gemini API to extract data from CVs, score how well a CV matches a job description, give improvement feedback and generate personalised cover letters. I also work with scikit-learn and pandas, and I completed an AI programme with the Google Developer Student Club.",
-      de: "Meine wichtigste KI-Arbeit ist TalentSync, mein Abschlussprojekt: Ich habe Python-Skripte und die Gemini API integriert, um Daten aus Lebensläufen zu extrahieren, die Passung zu einer Stellenbeschreibung zu bewerten, Verbesserungsfeedback zu geben und personalisierte Anschreiben zu erzeugen. Außerdem arbeite ich mit scikit-learn und pandas und habe ein KI-Programm beim Google Developer Student Club absolviert." },
+      en: "My main AI work is TalentSync, my final-year project: I integrated Python scripts and the Gemini API to extract data from CVs, score how well a CV matches a job description, give improvement feedback and generate personalised cover letters. I also work with scikit-learn and pandas, I completed an AI programme with the Google Developer Student Club, and in November 2026 I earned the Certiprof AI Foundation Microcredential (AIFM™).",
+      de: "Meine wichtigste KI-Arbeit ist TalentSync, mein Abschlussprojekt: Ich habe Python-Skripte und die Gemini API integriert, um Daten aus Lebensläufen zu extrahieren, die Passung zu einer Stellenbeschreibung zu bewerten, Verbesserungsfeedback zu geben und personalisierte Anschreiben zu erzeugen. Außerdem arbeite ich mit scikit-learn und pandas habe ein KI-Programm beim Google Developer Student Club absolviert und im November 2026 das Certiprof AI Foundation Microcredential (AIFM™) erworben." },
 
     { id: "talentsync", chip: { en: "Tell me about TalentSync", de: "Erzähl von TalentSync" },
       k: ["talentsync", "talent sync", "talentsync!", "project", "projekt", "built", "pfe", "final year", "abschlussprojekt", "gebaut"],
       en: "TalentSync is an AI-powered recruitment platform I built during my final-year internship at AlloGenie. Candidates upload a CV and get a match score against a job, feedback and a generated cover letter; recruiters see applicants with their scores; admins manage the platform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. You can see real screens in the Projects section above.",
       de: "TalentSync ist eine KI-gestützte Recruiting-Plattform, die ich in meinem Abschlusspraktikum bei AlloGenie gebaut habe. Kandidaten laden ihren Lebenslauf hoch und erhalten einen Match-Score zur Stelle, Feedback und ein generiertes Anschreiben; Recruiter sehen Bewerber mit ihren Scores; Admins verwalten die Plattform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. Echte Screens findest du oben im Projektbereich." },
+
+    { id: "learning", chip: { en: "What are you learning?", de: "Was lernst du gerade?" },
+      k: ["learning", "learn", "goal", "goals", "future", "career", "long-term", "rag", "retrieval", "agent", "agents", "agentic", "vector", "embedding", "ai engineer", "lernst", "lernen", "ziel", "ziele", "zukunft", "karriere"],
+      en: "Right now I'm focusing on Python, AI engineering and full-stack development, alongside my M.Sc. at TH Köln. I recently earned the Certiprof AI Foundation Microcredential (AIFM™).\nMy long-term goal is to become an AI Engineer specialising in RAG and agentic AI systems: LLMs and embeddings, vector databases and semantic search, tool calling and multi-step agent workflows. I want to go beyond experimenting with AI tools and learn to engineer, evaluate and deploy AI systems that solve real problems.",
+      de: "Aktuell konzentriere ich mich neben meinem M.Sc. an der TH Köln auf Python, AI Engineering und Full-Stack-Entwicklung. Vor Kurzem habe ich das Certiprof AI Foundation Microcredential (AIFM™) erworben.\nMein langfristiges Ziel ist es, AI Engineer mit Schwerpunkt RAG und agentenbasierte KI-Systeme zu werden: LLMs und Embeddings, Vektordatenbanken und semantische Suche, Tool Calling und mehrstufige Agenten-Workflows. Ich möchte nicht nur mit KI-Tools experimentieren, sondern KI-Systeme entwickeln, evaluieren und in Betrieb bringen, die echte Probleme lösen." },
 
     { id: "experience", chip: { en: "What's your experience?", de: "Welche Erfahrung hast du?" },
       k: ["experience", "worked", "work history", "internship", "where was", "previous", "companies", "allogenie", "siryos", "tunisair", "erfahrung", "gearbeitet", "berufserfahrung", "firmen"],
@@ -897,9 +979,9 @@
       de: "Drei Gründe: Ich denke End-to-End, von der UI über die API bis zur Datenbank; ich habe bereits eine echte KI-Funktion umgesetzt (CV-Matching und Anschreiben mit der Gemini API), statt nur zu experimentieren; und ich bringe aus meinem ERP/SAP-Praktikum eine Enterprise-Denkweise mit – Agile/Scrum, UML und klare Dokumentation." },
 
     { id: "certs", chip: null,
-      k: ["certif", "certificate", "zertifik", "course", "kurs"],
-      en: "My certifications and programmes: telc Deutsch C1 Hochschule (exam taken Aug 2026), UX Research (Space Academy), Artificial Intelligence (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023), plus the Design Night 24-hour competition (2023).",
-      de: "Meine Zertifikate und Programme: telc Deutsch C1 Hochschule (Prüfung abgelegt Aug. 2026), UX Research (Space Academy), Künstliche Intelligenz (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023) sowie der 24-Stunden-Wettbewerb Design Night (2023)." },
+      k: ["certif", "certificate", "zertifik", "course", "kurs", "aifm", "certiprof", "microcredential"],
+      en: "My certifications and programmes: AI Foundation Microcredential (AIFM™) from Certiprof (Nov 2026, valid until Nov 2027, <a href=\"certs/AIFM_Achraf_Aroua.pdf\" target=\"_blank\" rel=\"noopener\">view certificate</a>), telc Deutsch C1 Hochschule (exam taken Aug 2026), UX Research (Space Academy), Artificial Intelligence (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023), plus the Design Night 24-hour competition (2023).",
+      de: "Meine Zertifikate und Programme: AI Foundation Microcredential (AIFM™) von Certiprof (Nov. 2026, gültig bis Nov. 2027, <a href=\"certs/AIFM_Achraf_Aroua.pdf\" target=\"_blank\" rel=\"noopener\">Zertifikat ansehen</a>), telc Deutsch C1 Hochschule (Prüfung abgelegt Aug. 2026), UX Research (Space Academy), Künstliche Intelligenz (Google Developer Student Club FSB, 2023), DevOps (Art of Code Club, 2023) sowie der 24-Stunden-Wettbewerb Design Night (2023)." },
 
     { id: "contact", chip: { en: "How can I contact you?", de: "Wie erreiche ich dich?" },
       k: ["contact", "email", "e-mail", "mail", "reach", "phone", "call", "linkedin", "github", "cv", "resume", "lebenslauf", "kontakt", "erreichen", "anrufen", "telefon"],
