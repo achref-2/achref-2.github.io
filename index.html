@@ -202,6 +202,8 @@
   .mock-note { margin-top: 14px; padding: 12px; border-radius: 10px; background: var(--accent-soft); font-size: 12.5px; color: var(--muted); }
   .mock-note b { color: var(--text); }
 
+  .p-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .p-note { margin-top: 12px; font: 12px/1.6 "JetBrains Mono", monospace; color: var(--muted); }
   .mock-cap { margin-top: 12px; font: 11.5px/1.5 "JetBrains Mono", monospace; color: var(--muted); text-align: center; }
   .case { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 16px; padding: 36px 40px; border-radius: 24px; border: 1px solid var(--line); background: var(--card); }
   .case .h-mini { margin-top: 0; margin-bottom: 18px; }
@@ -535,6 +537,11 @@
             <li data-i="proj.f7">File upload handling</li>
             <li data-i="proj.f8">UML, user stories, sprints</li>
           </ul>
+          <div class="p-links">
+            <a class="btn primary" href="https://achref-2.github.io/TalentSync-App/" target="_blank" rel="noopener" data-i="proj.demo">Live preview ↗</a>
+            <a class="btn" href="https://github.com/achref-2/TalentSync-App" target="_blank" rel="noopener" data-i="proj.code">Source code ↗</a>
+          </div>
+          <p class="p-note" data-i="proj.note">The live preview shows the frontend. Sign-in and the AI analysis need the backend API, which isn't publicly hosted yet — the screens below show them in action.</p>
         </div>
         <div class="project-visual">
           <figure style="width:100%;max-width:420px">
@@ -807,6 +814,8 @@
     "proj.label":"Hauptprojekt","proj.title":"Systeme rund um echte Workflows.","proj.sub":"Mein Abschlussprojekt: Produktdenken, Full-Stack-Architektur und KI dort, wo sie echten Mehrwert schafft.",
     "proj.badge":"ABSCHLUSSPROJEKT · EXCELLENT","proj.kicker":"KI-gestützte Recruiting-Plattform · AlloGenie",
     "proj.desc":"Eine Recruiting-Plattform, die Lebensläufe mit Stellenbeschreibungen abgleicht, Matching-Scores und Feedback liefert und personalisierte Anschreiben generiert — mit eigenen Bereichen für Kandidaten, Recruiter und Admins.",
+    "proj.demo":"Live-Vorschau ↗","proj.code":"Quellcode ↗",
+    "proj.note":"Die Live-Vorschau zeigt das Frontend. Anmeldung und KI-Analyse benötigen die Backend-API, die noch nicht öffentlich gehostet ist – die Screens unten zeigen sie in Aktion.",
     "proj.feat":"Hauptfunktionen","proj.f1":"KI-Matching Lebenslauf ↔ Stelle","proj.f2":"Extraktion von CV-Daten","proj.f3":"Anschreiben-Generierung","proj.f4":"UIs für Kandidaten / Recruiter / Admin","proj.f5":"Rollenbasierte Zugriffskontrolle","proj.f6":"JWT + Google OAuth","proj.f7":"Datei-Upload","proj.f8":"UML, User Stories, Sprints",
     "exp.label":"Berufserfahrung","exp.title":"Lernen durch Liefern in echten Teams.","exp.latest":"AKTUELLSTE",
     "exp.r1":"Abschlusspraktikant — Full-Stack- & KI-Entwickler",
@@ -944,9 +953,9 @@
       de: "Meine wichtigste KI-Arbeit ist TalentSync, mein Abschlussprojekt: Ich habe Python-Skripte und die Gemini API integriert, um Daten aus Lebensläufen zu extrahieren, die Passung zu einer Stellenbeschreibung zu bewerten, Verbesserungsfeedback zu geben und personalisierte Anschreiben zu erzeugen. Außerdem arbeite ich mit scikit-learn und pandas habe ein KI-Programm beim Google Developer Student Club absolviert und im November 2026 das Certiprof AI Foundation Microcredential (AIFM™) erworben." },
 
     { id: "talentsync", chip: { en: "Tell me about TalentSync", de: "Erzähl von TalentSync" },
-      k: ["talentsync", "talent sync", "talentsync!", "project", "projekt", "built", "pfe", "final year", "abschlussprojekt", "gebaut"],
-      en: "TalentSync is an AI-powered recruitment platform I built during my final-year internship at AlloGenie. Candidates upload a CV and get a match score against a job, feedback and a generated cover letter; recruiters see applicants with their scores; admins manage the platform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. You can see real screens in the Projects section above.",
-      de: "TalentSync ist eine KI-gestützte Recruiting-Plattform, die ich in meinem Abschlusspraktikum bei AlloGenie gebaut habe. Kandidaten laden ihren Lebenslauf hoch und erhalten einen Match-Score zur Stelle, Feedback und ein generiertes Anschreiben; Recruiter sehen Bewerber mit ihren Scores; Admins verwalten die Plattform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API. Echte Screens findest du oben im Projektbereich." },
+      k: ["talentsync", "talent sync", "talentsync!", "project", "projekt", "built", "pfe", "final year", "abschlussprojekt", "gebaut", "demo", "source code", "repo", "quellcode", "try it"],
+      en: "TalentSync is an AI-powered recruitment platform I built during my final-year internship at AlloGenie. Candidates upload a CV and get a match score against a job, feedback and a generated cover letter; recruiters see applicants with their scores; admins manage the platform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API.\nTry the <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">live frontend preview</a> or read the <a href=\"https://github.com/achref-2/TalentSync-App\" target=\"_blank\" rel=\"noopener\">source code</a>. Sign-in and the AI analysis need the backend, which isn't publicly hosted yet, so the screens in the Projects section show those parts.",
+      de: "TalentSync ist eine KI-gestützte Recruiting-Plattform, die ich in meinem Abschlusspraktikum bei AlloGenie gebaut habe. Kandidaten laden ihren Lebenslauf hoch und erhalten einen Match-Score zur Stelle, Feedback und ein generiertes Anschreiben; Recruiter sehen Bewerber mit ihren Scores; Admins verwalten die Plattform.\nStack: React + Vite + Tailwind, Node.js/Express, MongoDB, JWT + Google OAuth, Python + Gemini API.\nProbier die <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">Live-Vorschau des Frontends</a> oder schau dir den <a href=\"https://github.com/achref-2/TalentSync-App\" target=\"_blank\" rel=\"noopener\">Quellcode</a> an. Anmeldung und KI-Analyse benötigen das Backend, das noch nicht öffentlich gehostet ist – die Screens im Projektbereich zeigen diese Teile." },
 
     { id: "learning", chip: { en: "What are you learning?", de: "Was lernst du gerade?" },
       k: ["learning", "learn", "goal", "goals", "future", "career", "long-term", "rag", "retrieval", "agent", "agents", "agentic", "vector", "embedding", "ai engineer", "lernst", "lernen", "ziel", "ziele", "zukunft", "karriere"],
