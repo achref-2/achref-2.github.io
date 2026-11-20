@@ -363,6 +363,50 @@ button { font: inherit; color: inherit; cursor: pointer; }
     <div class="wrap">
       <h2 class="h2" id="work-h" data-i="work.h">Selected work</h2>
 
+      <article class="proj flip">
+        <div class="proj-text">
+          <p class="meta" data-i="al.meta">Personal project, 2026</p>
+          <h3 class="h3">Amt-Lotse</h3>
+          <p class="body" data-i="al.desc">Explains letters from German offices, like the Jobcenter, the Finanzamt or the Krankenkasse, from a phone photo. It answers in English, French, Arabic or simple German and reads the result aloud. It is built for new immigrants, blind people and older people, and it runs completely on the user's own computer, so no letter leaves it.</p>
+          <dl class="facts">
+            <dt data-i="f.how">How it works</dt>
+            <dd data-i="al.how">A vision model reads the photo and a small local model extracts the facts as typed JSON. Rules then check what the models get wrong: the letter's own wording decides who pays, a price per kWh is not a bill, and numbers a reply invents become placeholders. The page starts with one sentence built only from checked facts: what to do, and by when.</dd>
+            <dt data-i="f.tested">Tested</dt>
+            <dd data-i="al.tested">12 hand-labelled letters with traps, 36 of 36 fields correct. A rule-based check of the explanation and reply texts, and a contrast check that caught unreadable text before release.</dd>
+            <dt data-i="f.stack">Built with</dt>
+            <dd data-i="al.stack">Python, Ollama with Qwen2.5 and Qwen2.5-VL, Pydantic, Gradio, Piper text-to-speech, MCP server, Docker</dd>
+          </dl>
+          <div class="links">
+            <a class="btn" href="https://github.com/achref-2/amt-lotse" target="_blank" rel="noopener" data-i="f.code">View source</a>
+          </div>
+          <p class="note" data-i="al.note">All letters in the screenshots are made up for testing.</p>
+        </div>
+        <figure class="proj-media">
+          <button class="zoom frame tall" type="button" data-full="shots/amt-result-en.webp">
+            <img src="shots/amt-result-en.webp" width="560" height="550" loading="lazy" alt="Amt-Lotse result for a test debt reminder: a box saying 14 days left, pay 56,13 euros by Friday 4 December 2026, buttons to listen again and add the deadline to the calendar, an audio player, and the sender, deadline, amount and reference number">
+          </button>
+          <figcaption class="cap" data-i="al.cap">The result for a test debt reminder: first what to do and by when, then the audio and the details.</figcaption>
+        </figure>
+        <div class="strip">
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/amt-upload.webp"><img src="shots/amt-upload.webp" width="600" height="609" loading="lazy" alt="Amt-Lotse start page with large text: choose the language, then add the letter"></button>
+            <figcaption class="cap" data-i="al.s1">Three steps, large text</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/amt-contrast.webp"><img src="shots/amt-contrast.webp" width="600" height="600" loading="lazy" alt="Amt-Lotse in high-contrast mode: yellow text on black"></button>
+            <figcaption class="cap" data-i="al.s2">High-contrast mode</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/amt-mcp.webp"><img src="shots/amt-mcp.webp" width="494" height="688" loading="lazy" alt="MCP Inspector listing the six Amt-Lotse tools: create_calendar_reminder, draft_reply, explain_letter, get_letter_facts, list_letters, read_letter_text"></button>
+            <figcaption class="cap" data-i="al.s3">Six tools for AI assistants (MCP)</figcaption>
+          </figure>
+          <figure>
+            <button class="zoom frame" type="button" data-full="shots/amt-letter-photo.webp"><img src="shots/amt-letter-photo.webp" width="700" height="921" loading="lazy" alt="A tilted phone photo of a made-up Jobcenter letter, used as test input"></button>
+            <figcaption class="cap" data-i="al.s4">Input: a phone photo</figcaption>
+          </figure>
+        </div>
+      </article>
+
       <article class="proj">
         <div class="proj-text">
           <p class="meta" data-i="ts.meta">Final-year project at AlloGenie, 2025</p>
@@ -627,6 +671,14 @@ const DE = {
   "hero.mail": "E-Mail schreiben", "hero.cv": "Lebenslauf herunterladen",
   "work.h": "Ausgewählte Projekte",
   "f.part": "Mein Teil", "f.stack": "Technik", "f.result": "Ergebnis", "f.how": "So funktioniert es", "f.tested": "Getestet", "f.fixed": "Gelöste Probleme", "f.next": "Als Nächstes", "f.code": "Quellcode ansehen",
+  "al.meta": "Eigenes Projekt, 2026",
+  "al.desc": "Erklärt Briefe von Ämtern wie Jobcenter, Finanzamt oder Krankenkasse anhand eines Handyfotos. Die Antwort kommt auf Englisch, Französisch, Arabisch oder in einfachem Deutsch und wird vorgelesen. Gebaut für Neuzugewanderte, blinde und ältere Menschen. Alles läuft auf dem eigenen Computer, kein Brief verlässt ihn.",
+  "al.how": "Ein Vision-Modell liest das Foto, ein kleines lokales Modell zieht die Fakten als typisiertes JSON heraus. Danach prüfen Regeln, was die Modelle falsch machen: Wer zahlt, entscheidet der Wortlaut des Briefs, ein Preis pro kWh ist keine Rechnung, und Zahlen, die eine Antwort erfindet, werden zu Platzhaltern. Die Seite beginnt mit einem Satz, der nur aus geprüften Fakten besteht: was zu tun ist und bis wann.",
+  "al.tested": "12 handbeschriftete Briefe mit Fallen, 36 von 36 Feldern korrekt. Eine regelbasierte Prüfung der Erklärungs- und Antworttexte und ein Kontrast-Check, der unlesbaren Text vor dem Release gefunden hat.",
+  "al.stack": "Python, Ollama mit Qwen2.5 und Qwen2.5-VL, Pydantic, Gradio, Piper Text-to-Speech, MCP-Server, Docker",
+  "al.note": "Alle Briefe auf den Screenshots sind zum Testen erfunden.",
+  "al.cap": "Das Ergebnis für eine Test-Mahnung: zuerst, was zu tun ist und bis wann, dann Audio und Details.",
+  "al.s1": "Drei Schritte, große Schrift", "al.s2": "Hoher Kontrast", "al.s3": "Sechs Tools für KI-Assistenten (MCP)", "al.s4": "Eingabe: ein Handyfoto",
   "ts.meta": "Abschlussprojekt bei AlloGenie, 2025",
   "ts.desc": "Eine Recruiting-Plattform, die einen Lebenslauf liest, ihn mit einer Stellenbeschreibung vergleicht und einen Match-Score, konkretes Feedback und einen Entwurf für das Anschreiben liefert. Kandidaten, Recruiter und Admins haben jeweils einen eigenen Bereich.",
   "ts.part": "Alles, von Anfang bis Ende: die React-Oberfläche für alle drei Rollen, eine API mit Express und MongoDB inklusive JWT, Google-Login, Datei-Uploads und rollenbasierter Zugriffskontrolle, und die Python-Skripte, die mit der Gemini API Lebenslaufdaten auslesen und die Passung bewerten. Dazu User Stories, UML-Diagramme und der Projektbericht.",
