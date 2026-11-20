@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amt-Lotse demo · Achraf Aroua</title>
+<meta name="description" content="View-only demo of Amt-Lotse: real results the tool produced for made-up German official letters.">
+<link rel="canonical" href="https://achref-2.github.io/amt-lotse/">
+<meta name="theme-color" content="#f2f3f5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23000'/%3E%3Cpath d='M16 16h11' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="../fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.dataset.theme = t;
+})();
+</script>
+<style>
+@font-face { font-family: "Archivo"; src: url("../fonts/archivo.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+:root {
+  --free: #f2f3f5; --paper: #fff; --line: #c9ced4; --ink: #000; --ink-2: #33383e; --muted: #5b6168;
+  --scan: #2436f0; --ok: #0f7a3d; --warn-bg: #fff4d6; --warn-ink: #5c3d00; --todo-bg: #e8f5ec; --todo-line: #0f7a3d;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --free: #0f1114; --paper: #181b20; --line: #353c44; --ink: #f2f3f5; --ink-2: #c9ced4; --muted: #9aa1a9;
+  --scan: #8b97ff; --ok: #3ccf7a; --warn-bg: #2e2510; --warn-ink: #f3d99a; --todo-bg: #12261a; --todo-line: #3ccf7a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--free); color: var(--ink); font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: 17px; line-height: 1.55; }
+a { color: var(--scan); text-underline-offset: 3px; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--scan); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.top { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.top .back { font-weight: 650; text-decoration: none; color: var(--ink); margin-right: auto; }
+.top .back:hover { color: var(--scan); }
+.pill { border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600; }
+.pill:hover { border-color: var(--ink); }
+h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.05; font-stretch: 115%; letter-spacing: -.02em; margin: 40px 0 10px; }
+.lede { color: var(--ink-2); max-width: 760px; margin: 0 0 18px; }
+.notice { display: flex; gap: 10px; background: var(--warn-bg); color: var(--warn-ink); border-radius: 10px; padding: 12px 16px; max-width: 900px; font-size: 15.5px; }
+.notice b { white-space: nowrap; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 18px; }
+.tabs button { border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 9px 18px; font-weight: 600; font-size: 15.5px; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--free); border-color: var(--ink); }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; padding-bottom: 60px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+.card + .card { margin-top: 16px; }
+.lab { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.letter { position: sticky; top: 16px; }
+.letter pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); max-height: 75vh; overflow: auto; }
+.todo { background: var(--todo-bg); border: 2px solid var(--todo-line); border-radius: 12px; padding: 18px 22px; font-size: clamp(21px, 2.6vw, 27px); line-height: 1.35; font-weight: 500; }
+.todo b { font-weight: 800; }
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; margin: 0; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.expl { margin: 0; font-size: 18px; }
+audio { width: 100%; margin-top: 4px; }
+.small { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+.reply pre { margin: 0; white-space: pre-wrap; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); }
+.reply .ph { background: var(--warn-bg); color: var(--warn-ink); border-radius: 4px; padding: 0 3px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.foot { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--muted); font-size: 14.5px; }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .letter { position: static; } .letter pre { max-height: 340px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="../#work" id="t-back">← Achraf Aroua</a>
+    <button class="pill" id="theme" type="button" aria-pressed="false">Dark</button>
+    <button class="pill" id="lang" type="button" lang="de">Deutsch</button>
+  </header>
+
+  <main>
+    <h1>Amt-Lotse</h1>
+    <p class="lede" id="t-lede">Pick a letter and see what Amt-Lotse shows for it: first what to do and by when, then the facts it checked, a plain explanation, the read-aloud audio and a reply draft.</p>
+    <p class="notice" role="note"><b id="t-vo">View only.</b> <span id="t-notice">These are real, unedited results that Amt-Lotse produced on my computer. All letters are made up for testing. The AI does not run on this page: the real tool runs locally, so no letter ever leaves the user's computer.</span></p>
+
+    <div class="tabs" role="tablist" id="tabs" aria-label="Test letters"></div>
+
+    <div class="grid">
+      <section class="card letter" aria-labelledby="h-letter">
+        <h2 class="lab" id="h-letter">The letter (German)</h2>
+        <pre id="letter" lang="de" tabindex="0"></pre>
+      </section>
+
+      <section aria-live="polite">
+        <div class="card" style="padding:0;border:0;background:none">
+          <h2 class="lab" id="h-todo">What to do</h2>
+          <div class="todo" id="todo"></div>
+        </div>
+        <div class="card" id="audio-card">
+          <h2 class="lab" id="h-audio">Read aloud</h2>
+          <audio id="audio" controls preload="none"></audio>
+          <p class="small" id="audio-note"></p>
+        </div>
+        <div class="card">
+          <h2 class="lab" id="h-facts">Checked facts</h2>
+          <dl class="facts">
+            <dt id="f-from">From</dt><dd id="from"></dd>
+            <dt id="f-dl">Deadline</dt><dd id="deadline"></dd>
+            <dt id="f-amt">Amount to pay</dt><dd id="amount"></dd>
+            <dt id="f-ref">Reference</dt><dd id="ref"></dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h2 class="lab" id="h-expl">Explanation</h2>
+          <p class="expl" id="expl" lang="en"></p>
+          <p class="small" id="expl-note">Shown in English here. The tool also answers in French, Arabic and simple German.</p>
+        </div>
+        <div class="card reply">
+          <div class="row"><h2 class="lab" id="h-reply">Reply draft</h2><button class="pill" id="copy" type="button">Copy</button></div>
+          <pre id="reply" lang="de"></pre>
+          <p class="small" id="reply-note">Unedited model output. Anything in [brackets] is a gap for the user to fill: numbers the model would have invented become placeholders.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <span id="t-foot">Built by Achraf Aroua.</span>
+    <a href="https://github.com/achref-2/amt-lotse" target="_blank" rel="noopener" id="t-src">Source code and install guide on GitHub</a>
+  </footer>
+</div>
+
+<script>
+const LETTERS = [{"id": "mahnung_01", "letter": "[TESTDATEN – fiktives Musterschreiben für das Projekt amt-lotse, kein echtes Dokument]\n\nMuster Mobilfunk GmbH\nForderungsmanagement\nFunkstraße 3, 40210 Musterstadt\n\nHerrn Max Beispiel\nTeststraße 12\n52062 Musterstadt\n\nMusterstadt, 20.11.2026\n\nKundennummer: K-55102\nRechnungsnummer: RE-2026-08812\n\n2. Mahnung\n\nSehr geehrter Herr Beispiel,\n\ntrotz unserer Zahlungserinnerung vom 30.10.2026 ist die Rechnung vom\n01.10.2026 noch nicht vollständig beglichen.\n\n    Offene Rechnung                              49,90 €\n    Mahngebühr                                    5,00 €\n    Verzugszinsen                                 1,23 €\n    -------------------------------------------------\n    Gesamtbetrag                                 56,13 €\n\nBitte überweisen Sie den Gesamtbetrag von 56,13 € bis zum 04.12.2026.\nGeben Sie als Verwendungszweck bitte Ihre Rechnungsnummer RE-2026-08812 an.\n\nGeht die Zahlung nicht fristgerecht ein, übergeben wir die Forderung an\nein Inkassounternehmen. Dadurch entstehen Ihnen weitere Kosten.\n\nMit freundlichen Grüßen\nMuster Mobilfunk GmbH", "explanation": "The letter is from Muster Mobilfunk GmbH, a company in Musterstadt, to Herr Max Beispiel. It is a second reminder about an unpaid invoice from October 1, 2026, totaling 56.13 €. Herr Beispiel needs to pay this amount by December 4, 2026, using the invoice number RE-2026-08812 as the payment reference. If the payment is not received by the deadline, the company will hand over the debt to an enforcement agency, which may result in additional costs.", "reply": "[Ihr Vorname Nachname]\n[Ihre Straße und Hausnummer]\n[PLZ Ort]\n\nMuster Mobilfunk GmbH\n[Adresse aus dem Briefkopf]\n\n[Ort], 20.11.2026\n\nIhr Zeichen / Nummer: RE-2026-08812\nIhr Schreiben vom 20.11.2026\n\nAntrag auf Ratenzahlung\n\nSehr geehrte Damen und Herren,\n\nwegen meiner aktuellen finanziellen Situation ist es mir leider nicht möglich, den Gesamtbetrag von 56,13 € in einem einzigen Überweisung zu zahlen. Ich würde es sehr schätzen, wenn wir den Betrag in drei Monatsraten von [Betrag] € anfangs [Datum] begleichen könnten.\n\nMit freundlichen Grüßen\n\n[Unterschrift]\n[Ihr Vorname Nachname]", "intent": "installments", "facts": {"deadline": "2026-12-04", "amount_eur": "56.13", "reference_number": "RE-2026-08812"}, "sender": "Muster Mobilfunk GmbH", "tab": {"en": "Debt reminder", "de": "Mahnung"}, "audio": {"src": "audio/mahnung_en.mp3", "lang": "en"}}, {"id": "jobcenter_01", "letter": "[TESTDATEN – fiktives Musterschreiben für das Projekt amt-lotse, kein echtes Dokument]\n\nJobcenter Musterstadt\nArbeitsweg 7, 52066 Musterstadt\n\nHerrn Max Beispiel\nTeststraße 12\n52062 Musterstadt\n\nMusterstadt, 20.11.2026\n\nBG-Nummer: 12345BG0098765\n\nEinladung zu einem persönlichen Gespräch\n\nSehr geehrter Herr Beispiel,\n\nSie beziehen seit dem 01.07.2026 Bürgergeld. Ihr aktueller\nBewilligungszeitraum läuft vom 01.07.2026 bis 30.06.2027.\n\nBitte kommen Sie am 08.12.2026 um 10:30 Uhr in das Jobcenter Musterstadt,\nZimmer 214, um mit Ihrer Ansprechpartnerin über Ihre berufliche Situation\nzu sprechen.\n\nBitte bringen Sie folgende Unterlagen mit:\n- Ihren Personalausweis oder Reisepass\n- Ihren aktuellen Lebenslauf\n\nKommen Sie ohne wichtigen Grund nicht zu diesem Termin, kann Ihr\nBürgergeld gemindert werden. Ist Ihnen die Wahrnehmung des Termins nicht\nmöglich, teilen Sie uns dies bitte vorher mit.\n\nMit freundlichen Grüßen\nIhr Jobcenter Musterstadt", "explanation": "The letter is from the Jobcenter Musterstadt and invites Herr Max Beispiel to a personal meeting. He needs to come to the Jobcenter Musterstadt, Zimmer 214, on December 8, 2026, at 10:30 AM, to discuss his employment situation. He should bring his identification and a current resume. If he misses this appointment without a valid reason, his Bürgergeld (social assistance) may be reduced.", "reply": "[Ihr Vorname Nachname]\n[Ihre Straße und Hausnummer]\n[PLZ Ort]\n\nJobcenter Musterstadt\n[Adresse aus dem Briefkopf]\n\n[Ort], 20.11.2026\n\nIhr Zeichen / Nummer: 12345BG0098765\nIhr Schreiben vom 20.11.2026\n\nBitte um Fristverlängerung\n\nSehr geehrte Damen und Herren,\n\nleider bin ich nicht in der Lage, am 08.12.2026 zu dem geplanten persönlichen Gespräch in das Jobcenter Musterstadt zu kommen. Könnten Sie mir bitte ein neues Termindatum anbieten? Ich würde mich sehr freuen, wenn wir den Termin verschieben könnten.\n\nMit freundlichen Grüßen\n\n[Unterschrift]\n[Ihr Vorname Nachname]", "intent": "more-time", "facts": {"deadline": "2026-12-08", "amount_eur": null, "reference_number": "12345BG0098765"}, "sender": "Jobcenter Musterstadt", "tab": {"en": "Jobcenter invitation", "de": "Einladung Jobcenter"}, "audio": {"src": "audio/jobcenter_ar.mp3", "lang": "ar"}}, {"id": "auslaenderbehoerde_01", "letter": "[TESTDATEN – fiktives Musterschreiben für das Projekt amt-lotse, kein echtes Dokument]\n\nStadt Musterstadt\nAusländerbehörde\nRathausplatz 1, 52062 Musterstadt\n\nHerrn Max Beispiel\nTeststraße 12\n52062 Musterstadt\n\nMusterstadt, 19.11.2026\n\nAktenzeichen: 32.1-AE-2026-0457\n\nAblauf Ihres Aufenthaltstitels\n\nSehr geehrter Herr Beispiel,\n\nIhr Aufenthaltstitel zum Zweck des Studiums ist gültig bis zum 28.02.2027.\n\nWenn Sie Ihren Aufenthalt in Deutschland fortsetzen möchten, beantragen\nSie die Verlängerung bitte spätestens bis zum 31.01.2027 über unser\nOnline-Portal. Laden Sie dabei folgende Nachweise hoch:\n\n- aktuelle Immatrikulationsbescheinigung\n- Nachweis über die Sicherung des Lebensunterhalts\n- Nachweis über eine bestehende Krankenversicherung\n\nFür die Verlängerung wird eine Gebühr in Höhe von 93,00 € erhoben. Die\nGebühr ist bei Antragstellung zu zahlen.\n\nMit freundlichen Grüßen\nIm Auftrag\nIhre Ausländerbehörde Musterstadt", "explanation": "The letter is from the Musterstadt Foreign Office to Mr. Max Beispiel. It informs him that his study residence permit is valid until February 28, 2027. To extend his stay, he must apply online by January 31, 2027, and upload the required documents. He also needs to pay a fee of 93.00 € when submitting his application.", "reply": "[Ihr Vorname Nachname]\n[Ihre Straße und Hausnummer]\n[PLZ Ort]\n\nStadt Musterstadt, Ausländerbehörde\n[Adresse aus dem Briefkopf]\n\n[Ort], 20.11.2026\n\nIhr Zeichen / Nummer: 32.1-AE-2026-0457\nIhr Schreiben vom 19.11.2026\n\nAntrag auf Ratenzahlung\n\nSehr geehrte Damen und Herren,\n\nleider ist es mir derzeit nicht möglich, die Gebühr in einem einzigen Betrag zu zahlen. Ich würde Sie bitten, mir die Möglichkeit zu geben, den Betrag in [Betrag] Euro monatlich zu zahlen, ab [Datum].\n\nMit freundlichen Grüßen\n\n[Unterschrift]\n[Ihr Vorname Nachname]", "intent": "installments", "facts": {"deadline": "2027-01-31", "amount_eur": "93.00", "reference_number": "32.1-AE-2026-0457"}, "sender": "Stadt Musterstadt, Ausländerbehörde", "tab": {"en": "Residence permit", "de": "Aufenthaltstitel"}, "audio": null}, {"id": "finanzamt_01", "letter": "Finanzamt Musterstadt\nSteuerstraße 1, 52070 Musterstadt\n\nHerrn Max Beispiel\nTeststraße 12\n52062 Musterstadt\n\nMusterstadt, 20.11.2026\n\nSteuernummer: 201/5555/1234\n\nEinkommensteuererklärung 2025 – Anforderung von Unterlagen\n\nSehr geehrter Herr Beispiel,\n\nzur Bearbeitung Ihrer am 02.09.2026 eingereichten Einkommensteuererklärung\nfür das Jahr 2025 benötigen wir noch folgende Unterlagen:\n\n- Immatrikulationsbescheinigung für das Wintersemester 2025/26\n- Nachweise über die geltend gemachten Fahrtkosten\n\nBitte reichen Sie die Unterlagen bis zum 10.01.2027 ein.\nGeben Sie dabei bitte Ihre Steuernummer an.\n\nMit freundlichen Grüßen\nIhr Finanzamt Musterstadt", "explanation": "The letter is from the Tax Office in Musterstadt to Mr. Max Beispiel. It requests additional documents for his 2025 tax declaration, including his matriculation certificate for the winter semester 2025/26 and proof of commuting expenses. He must submit these documents by January 10, 2027. Failure to do so may result in further correspondence or delays in processing his tax declaration.", "reply": "[Ihr Vorname Nachname]\n[Ihre Straße und Hausnummer]\n[PLZ Ort]\n\nFinanzamt Musterstadt\n[Adresse aus dem Briefkopf]\n\n[Ort], 20.11.2026\n\nIhr Zeichen / Nummer: 201/5555/1234\nIhr Schreiben vom 20.11.2026\n\nBitte um Fristverlängerung\n\nSehr geehrte Damen und Herren,\n\nich bitte um Verständnis, da ich leider bis [neues Datum] keine vollständigen Unterlagen vorliegen habe. Könnten Sie mir daher bis zu diesem neuen Termin die Bearbeitung Ihrer Einkommensteuererklärung für das Jahr 2025 verlängern?\n\nIhr [Name]\n\nMit freundlichen Grüßen\n\n[Unterschrift]\n[Ihr Vorname Nachname]", "intent": "more-time", "facts": {"deadline": "2027-01-10", "amount_eur": null, "reference_number": "201/5555/1234"}, "sender": "Finanzamt Musterstadt", "tab": {"en": "Tax office", "de": "Finanzamt"}, "audio": null}];
+
+const T = {
+  en: {
+    other: "Deutsch", back: "← Achraf Aroua",
+    lede: "Pick a letter and see what Amt-Lotse shows for it: first what to do and by when, then the facts it checked, a plain explanation, the read-aloud audio and a reply draft.",
+    vo: "View only.",
+    notice: "These are real, unedited results that Amt-Lotse produced on my computer. All letters are made up for testing. The AI does not run on this page: the real tool runs locally, so no letter ever leaves the user's computer.",
+    tabs: "Test letters", letter: "The letter (German)", todo: "What to do", audio: "Read aloud", facts: "Checked facts",
+    from: "From", dl: "Deadline", amt: "Amount to pay", ref: "Reference", none: "none",
+    expl: "Explanation", explNote: "Shown in English here. The tool also answers in French, Arabic and simple German.",
+    reply: "Reply draft", copy: "Copy", copied: "Copied",
+    replyNote: "Unedited model output. Anything in [brackets] is a gap for the user to fill: numbers the model would have invented become placeholders.",
+    audioNote: { en: "Recorded in English with Piper, an offline voice.", ar: "Recorded in Arabic with Piper, an offline voice, for a user who reads Arabic best." },
+    noAudio: "No recording saved for this letter. In the tool, every result can be read aloud.",
+    intent: { installments: "Asking to pay in instalments", "more-time": "Asking for more time", question: "Asking a question", reschedule: "Asking for a new appointment" },
+    pay: (a, d) => `Pay <b>${a}</b> by <b>${d}</b>.`, date: d => `Important date: <b>${d}</b>. Read below what to do.`,
+    months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    fmt: (d, m, y, M) => `${d} ${M[m]} ${y}`,
+    foot: "Built by Achraf Aroua.", src: "Source code and install guide on GitHub",
+    dark: "Dark", light: "Light"
+  },
+  de: {
+    other: "English", back: "← Achraf Aroua",
+    lede: "Wählen Sie einen Brief und sehen Sie, was Amt-Lotse dazu zeigt: zuerst, was zu tun ist und bis wann, dann die geprüften Fakten, eine einfache Erklärung, das Vorlese-Audio und einen Antwortentwurf.",
+    vo: "Nur zum Ansehen.",
+    notice: "Das sind echte, unbearbeitete Ergebnisse, die Amt-Lotse auf meinem Computer erzeugt hat. Alle Briefe sind zum Testen erfunden. Die KI läuft nicht auf dieser Seite: Das echte Tool läuft lokal, kein Brief verlässt den Computer.",
+    tabs: "Testbriefe", letter: "Der Brief (Deutsch)", todo: "Was zu tun ist", audio: "Vorlesen", facts: "Geprüfte Fakten",
+    from: "Von", dl: "Frist", amt: "Zu zahlen", ref: "Zeichen", none: "keine",
+    expl: "Erklärung", explNote: "Hier auf Englisch. Das Tool antwortet auch auf Französisch, Arabisch und in einfachem Deutsch.",
+    reply: "Antwortentwurf", copy: "Kopieren", copied: "Kopiert",
+    replyNote: "Unbearbeitete Modellausgabe. Alles in [Klammern] füllt die Person selbst aus: Zahlen, die das Modell erfinden würde, werden zu Platzhaltern.",
+    audioNote: { en: "Auf Englisch aufgenommen mit Piper, einer Offline-Stimme.", ar: "Auf Arabisch aufgenommen mit Piper, einer Offline-Stimme, für Menschen, die am besten Arabisch lesen." },
+    noAudio: "Für diesen Brief ist keine Aufnahme gespeichert. Im Tool kann jedes Ergebnis vorgelesen werden.",
+    intent: { installments: "Bitte um Ratenzahlung", "more-time": "Bitte um mehr Zeit", question: "Rückfrage", reschedule: "Bitte um neuen Termin" },
+    pay: (a, d) => `Zahlen Sie <b>${a}</b> bis <b>${d}</b>.`, date: d => `Wichtiges Datum: <b>${d}</b>. Was zu tun ist, steht unten.`,
+    months: ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+    fmt: (d, m, y, M) => `${d}. ${M[m]} ${y}`,
+    foot: "Gebaut von Achraf Aroua.", src: "Quellcode und Installationsanleitung auf GitHub",
+    dark: "Dunkel", light: "Hell"
+  }
+};
+
+const $ = s => document.querySelector(s);
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+let lang = store.get("lang") || ((navigator.language || "").toLowerCase().startsWith("de") ? "de" : "en");
+let current = 0;
+
+const euro = s => Number(s).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+function sayDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number), t = T[lang];
+  return t.fmt(d, m - 1, y, t.months);
+}
+const esc = s => s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+function renderTabs() {
+  const box = $("#tabs");
+  box.setAttribute("aria-label", T[lang].tabs);
+  box.innerHTML = "";
+  LETTERS.forEach((l, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.role = "tab"; b.id = "tab-" + i;
+    b.textContent = l.tab[lang];
+    b.setAttribute("aria-selected", String(i === current));
+    b.tabIndex = i === current ? 0 : -1;
+    b.addEventListener("click", () => { current = i; render(); });
+    b.addEventListener("keydown", e => {
+      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      current = (current + step + LETTERS.length) % LETTERS.length;
+      render(); $("#tab-" + current).focus();
+    });
+    box.appendChild(b);
+  });
+}
+
+function render() {
+  const t = T[lang], l = LETTERS[current], f = l.facts;
+  renderTabs();
+  $("#letter").textContent = l.letter;
+  // the to-do sentence is built from checked facts only, like pipeline.todo_box
+  $("#todo").innerHTML = f.amount_eur && f.deadline ? t.pay(euro(f.amount_eur), sayDate(f.deadline)) : t.date(sayDate(f.deadline));
+  $("#from").textContent = l.sender;
+  $("#deadline").textContent = f.deadline ? sayDate(f.deadline) : t.none;
+  $("#amount").textContent = f.amount_eur ? euro(f.amount_eur) : t.none;
+  $("#ref").textContent = f.reference_number || t.none;
+  $("#expl").textContent = l.explanation;
+  $("#reply").innerHTML = esc(l.reply).replace(/\[[^\]\n]+\]/g, m => `<span class="ph">${m}</span>`);
+  $("#h-reply").textContent = `${t.reply} · ${t.intent[l.intent] || l.intent}`;
+  const a = $("#audio");
+  if (l.audio) {
+    if (a.getAttribute("src") !== l.audio.src) { a.pause(); a.setAttribute("src", l.audio.src); }
+    a.hidden = false; $("#audio-note").textContent = t.audioNote[l.audio.lang];
+  } else {
+    a.pause(); a.removeAttribute("src"); a.load(); a.hidden = true; $("#audio-note").textContent = t.noAudio;
+  }
+}
+
+function setLang(l) {
+  lang = l; store.set("lang", l);
+  const t = T[l];
+  document.documentElement.lang = l;
+  $("#lang").textContent = t.other; $("#lang").lang = l === "de" ? "en" : "de";
+  for (const [id, key] of [["t-lede","lede"],["t-vo","vo"],["t-notice","notice"],["h-letter","letter"],["h-todo","todo"],["h-audio","audio"],["h-facts","facts"],
+    ["f-from","from"],["f-dl","dl"],["f-amt","amt"],["f-ref","ref"],["h-expl","expl"],["expl-note","explNote"],["copy","copy"],["reply-note","replyNote"],["t-foot","foot"],["t-src","src"]])
+    $("#" + id).textContent = t[key];
+  showTheme(); render();
+}
+
+function showTheme() {
+  const dark = document.documentElement.dataset.theme === "dark";
+  $("#theme").textContent = dark ? T[lang].light : T[lang].dark;
+  $("#theme").setAttribute("aria-pressed", String(dark));
+  document.querySelector('meta[name="theme-color"]').content = dark ? "#0f1114" : "#f2f3f5";
+}
+$("#theme").addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next; store.set("theme", next); showTheme();
+});
+$("#lang").addEventListener("click", () => setLang(lang === "de" ? "en" : "de"));
+$("#copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(LETTERS[current].reply); $("#copy").textContent = T[lang].copied;
+        setTimeout(() => { $("#copy").textContent = T[lang].copy; }, 1500); } catch (e) {}
+});
+setLang(lang);
+</script>
+</body>
+</html>

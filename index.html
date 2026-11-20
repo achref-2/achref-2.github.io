@@ -38,7 +38,15 @@
   #name { position: static; width: auto; height: auto; clip: auto; overflow: visible; white-space: normal; max-width: var(--wrap); margin: 0 auto; padding: 72px var(--gutter) 0; font-stretch: 125%; font-weight: 800; font-size: clamp(44px, 8vw, 110px); line-height: 1; letter-spacing: -.02em; }
   .map, .statusbar { display: none; }
 </style></noscript>
-<script>document.documentElement.classList.add("js")</script>
+<script>
+document.documentElement.classList.add("js");
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.dataset.theme = t;
+})();
+</script>
 <style>
 @font-face {
   font-family: "Archivo";
@@ -66,6 +74,24 @@
   --frontier: #12a150;
   --wrap: 1240px;
   --gutter: clamp(20px, 4vw, 40px);
+  --top-bg: rgba(242, 243, 245, .92);
+  --shadow: 0 18px 50px rgba(0, 0, 0, .18);
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --free: #0f1114;
+  --paper: #181b20;
+  --unknown: #2a2f36;
+  --bar: #1b1f24;
+  --line: #353c44;
+  --ink: #f2f3f5;
+  --ink-2: #c9ced4;
+  --muted: #9aa1a9;
+  --scan: #8b97ff;
+  --frontier: #3ccf7a;
+  --top-bg: rgba(15, 17, 20, .9);
+  --shadow: 0 18px 50px rgba(0, 0, 0, .55);
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -94,7 +120,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Header */
 .top {
   position: sticky; top: 0; z-index: 40;
-  background: rgba(242, 243, 245, .92);
+  background: var(--top-bg);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color .2s;
@@ -108,6 +134,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .top-actions { display: flex; align-items: center; gap: 10px; }
 .lang { background: none; border: 0; font-size: 15px; color: var(--ink-2); padding: 6px 4px; }
 .lang:hover { color: var(--scan); }
+.theme { display: inline-flex; align-items: center; gap: 6px; }
+.theme svg { width: 18px; height: 18px; }
 
 /* Buttons */
 .btn {
@@ -235,7 +263,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* About */
 .about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px clamp(32px, 6vw, 96px); align-items: start; }
-.portrait { border-radius: 8px; overflow: hidden; background: #e9eaeb; max-width: 420px; }
+.portrait { border-radius: 8px; overflow: hidden; background: var(--unknown); max-width: 420px; }
 .about .body { font-size: 18px; }
 .kit { margin-top: 48px; }
 .kit h3, .sub-h { font-stretch: 112%; font-weight: 700; font-size: 22px; margin-bottom: 14px; }
@@ -275,6 +303,40 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes lb-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
 
 /* Responsive */
+
+/* "Ask Achraf": prepared answers for recruiters, no AI, nothing leaves the page */
+.chat-fab { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--paper); color: var(--ink); font-weight: 650; font-size: 15px; box-shadow: var(--shadow); transition: transform .2s; }
+.chat-fab:hover { transform: translateY(-2px); }
+.chat-fab img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.chat-fab .on { position: relative; }
+.chat-fab .on::after { content: ""; position: absolute; left: -16px; top: -14px; width: 10px; height: 10px; border-radius: 50%; background: var(--frontier); border: 2px solid var(--paper); }
+.chat { position: fixed; right: 20px; bottom: 82px; z-index: 61; width: 390px; max-width: calc(100vw - 32px); height: 580px; max-height: calc(100vh - 110px); display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
+.chat[hidden] { display: none; }
+.chat-head { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--free); }
+.chat-head img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+.chat-head div { flex: 1; line-height: 1.3; }
+.chat-head b { font-stretch: 112%; }
+.chat-head small { display: block; color: var(--muted); font-size: 12.5px; }
+.chat-x { background: none; border: 0; color: var(--ink-2); font-size: 22px; line-height: 1; padding: 6px 8px; border-radius: 6px; }
+.chat-log { flex: 1; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+.msg { max-width: 88%; padding: 9px 12px; border-radius: 12px; white-space: pre-line; overflow-wrap: anywhere; line-height: 1.5; }
+.msg.bot { align-self: flex-start; background: var(--free); border: 1px solid var(--line); color: var(--ink-2); border-bottom-left-radius: 4px; }
+.msg.me { align-self: flex-end; background: var(--ink); color: var(--free); border-bottom-right-radius: 4px; }
+.msg a { color: var(--scan); text-underline-offset: 2px; }
+.msg.typing { color: var(--muted); }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 10px; }
+.chat-chips:empty { display: none; }
+.chat-chips button { border: 1px solid var(--line); background: var(--free); color: var(--ink); border-radius: 999px; padding: 6px 12px; font-size: 13.5px; }
+.chat-chips button:hover { border-color: var(--ink); }
+.chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+.chat-form input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--free); color: var(--ink); font: inherit; font-size: 15px; }
+.chat-form button { width: 46px; border: 0; border-radius: 10px; background: var(--ink); color: var(--free); font-size: 18px; }
+@media (max-width: 520px) {
+  .chat-fab { right: 12px; bottom: 12px; }
+  .chat { right: 8px; left: 8px; bottom: 70px; width: auto; max-width: none; height: calc(100vh - 92px); }
+}
+@media print { .chat-fab, .chat { display: none !important; } }
+
 @media (max-width: 980px) {
   .proj, .proj.flip, .about { grid-template-columns: 1fr; }
   .proj.flip .proj-media { order: 0; }
@@ -326,6 +388,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
       <a href="#contact" data-i="nav.contact">Contact</a>
     </nav>
     <div class="top-actions">
+      <button class="lang theme" id="theme" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span id="theme-label">Dark</span></button>
       <button class="lang" id="lang" type="button" lang="de">Deutsch</button>
       <a class="btn btn-sm btn-solid" href="Achraf_Aroua_CV.pdf" download data-i="nav.cv">CV</a>
     </div>
@@ -377,6 +440,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
             <dd data-i="al.stack">Python, Ollama with Qwen2.5 and Qwen2.5-VL, Pydantic, Gradio, Piper text-to-speech, MCP server, Docker</dd>
           </dl>
           <div class="links">
+            <a class="btn btn-solid" href="amt-lotse/" data-i="al.demo">Open live demo</a>
             <a class="btn" href="https://github.com/achref-2/amt-lotse" target="_blank" rel="noopener" data-i="f.code">View source</a>
           </div>
           <p class="note" data-i="al.note">All letters in the screenshots are made up for testing.</p>
@@ -656,6 +720,25 @@ button { font: inherit; color: inherit; cursor: pointer; }
   </div>
 </footer>
 
+
+<!-- "Ask Achraf": prepared answers, no AI, nothing is sent anywhere -->
+<button class="chat-fab" id="chat-fab" type="button" aria-expanded="false" aria-controls="chat">
+  <img src="img/portrait.webp" alt="" width="36" height="36"><span class="on" id="chat-fab-label">Ask Achraf</span>
+</button>
+<section class="chat" id="chat" role="dialog" aria-modal="false" aria-labelledby="chat-title" hidden>
+  <header class="chat-head">
+    <img src="img/portrait.webp" alt="" width="38" height="38">
+    <div><b id="chat-title">Ask Achraf</b><small id="chat-sub">Prepared answers, written by me</small></div>
+    <button class="chat-x" id="chat-close" type="button" aria-label="Close chat">×</button>
+  </header>
+  <div class="chat-log" id="chat-log" aria-live="polite"></div>
+  <div class="chat-chips" id="chat-chips"></div>
+  <form class="chat-form" id="chat-form" autocomplete="off">
+    <label class="sr" for="chat-input" id="chat-input-label">Your question</label>
+    <input id="chat-input" maxlength="300" placeholder="Ask about skills, projects, availability…">
+    <button type="submit" id="chat-send" aria-label="Send">➤</button>
+  </form>
+</section>
 <dialog class="lb" id="lb">
   <img alt="">
   <p><span id="lb-cap"></span><button type="button" id="lb-close" data-i="lb.close">Close</button></p>
@@ -676,6 +759,7 @@ const DE = {
   "al.how": "Ein Vision-Modell liest das Foto, ein kleines lokales Modell zieht die Fakten als typisiertes JSON heraus. Danach prüfen Regeln, was die Modelle falsch machen: Wer zahlt, entscheidet der Wortlaut des Briefs, ein Preis pro kWh ist keine Rechnung, und Zahlen, die eine Antwort erfindet, werden zu Platzhaltern. Die Seite beginnt mit einem Satz, der nur aus geprüften Fakten besteht: was zu tun ist und bis wann.",
   "al.tested": "12 handbeschriftete Briefe mit Fallen, 36 von 36 Feldern korrekt. Eine regelbasierte Prüfung der Erklärungs- und Antworttexte und ein Kontrast-Check, der unlesbaren Text vor dem Release gefunden hat.",
   "al.stack": "Python, Ollama mit Qwen2.5 und Qwen2.5-VL, Pydantic, Gradio, Piper Text-to-Speech, MCP-Server, Docker",
+  "al.demo": "Live-Demo öffnen",
   "al.note": "Alle Briefe auf den Screenshots sind zum Testen erfunden.",
   "al.cap": "Das Ergebnis für eine Test-Mahnung: zuerst, was zu tun ist und bis wann, dann Audio und Details.",
   "al.s1": "Drei Schritte, große Schrift", "al.s2": "Hoher Kontrast", "al.s3": "Sechs Tools für KI-Assistenten (MCP)", "al.s4": "Eingabe: ein Handyfoto",
@@ -793,6 +877,165 @@ setLang(store.get("lang") || ((navigator.language || "").toLowerCase().startsWit
 
 document.getElementById("yr").textContent = new Date().getFullYear();
 
+/* ---------- Dark / light mode: follows the system until the visitor picks one ---------- */
+(() => {
+  const btn = $("#theme"), label = $("#theme-label"), meta = $('meta[name="theme-color"]');
+  const TXT = { en: { dark: "Dark", light: "Light", toDark: "Switch to dark mode", toLight: "Switch to light mode" },
+                de: { dark: "Dunkel", light: "Hell", toDark: "Zum dunklen Modus wechseln", toLight: "Zum hellen Modus wechseln" } };
+  const current = () => document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  function show() {
+    const t = TXT[lang], dark = current() === "dark";
+    label.textContent = dark ? t.light : t.dark;          // the button names the mode it switches to
+    btn.setAttribute("aria-label", dark ? t.toLight : t.toDark);
+    btn.setAttribute("aria-pressed", String(dark));
+    meta.setAttribute("content", dark ? "#0f1114" : "#f2f3f5");
+  }
+  function apply(theme, remember) {
+    document.documentElement.dataset.theme = theme;
+    if (remember) store.set("theme", theme);
+    show();
+    document.dispatchEvent(new Event("themechange"));
+  }
+  btn.addEventListener("click", () => apply(current() === "dark" ? "light" : "dark", true));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
+    if (!store.get("theme")) apply(e.matches ? "dark" : "light", false);
+  });
+  listeners.push(show);
+  show();
+})();
+
+/* ---------- "Ask Achraf": prepared answers only, nothing is sent anywhere ---------- */
+(() => {
+  const fab = $("#chat-fab"), panel = $("#chat"), log = $("#chat-log"), chips = $("#chat-chips"),
+        form = $("#chat-form"), input = $("#chat-input");
+  const MAIL = '<a href="mailto:arouaachref8@gmail.com">arouaachref8@gmail.com</a>';
+  const LI = '<a href="https://www.linkedin.com/in/achref-aroua/" target="_blank" rel="noopener">LinkedIn</a>';
+  const CV = '<a href="Achraf_Aroua_CV.pdf" download>CV (PDF)</a>';
+
+  const FAQ = [
+    { id: "summary", chip: { en: "30-second summary", de: "Kurz in 30 Sekunden" },
+      k: ["summary", "who", "about", "yourself", "introduce", "overview", "short", "zusammenfassung", "wer", "über", "kurz", "vorstellen"],
+      en: "I'm Achraf, a software engineer in Aachen doing my Master's in Computer Science at TH Köln.\n\n• Full-stack web apps with AI features (React, Node.js, Python)\n• Recent: Amt-Lotse, a local AI assistant that explains German official letters, with its own tests and an MCP server\n• German C1, English good, French fluent, Arabic native\n• Looking for a working student role or internship, Cologne/Aachen or hybrid\n\n" + CV + " · " + MAIL,
+      de: "Ich bin Achraf, Softwareentwickler in Aachen, im Master Informatik an der TH Köln.\n\n• Full-Stack-Webanwendungen mit KI-Funktionen (React, Node.js, Python)\n• Aktuell: Amt-Lotse, ein lokaler KI-Assistent, der Behördenbriefe erklärt, mit eigenen Tests und MCP-Server\n• Deutsch C1, Englisch gut, Französisch fließend, Arabisch Muttersprache\n• Suche eine Werkstudentenstelle oder ein Praktikum, Köln/Aachen oder hybrid\n\n" + CV + " · " + MAIL },
+    { id: "avail", chip: { en: "Availability", de: "Verfügbarkeit" },
+      k: ["available", "availability", "start", "begin", "when", "hours", "anfang", "beginn", "wann", "zeit", "teilzeit", "vollzeit", "part time", "full time", "salary", "gehalt", "working student", "werkstudent", "internship", "praktikum", "verfügbar", "ab wann", "stunden", "location", "where", "cologne", "aachen", "köln", "remote", "hybrid", "relocate", "ort"],
+      en: "I'm open to working student roles and internships in software or AI engineering. Cologne or Aachen, on site or hybrid. During the semester I can work part time next to my studies, in the semester break full time. Write me and we'll find a start date.\n\n" + MAIL,
+      de: "Ich suche eine Werkstudentenstelle oder ein Praktikum in Software- oder KI-Entwicklung, in Köln oder Aachen, vor Ort oder hybrid. Im Semester arbeite ich in Teilzeit neben dem Studium, in den Semesterferien Vollzeit. Schreiben Sie mir, dann finden wir einen Starttermin.\n\n" + MAIL },
+    { id: "skills", chip: { en: "Tech stack", de: "Tech-Stack" },
+      k: ["skill", "stack", "tech", "technolog", "language", "framework", "react", "node", "python", "typescript", "javascript", "angular", "sql", "docker", "kenntnisse", "fähigkeiten", "programmier"],
+      en: "Frontend: React, TypeScript, Next.js, Tailwind CSS.\nBackend: Node.js, Express, Spring Boot, REST, JWT and OAuth.\nAI: Python, LLM APIs (Gemini, Claude), tool calling, retrieval, local models with Ollama, MCP servers.\nData: MongoDB, PostgreSQL, MySQL, Redis.\nDelivery: Docker, CI/CD, Git, Vitest.\nAlso: ROS 2 for robotics, SAP ERP and ABAP.",
+      de: "Frontend: React, TypeScript, Next.js, Tailwind CSS.\nBackend: Node.js, Express, Spring Boot, REST, JWT und OAuth.\nKI: Python, LLM-APIs (Gemini, Claude), Tool Calling, Retrieval, lokale Modelle mit Ollama, MCP-Server.\nDaten: MongoDB, PostgreSQL, MySQL, Redis.\nDelivery: Docker, CI/CD, Git, Vitest.\nAußerdem: ROS 2 für Robotik, SAP ERP und ABAP." },
+    { id: "projects", chip: { en: "Best projects", de: "Beste Projekte" },
+      k: ["project", "portfolio", "built", "build", "work", "example", "github", "amt", "lotse", "talentsync", "ghostmate", "robot", "projekt", "gebaut", "beispiel"],
+      en: "• Amt-Lotse: explains German official letters from a photo, in four languages, read aloud, fully local. 36/36 fields correct on a hand-labelled test set. <a href=\"amt-lotse/\">Live demo</a>\n• TalentSync: CV-to-job matching platform with Gemini, my Bachelor's project, graded Excellent. <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">Live preview</a>\n• GhostMate: an AI agent with 16 typed tools and 43 tests.\n• Map→Plan→Drive: the robot on this page, mapping and A* path planning.\n\n<a href=\"#work\">See all projects</a>",
+      de: "• Amt-Lotse: erklärt Behördenbriefe von einem Foto, in vier Sprachen, vorgelesen, komplett lokal. 36/36 Felder korrekt auf einem eigenen Testset. <a href=\"amt-lotse/\">Live-Demo</a>\n• TalentSync: Plattform für Lebenslauf-Job-Matching mit Gemini, mein Bachelorprojekt, mit „Excellent“ bewertet. <a href=\"https://achref-2.github.io/TalentSync-App/\" target=\"_blank\" rel=\"noopener\">Live-Vorschau</a>\n• GhostMate: ein KI-Agent mit 16 typisierten Tools und 43 Tests.\n• Map→Plan→Drive: der Roboter auf dieser Seite, Kartierung und A*-Pfadplanung.\n\n<a href=\"#work\">Alle Projekte ansehen</a>" },
+    { id: "exp", chip: { en: "Experience", de: "Erfahrung" },
+      k: ["experience", "job", "worked", "intern", "company", "allogenie", "asap", "tunisair", "erfahrung", "gearbeitet", "firma", "berufserfahrung"],
+      en: "• AlloGenie, Feb–Jun 2025, full-stack and AI developer: built TalentSync end to end, React for three roles, a Node.js API and the Gemini CV analysis.\n• Groupe ASAP Siryos, summer 2024: ERP and ABAP intern, SAP ERP and OpenSQL.\n• Tunisair Technics, summer 2023: web development intern, a PHP and SQL web app.\n\nDetails are in my " + CV + ".",
+      de: "• AlloGenie, Feb.–Jun. 2025, Full-Stack- und KI-Entwickler: TalentSync komplett gebaut, React für drei Rollen, Node.js-API und Gemini-Lebenslaufanalyse.\n• Groupe ASAP Siryos, Sommer 2024: Praktikant ERP und ABAP, SAP ERP und OpenSQL.\n• Tunisair Technics, Sommer 2023: Praktikant Webentwicklung, eine Webanwendung mit PHP und SQL.\n\nDetails stehen in meinem " + CV + "." },
+    { id: "lang", chip: { en: "Languages", de: "Sprachen" },
+      k: ["german", "deutsch", "english", "englisch", "french", "arabic", "speak", "sprache", "sprachen", "c1", "telc", "spreche"],
+      en: "German C1 (telc Deutsch C1 Hochschule), English good, French fluent, Arabic native. I'm happy to do the interview in German or English.",
+      de: "Deutsch C1 (telc Deutsch C1 Hochschule), Englisch gut, Französisch fließend, Arabisch Muttersprache. Das Gespräch kann gern auf Deutsch oder Englisch sein." },
+    { id: "edu", chip: { en: "Studies", de: "Studium" },
+      k: ["study", "studies", "master", "bachelor", "degree", "university", "th köln", "education", "studium", "studiere", "abschluss", "hochschule", "uni", "certificate", "zertifikat"],
+      en: "Master's in Computer Science (Informatik und Systems-Engineering) at TH Köln, started in winter 2026/27. Bachelor's in Computer Science, Software Engineering, from the Faculty of Sciences of Bizerte (2022–2025); my final project TalentSync was graded Excellent. Certificate: AI Foundation Microcredential (Certiprof).",
+      de: "Master Informatik und Systems-Engineering an der TH Köln, seit dem Wintersemester 2026/27. Bachelor Informatik, Software Engineering, an der Faculty of Sciences of Bizerte (2022–2025); das Abschlussprojekt TalentSync wurde mit „Excellent“ bewertet. Zertifikat: AI Foundation Microcredential (Certiprof)." },
+    { id: "contact", chip: { en: "Contact & CV", de: "Kontakt & CV" },
+      k: ["contact", "email", "mail", "reach", "phone", "linkedin", "cv", "resume", "lebenslauf", "kontakt", "erreichen", "interview", "call", "gespräch", "termin"],
+      en: "The fastest way is email: " + MAIL + ".\nAlso on " + LI + ". Here is my " + CV + ".",
+      de: "Am schnellsten per E-Mail: " + MAIL + ".\nAußerdem auf " + LI + ". Hier ist mein " + CV + "." }
+  ];
+  const T = {
+    en: { fab: "Ask Achraf", sub: "Prepared answers, written by me", close: "Close chat", label: "Your question", send: "Send",
+          ph: "Ask about skills, projects, availability…",
+          hello: "Hi! Short on time? Pick a question below or type your own. These answers are written by me, nothing you type is sent anywhere.",
+          miss: "I don't have a prepared answer for that. Try one of the topics below, or ask me directly: " + MAIL, more: "Anything else?" },
+    de: { fab: "Frag Achraf", sub: "Vorbereitete Antworten von mir", close: "Chat schließen", label: "Ihre Frage", send: "Senden",
+          ph: "Fragen zu Skills, Projekten, Verfügbarkeit…",
+          hello: "Hallo! Wenig Zeit? Wählen Sie unten eine Frage oder schreiben Sie selbst. Die Antworten habe ich selbst geschrieben, Ihre Eingabe wird nirgendwohin gesendet.",
+          miss: "Darauf habe ich keine vorbereitete Antwort. Probieren Sie eines der Themen unten oder fragen Sie mich direkt: " + MAIL, more: "Noch etwas?" }
+  };
+  const asked = new Set();
+  let started = false;
+
+  const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function add(html, who) {
+    const m = document.createElement("div");
+    m.className = "msg " + who;
+    m.setAttribute("dir", "auto");
+    m.innerHTML = html;
+    log.appendChild(m);
+    log.scrollTop = log.scrollHeight;
+    return m;
+  }
+  function renderChips() {
+    chips.innerHTML = "";
+    FAQ.filter(f => !asked.has(f.id)).slice(0, 4).forEach(f => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = f.chip[lang];
+      b.addEventListener("click", () => ask(f.chip[lang], f));
+      chips.appendChild(b);
+    });
+  }
+  function match(q) {
+    const t = q.toLowerCase();
+    let best = null, score = 0;
+    for (const f of FAQ) {
+      const n = f.k.reduce((s, w) => s + (t.includes(w) ? w.length : 0), 0);
+      if (n > score) { score = n; best = f; }
+    }
+    return best;
+  }
+  function ask(q, f) {
+    add(esc(q), "me");
+    f = f || match(q);
+    if (f) asked.add(f.id);
+    const typing = add("…", "bot typing");
+    chips.innerHTML = "";
+    setTimeout(() => {
+      typing.classList.remove("typing");
+      typing.innerHTML = f ? f[lang] : T[lang].miss;
+      log.scrollTop = log.scrollHeight;
+      renderChips();
+    }, 350);
+  }
+  function renderUI() {
+    const t = T[lang];
+    $("#chat-fab-label").textContent = t.fab;
+    $("#chat-title").textContent = t.fab;
+    $("#chat-sub").textContent = t.sub;
+    $("#chat-close").setAttribute("aria-label", t.close);
+    $("#chat-input-label").textContent = t.label;
+    $("#chat-send").setAttribute("aria-label", t.send);
+    input.placeholder = t.ph;
+    if (started && !panel.hidden) renderChips();
+  }
+  function open() {
+    panel.hidden = false;
+    fab.setAttribute("aria-expanded", "true");
+    if (!started) { started = true; add(T[lang].hello, "bot"); renderChips(); }
+    input.focus();
+  }
+  function close() {
+    panel.hidden = true;
+    fab.setAttribute("aria-expanded", "false");
+    fab.focus();
+  }
+  fab.addEventListener("click", () => panel.hidden ? open() : close());
+  $("#chat-close").addEventListener("click", close);
+  panel.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = "";
+    ask(q);
+  });
+  listeners.push(renderUI);
+  renderUI();
+})();
+
 const topBar = $("#top");
 const onScroll = () => topBar.classList.toggle("scrolled", scrollY > 8);
 addEventListener("scroll", onScroll, { passive: true });
@@ -862,7 +1105,16 @@ $("#copy").addEventListener("click", e => {
   const host = $("#map"), cv = $("canvas", host), ctx = cv.getContext("2d");
   const covEl = $("#cov"), hintEl = $("#hint"), againBtn = $("#again");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const UNK = [211, 215, 220], UNK_WALL = [194, 199, 205], FREE = [242, 243, 245], SCAN = [36, 54, 240];
+  const PAL = {
+    light: { UNK: [211, 215, 220], UNK_WALL: [194, 199, 205], FREE: [242, 243, 245], SCAN: [36, 54, 240], WALL: [0, 0, 0], ink: "0,0,0", scan: "36,54,240", free: "#f2f3f5" },
+    dark: { UNK: [42, 47, 54], UNK_WALL: [56, 62, 70], FREE: [15, 17, 20], SCAN: [139, 151, 255], WALL: [242, 243, 245], ink: "242,243,245", scan: "139,151,255", free: "#0f1114" }
+  };
+  let P, UNK, UNK_WALL, FREE, SCAN, WALL;
+  function usePalette() {
+    P = PAL[document.documentElement.dataset.theme === "dark" ? "dark" : "light"];
+    ({ UNK, UNK_WALL, FREE, SCAN, WALL } = P);
+  }
+  usePalette();
   const DX = [1, -1, 0, 0, 1, 1, -1, -1], DY = [0, 0, 1, -1, 1, -1, 1, -1];
 
   let W, H, DPR, C, cols, rows, N, R, RINF, SPEED, nameBox;
@@ -1260,7 +1512,7 @@ $("#copy").addEventListener("click", e => {
       const o = i * 4;
       if (wall) {
         const e = p * p;
-        px[o] = SCAN[0] * (1 - e); px[o + 1] = SCAN[1] * (1 - e); px[o + 2] = SCAN[2] * (1 - e);
+        px[o] = SCAN[0] + (WALL[0] - SCAN[0]) * e; px[o + 1] = SCAN[1] + (WALL[1] - SCAN[1]) * e; px[o + 2] = SCAN[2] + (WALL[2] - SCAN[2]) * e;
       } else {
         const e = 1 - (1 - p) * (1 - p);
         px[o] = UNK[0] + (FREE[0] - UNK[0]) * e; px[o + 1] = UNK[1] + (FREE[1] - UNK[1]) * e; px[o + 2] = UNK[2] + (FREE[2] - UNK[2]) * e;
@@ -1276,7 +1528,7 @@ $("#copy").addEventListener("click", e => {
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(buf, 0, 0, cols * C, rows * C);
 
-    ctx.strokeStyle = "rgba(0,0,0,.05)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = `rgba(${P.ink},.05)`; ctx.lineWidth = 1;
     ctx.beginPath();
     const step = 64;
     for (let x = step; x < W; x += step) { ctx.moveTo(Math.round(x) + .5, 0); ctx.lineTo(Math.round(x) + .5, H); }
@@ -1284,7 +1536,7 @@ $("#copy").addEventListener("click", e => {
     ctx.stroke();
 
     if (trail.length > 1) {
-      ctx.strokeStyle = "rgba(0,0,0,.14)"; ctx.lineWidth = 1.5; ctx.lineJoin = "round";
+      ctx.strokeStyle = `rgba(${P.ink},.14)`; ctx.lineWidth = 1.5; ctx.lineJoin = "round";
       ctx.beginPath(); ctx.moveTo(trail[0][0] * C, trail[0][1] * C);
       for (const p of trail) ctx.lineTo(p[0] * C, p[1] * C);
       ctx.lineTo(rob.x * C, rob.y * C);
@@ -1292,11 +1544,11 @@ $("#copy").addEventListener("click", e => {
     }
 
     if (!still && hits.length) {
-      ctx.fillStyle = "rgba(36,54,240,.075)";
+      ctx.fillStyle = `rgba(${P.scan},.075)`;
       ctx.beginPath(); ctx.moveTo(hits[0] * C, hits[1] * C);
       for (let k = 3; k < hits.length; k += 3) ctx.lineTo(hits[k] * C, hits[k + 1] * C);
       ctx.closePath(); ctx.fill();
-      ctx.fillStyle = "rgba(36,54,240,.9)";
+      ctx.fillStyle = `rgba(${P.scan},.9)`;
       for (let k = 0; k < hits.length; k += 3) if (hits[k + 2] === 1) ctx.fillRect(hits[k] * C - 1, hits[k + 1] * C - 1, 2, 2);
     }
 
@@ -1308,7 +1560,7 @@ $("#copy").addEventListener("click", e => {
     }
 
     if (path.length) {
-      ctx.strokeStyle = "rgba(36,54,240,.9)"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
+      ctx.strokeStyle = `rgba(${P.scan},.9)`; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
       ctx.beginPath(); ctx.moveTo(rob.x * C, rob.y * C);
       for (const p of path) ctx.lineTo(p[0] * C, p[1] * C);
       ctx.stroke(); ctx.setLineDash([]);
@@ -1321,16 +1573,16 @@ $("#copy").addEventListener("click", e => {
       const p = (now - clickMark.t) / 700;
       if (p >= 1) clickMark = null;
       else {
-        ctx.strokeStyle = clickMark.ok ? `rgba(18,161,80,${1 - p})` : `rgba(0,0,0,${1 - p})`;
+        ctx.strokeStyle = clickMark.ok ? `rgba(18,161,80,${1 - p})` : `rgba(${P.ink},${1 - p})`;
         ctx.lineWidth = 2;
         ctx.beginPath(); ctx.arc(clickMark.x, clickMark.y, 6 + p * 16, 0, Math.PI * 2); ctx.stroke();
       }
     }
 
     const rx = rob.x * C, ry = rob.y * C, rr = Math.max(6.5, C * 1.3);
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = `rgb(${P.ink})`;
     ctx.beginPath(); ctx.arc(rx, ry, rr, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "#f2f3f5"; ctx.lineWidth = 2; ctx.lineCap = "round";
+    ctx.strokeStyle = P.free; ctx.lineWidth = 2; ctx.lineCap = "round";
     ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx + Math.cos(rob.th) * rr * .8, ry + Math.sin(rob.th) * rr * .8); ctx.stroke();
     ctx.lineCap = "butt";
   }
@@ -1365,7 +1617,7 @@ $("#copy").addEventListener("click", e => {
         }
         if (edge) known[i] = 2;
       }
-      const o = i * 4, c = known[i] === 1 ? FREE : known[i] === 2 ? [0, 0, 0] : truth[i] ? UNK_WALL : UNK;
+      const o = i * 4, c = known[i] === 1 ? FREE : known[i] === 2 ? WALL : truth[i] ? UNK_WALL : UNK;
       px[o] = c[0]; px[o + 1] = c[1]; px[o + 2] = c[2];
     }
     fading = [];
@@ -1373,6 +1625,19 @@ $("#copy").addEventListener("click", e => {
     done = true; mode = "idle";
     covEl.textContent = "100%";
   }
+
+  // Dark/light switch: recolour everything already mapped, keep the robot where it is.
+  document.addEventListener("themechange", () => {
+    usePalette();
+    if (!built) return;
+    for (let i = 0; i < N; i++) {
+      const o = i * 4, c = known[i] === 1 ? FREE : known[i] === 2 ? WALL : truth[i] ? UNK_WALL : UNK;
+      px[o] = c[0]; px[o + 1] = c[1]; px[o + 2] = c[2];
+    }
+    fading = [];
+    bctx.putImageData(idata, 0, 0);
+    if (!raf) render(performance.now(), true);
+  });
 
   function init() {
     stop();
